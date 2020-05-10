@@ -1,0 +1,202 @@
+<!DOCTYPE HTML>
+<!--
+	David Styven Nieto Marin
+	Ingenieria de Sistemas | @dsnietom
+	Universidad Nacional de Colombia
+-->
+<html>
+	<head>
+		<title>Single - Future Imperfect by HTML5 UP</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+		
+		<!-- P5.js -->
+		<script src="p5/p5.min.js"></script>
+		<script src="p5/addons/p5.sound.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.0.0/p5.min.js"></script>
+		<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.0.0/addons/p5.sound.min.js"></script> -->
+		
+		<!-- Bootstrap CSS 
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">-->
+
+		
+	</head>
+	
+	<body class="single is-preload">
+	
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+			
+
+				<!-- Header -->
+					<header id="header">
+						
+						<nav class="links">
+						
+						<!-- Se crea un encabezado para insertar el html donde esta el menu-->
+							<iframe src="menu.html" ></iframe>
+							
+						</nav>
+						<nav class="main">
+							<ul>
+								<li class="search">
+									<a class="fa-search" href="#search">Search</a>
+									<form id="search" method="get" action="#">
+										<input type="text" name="query" placeholder="Search" />
+									</form>
+								</li>
+								<li class="menu">
+									<a class="fa-bars" href="#menu">Menu</a>
+								</li>
+							</ul>
+						</nav>
+					</header>
+
+				<!-- Menu -->
+					<section id="menu">
+
+						<!-- Search -->
+							<section>
+							<h1><a href="index.html" target="_parent">Visual Computing</a></h1>
+								<form class="search" method="get" action="#">
+									<input type="text" name="query" placeholder="Search" />
+								</form>
+							</section>
+
+						<!-- Links -->
+							<section>
+								<ul class="links">
+								<h1><a href="index.html" target="_parent">Visual Computing</a></h1>
+									<li>
+										<a href="#">
+											<h3>Lorem ipsum</h3>
+											<p>Feugiat tempus veroeros dolor</p>
+										</a>
+									</li>
+									<li>
+										<a href="#">
+											<h3>Dolor sit amet</h3>
+											<p>Sed vitae justo condimentum</p>
+										</a>
+									</li>
+									<li>
+										<a href="#">
+											<h3>Feugiat veroeros</h3>
+											<p>Phasellus sed ultricies mi congue</p>
+										</a>
+									</li>
+									<li>
+										<a href="#">
+											<h3>Etiam sed consequat</h3>
+											<p>Porta lectus amet ultricies</p>
+										</a>
+									</li>
+								</ul>
+							</section>
+
+						<!-- Actions -->
+							<section>
+								<ul class="actions stacked">
+									<li><a href="#" class="button large fit">Log In</a></li>
+								</ul>
+							</section>
+
+					</section>
+
+				<!-- Main -->
+					<div id="main">
+
+						<!-- Post -->
+							<article class="post">
+								<header>
+									<div class="title">
+										<h2><a href="#">Basic Sketch</a></h2>
+										<p>Processing transition - p5*js Examples</p>
+									</div>
+									<div class="meta">
+										<time class="published" datetime="2015-11-01">March 12, 2020</time>
+										<a href="#" class="author"><span class="name">David Nieto</span><img src="images/avatar.jpg" alt="" /></a>
+										
+									</div>
+								</header>
+								
+								<p>Este programa esta basado en un sketch básico. Crea una ventana con un ancho de 600 pixeles y una altura de 400 pixeles, y luego empieza a dibujar un cuadrado azul según la posición del mouse, al mismo tiempo el fondo de la ventana se va rellenando de color gris, dando la ilusión que solo existe un cuadrado azul moviéndose por toda la ventana siguiendo al mouse.</p>
+								
+								<div class="canvasp5js" >
+									<div>
+									<div id="masksImg">
+									
+									</div>
+																										
+								</div>
+								</div>
+								<p></p>
+								<h4>Code</h4>
+									<pre><code>function setup() { 
+	createCanvas(600, 400);
+} 
+
+function draw(){ 
+	// Dibuja un nuevo background en cada frame
+	background(210);
+	stroke(0);
+	fill(0,0,255);
+	// En modo CENTER, el rectángulo se dibuja en el centro del cursor
+	rectMode(CENTER);
+	// mouseX y mouseY posición del ratón
+	rect(mouseX,mouseY,50,50);
+}</code></pre>
+								
+								<p></p>
+								
+								<!-- Pagination -->
+							<ul class="actions pagination">
+								<li><a href="" class="disabled button large previous">Previous Page</a></li>
+								<li><a href="#" class="button large next">Next Page</a></li>
+							</ul>
+							
+							<!-- Footer 
+								<footer>
+									<ul class="stats">
+										<li><a href="#">General</a></li>
+										<li><a href="#" class="icon solid fa-heart">28</a></li>
+										<li><a href="#" class="icon solid fa-comment">128</a></li>
+									</ul>
+								</footer>-->
+								
+							</article>
+
+					</div>
+
+				<!-- Footer -->
+					<section id="footer">
+					<!-- Se crea un iframe para insertar el html donde esta el pie de pagina-->
+						<footer>
+							<iframe id="iframepie" src="footer.html"></iframe>
+						</footer>
+						
+					</section>
+
+			</div>
+
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/browser.min.js"></script>
+			<script src="assets/js/breakpoints.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
+			
+		<!-- Ejemplos P5.js -->
+			<script src="p5/js/images/masksImg.js"></script>
+
+			
+		<!-- Optional JavaScript -->
+		<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+			<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+			<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+			<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+	</body>
+</html>

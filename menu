@@ -1,0 +1,55 @@
+<!doctype html>
+<!-- David Styven Nieto Marin
+Menu-->
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Springfield</title>
+<meta name="viewport" content="width=device-width initial-scale=1.0">
+<link href="css/style.css" rel="stylesheet" type="text/css">
+
+
+</head>
+
+<body class="baner">
+<div>
+<!-- Menu de navegacion-->
+<nav class="navegacion">
+			<ul class="menu">
+				<li><a href="index.html" target="_parent">Springfield</a></li>
+				<li><a href="ubicacion.html" target="_parent">Ubicación</a></li>
+				<li><a href="#">Habitantes</a>
+					<ul class="submenu">
+						<li><a href="familia_simpson.html" target="_parent">Familia Simpson</a></li>
+						<li><a href="familia_flanders.html" target="_parent">Familia Flanders</a></li>
+						<li><a href="amigos_homero.html" target="_parent">Amigos de Homero</a></li>
+						<li><a href="amigos_bart.html" target="_parent">Amigos de Bart</a></li>
+						<li><a href="celebridades.html" target="_parent">Celebridades</a></li>
+						<li><a href="villanos.html" target="_parent">Villanos</a></li>
+						<li><a href="mascotas.html" target="_parent">Mascotas</a></li>
+						<li><a href="otros_personajes.html" target="_parent">Otros habitantes</a></li>
+					</ul>
+				</li>
+				<li><a href="#">Actividades</a>
+					<ul class="submenu">
+						<li><a href="arte.html" target="_parent">Arte y entretenimiento</a></li>
+						<li><a href="medios.html" target="_parent">Medios de comunicación</a></li>
+						<li><a href="deportes.html" target="_parent">Deportes</a></li>
+						<li><a href="rivalidad.html" target="_parent">Rivalidad con Shelbyville</a></li>
+						<li><a href="celebraciones.html" target="_parent">Celebraciones</a></li>
+					</ul>
+				</li>
+				<li><a href="#">Historia</a>
+					<ul class="submenu">
+						<li><a href="epoca_colonial.html" target="_parent">Época colonial</a></li>
+						<li><a href="epoca_moderna.html" target="_parent">Época moderna</a></li>
+					</ul>
+				</li>
+				<li><a href="script/mapa_springfield.html" target="_parent">Mapa Interactivo</a></li>
+				<li><a href="creditos.html" target="_parent">Créditos</a></li>
+			</ul>
+		</nav>
+</div>
+<div><a href="https://www.foxtv.es/series/fox/los-simpson" target="_blank"><img src="img/logo.png" id="logo"></a></div>
+</body>
+</html>
