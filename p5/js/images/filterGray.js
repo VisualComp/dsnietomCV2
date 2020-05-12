@@ -3,11 +3,11 @@ let lightness = 210; // Variable de ligereza
 let gray=0;
 
 function setup() { 
-  var myCanvas = createCanvas(800, 600);
+  var myCanvas = createCanvas(1024, 627);
   myCanvas.parent('filterGray');
   background(210);
   pixelDensity();
-  img = loadImage('https://upload.wikimedia.org/wikipedia/commons/thumb/0/02/Fire_breathing_2_Luc_Viatour.jpg/800px-Fire_breathing_2_Luc_Viatour.jpg');
+  img = loadImage('https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/Peacock_Plumage.jpg/1024px-Peacock_Plumage.jpg');
 } 
 
 function draw() {
@@ -61,7 +61,7 @@ function draw() {
 		}
 	}
 	updatePixels();
-	image(img, 0, 0, img.width *0.29, img.height *0.29);
+	image(img, 12, 12, img.width *0.26, img.height *0.26);
 }
 
 // Se ejecuta cuando se presiona cualquier tecla
