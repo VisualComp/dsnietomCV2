@@ -3,11 +3,11 @@ let lightness = 210; // Variable de ligereza
 let gray=0;
 
 function setup() { 
-  var myCanvas = createCanvas(800, 600);
+  var myCanvas = createCanvas(800, 588);
   myCanvas.parent('pixelsGray');
   background(210);
   pixelDensity();
-  img = loadImage('https://upload.wikimedia.org/wikipedia/commons/thumb/b/be/Red_eyed_tree_frog_edit2.jpg/800px-Red_eyed_tree_frog_edit2.jpg');
+  img = loadImage('https://upload.wikimedia.org/wikipedia/commons/thumb/0/02/Fire_breathing_2_Luc_Viatour.jpg/800px-Fire_breathing_2_Luc_Viatour.jpg');
 } 
 
 function draw() {

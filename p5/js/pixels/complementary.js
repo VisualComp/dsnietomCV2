@@ -6,14 +6,14 @@ let opposite = 0;
 let sign = -1;
 
 function setup() {
-    var myCanvas = createCanvas(1024, 512);
+    var myCanvas = createCanvas(772, 600);
     myCanvas.parent('complementary');
 
-    img_01 = loadImage('https://upload.wikimedia.org/wikipedia/en/7/7d/Lenna_%28test_image%29.png');
-    img_02 = loadImage('https://upload.wikimedia.org/wikipedia/en/7/7d/Lenna_%28test_image%29.png');
+    img_01 = loadImage('https://upload.wikimedia.org/wikipedia/commons/thumb/c/c0/Ara_macao_qtl1.jpg/386px-Ara_macao_qtl1.jpg');
+    img_02 = loadImage('https://upload.wikimedia.org/wikipedia/commons/thumb/c/c0/Ara_macao_qtl1.jpg/386px-Ara_macao_qtl1.jpg');
     
-    lienzo_01 = createGraphics(512, 512);
-    lienzo_02 = createGraphics(512, 512);
+    lienzo_01 = createGraphics(386, 600);
+    lienzo_02 = createGraphics(386, 600);
 }
 
 function draw() {
@@ -21,7 +21,7 @@ function draw() {
     drawImage_02();
 
     image(lienzo_01, 0, 0);
-    image(lienzo_02, 512, 0);
+    image(lienzo_02, 386, 0);
 }
 // Dibuja la imagen de la Izquierda
 function drawImage_01() {
@@ -42,7 +42,7 @@ function drawImage_02() {
     
 	loadPixels();
 	img_02.loadPixels();
-	let img = createImage(512, 512);
+	let img = createImage(386, 600);
 	img.loadPixels();
     
 	for (let index = 0; index < 4 * (width * height); index += 4){ 
@@ -59,7 +59,7 @@ function drawImage_02() {
 		img.pixels[index+3]=a;
 	}
 	img.updatePixels();
-	image(img, 512, 0);
+	image(img, 386, 0);
 }
 // Se ejecuta cuandp se presiona cualquier tecla
 function keyPressed() {

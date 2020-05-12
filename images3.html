@@ -31,6 +31,7 @@
 	
 	<body class="single is-preload">
 	
+	
 
 		<!-- Wrapper -->
 			<div id="wrapper">
@@ -129,65 +130,51 @@
 							<article class="post">
 								<header>
 									<div class="title">
-										<h2><a href="https://processing.org/examples/loaddisplayimage.html" target="_blank">Load and Display Images</a></h2>
+										<h2><a href="http://www.mywonderland.es/curso_js/processing/pro_ejemplos.html" target="_blank">Basic Sketch</a></h2>
 										<p>Processing transition - p5*js Examples</p>
 									</div>
 									<div class="meta">
-										<time class="published" datetime="2015-11-01">March 19, 2020</time>
+										<time class="published" datetime="2015-11-01">March 26, 2020</time>
 										<a href="https://dsnietom.github.io/myPageIngSoft/" target="_blank" class="author"><span class="name">David Nieto</span><img src="images/avatar.jpg" alt="dsnietom" /></a>
 										
 									</div>
 								</header>
 								<p>Los siguientes ejemplos tienen el propósito de desarrollar y practicar la transición entre el lenguaje Processing y el lenguaje p5.js observando sus principales diferencias, ya que ambos lenguajes se ven muy similar, y cómo convertir de uno a otro.</p>
 								
-								<p>Este programa está basado en un sketch básico de ejemplo, encontrado en el sitio web <a href="https://processing.org/examples/loaddisplayimage.html" target="_blank">processing.org</a>, en el lenguaje Processing, el cual tiene como propósito cargar y mostrar imágenes dentro del canvas. Crea una ventana con un ancho de 1024px y una altura de 512px y luego muestra una imagen, cargada previamente, repitiéndola varias veces y distribuyendo cada copia por todo el lienzo, modificando sus propiedades como el tamaño, posición y orientación, formando un collage.</p>
-																								
+								<p>Este programa esta basado en un sketch básico realizado por el sitio web <a href="http://www.mywonderland.es/curso_js/processing/pro_ejemplos.html" target="_blank">mywonderland.es</a>, en el lenguaje Processing, con el fin de observar un ejemplo en el que se utilizan las funciones 'mouseX, mouseY'. Crea una ventana con un ancho de 600px y una altura de 400px, y luego empieza a dibujar un cuadrado azul de 50px por 50px según la posición del mouse, al mismo tiempo que el fondo de la ventana se va rellenando de color gris, dando la ilusión que solo existe un cuadrado azul moviéndose por toda la ventana siguiendo al mouse.</p>
+								
 								<div class="canvasp5js" >
 									<div>
-										<div id="loadImage">
-										
-										</div>																							
+									<div id="lanternImg">
+									
 									</div>
-								<blockquote>Image of Lena Forsén ("Lenna") used in many image processing experiments. Source: Wikipedia, the free encyclopedia.<p><strong>Well-known Standard Test Image "Lenna"</strong></p></blockquote>
+																										
 								</div>
-								
+								<blockquote>Image of Green Peafowl. Male in display, Pavo muticus imperator. Source: Wikipedia, the free encyclopedia. <p><strong>Discovered in Ho Chi Minh's garden in Hanoi, Vietnam</strong></p></blockquote>
+								</div>
 								<p></p>
 								<h4>p5*js Code</h4>
-									<pre><code class="prettyprint">let img; // Declarar variable 'img'
-function setup() { 
-	createCanvas(1024, 512);
-	background(210);
-	img = loadImage('https://upload.wikimedia.org/wikipedia/en/7/7d/Lenna_%28test_image%29.png'); // Cargar la imagen
+									<pre><code class="prettyprint">function setup() { 
+	createCanvas(600, 400);
 } 
 
-function draw() {
-	imageMode(CENTER);
-	// Muestra la imagen en su tamaño original en la posición en el centro del canvas
-	image(img, width / 2, img.height / 2);
-
-	imageMode(CORNER);
-	// Muestra la imagen en la posición (0,0) del canvas a la mitad del tamaño
-	image(img, 0, 0, img.width / 2, img.height / 2);
-
-	imageMode(CORNERS);
-	// Muestra la imagen con su esquina inferior derecha en la posición (width, height)
-	image(img, width/2+img.height/2, height/2, width, height);
-
-	imageMode(CORNER);
-	// Muestra la imagen pegada a la derecha de la imagen de tamaño real, a la mitad del tamaño
-	image(img, width/2-img.height, height/2, img.width / 2, img.height / 2);
-	
-	imageMode(CORNER);
-	// Muestra la imagen en la posición (0,0) con respecto a la imagen de tamaño real, a 1/4 del tamaño
-	image(img, width/2-img.height/2, 0, img.width / 4, img.width / 4);
+function draw(){ 
+	// Dibuja un nuevo background en cada frame
+	background(210);
+	stroke(0);
+	fill(0,0,255);
+	// En modo CENTER, el rectángulo se dibuja en el centro del cursor
+	rectMode(CENTER);
+	// mouseX y mouseY posición del ratón
+	rect(mouseX,mouseY,50,50);
 }</code></pre>
 								
 								<p></p>
 								
 								<!-- Pagination -->
 							<ul class="actions pagination">
-								<li><a href="example5.html" target="_parent" class="button large previous">Previous Page</a></li>
-								<li><a href="#" target="_parent" class="disabled button large next">Next Page</a></li>
+								<li><a href="images2.html" target="_parent" class="button large previous">Previous Page</a></li>
+								<li><a href="images4.html" target="_parent" class="button large next">Next Page</a></li>
 							</ul>
 							
 							<!-- Footer 
@@ -222,7 +209,7 @@ function draw() {
 			<script src="assets/js/main.js"></script>
 			
 		<!-- Ejemplos P5.js -->
-			<script src="p5/js/examples/loadImage.js"></script>
+			<script src="p5/js/pixels/lanternImg.js"></script>
 
 			
 		<!-- Optional JavaScript -->
