@@ -1,11 +1,11 @@
 let img; // Declarar variable 'img'
 
 function setup() { 
-  var myCanvas = createCanvas(1024, 638);
+  var myCanvas = createCanvas(666, 460);
   myCanvas.parent('lanternImg');
   background(210);
   pixelDensity();
-  img = loadImage('https://live.staticflickr.com/1512/26690052576_7b62e59221_b.jpg');
+  img = loadImage('https://upload.wikimedia.org/wikipedia/commons/9/9a/Green_Peafowl%2C_Hanoi.jpg');
 } 
 
 function draw() {
