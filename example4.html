@@ -146,22 +146,22 @@
 								<div class="row">
 										<div class="col-6 col-12-medium">
 											<ul>
-												<li><h4 style="display:inline"><em>Aumentar (+) grosor de línea</em> = Fecha DERECHA</h4></li>
-												<li><h4 style="display:inline"><em>Color Rojo</em> = r</h4></li>
-												<li><h4 style="display:inline"><em>Color Verde</em> = g</h4></li>
-												<li><h4 style="display:inline"><em>Color Azul</em> = b</h4></li>
-												<li><h4 style="display:inline"><em>Color Negro</em> = k</h4></li>
-												<li><h4 style="display:inline"><em>Color Blanco</em> = w</h4></li>
+												<li><h4 style="display:inline"><em>Aumentar (+) grosor de línea</em> = </h4><img src="images/keyboard/plus.png" style="width:5%;vertical-align: middle"/></li>
+												<li><h4 style="display:inline"><em>Color Rojo</em> = </h4><img src="images/keyboard/r.png" style="width:5%;vertical-align: middle"/></li>
+												<li><h4 style="display:inline"><em>Color Verde</em> = </h4><img src="images/keyboard/g.png" style="width:5%;vertical-align: middle"/></li>
+												<li><h4 style="display:inline"><em>Color Azul</em> = </h4><img src="images/keyboard/b.png" style="width:5%;vertical-align: middle"/></li>
+												<li><h4 style="display:inline"><em>Color Negro</em> = </h4><img src="images/keyboard/k.png" style="width:5%;vertical-align: middle"/></li>
+												<li><h4 style="display:inline"><em>Color Blanco</em> = </h4><img src="images/keyboard/w.png" style="width:5%;vertical-align: middle"/></li>
 											</ul>									
 										</div>
 										<div class="col-6 col-12-medium">
 											<ul>
-												<li><h4 style="display:inline"><em>Disminuir (-) grosor de línea</em> = Fecha Izquierda</h4></li>
-												<li><h4 style="display:inline"><em>Color Magenta</em> = m</h4></li>
-												<li><h4 style="display:inline"><em>Color Amarillo</em> = y</h4></li>
-												<li><h4 style="display:inline"><em>Color Cian</em> = c</h4></li>
-												<li><h4 style="display:inline"><em>Color Naranja</em> = o</h4></li>
-												<li><h4 style="display:inline"><em>Color Purpura </em> = p</h4></li>
+												<li><h4 style="display:inline"><em>Disminuir (-) grosor de línea</em> = </h4><img src="images/keyboard/minus.png" style="width:5%;vertical-align: middle"/></li>
+												<li><h4 style="display:inline"><em>Color Magenta</em> = </h4><img src="images/keyboard/m.png" style="width:5%;vertical-align: middle"/></li>
+												<li><h4 style="display:inline"><em>Color Amarillo</em> = </h4><img src="images/keyboard/y.png" style="width:5%;vertical-align: middle"/></li>
+												<li><h4 style="display:inline"><em>Color Cian</em> = </h4><img src="images/keyboard/c.png" style="width:5%;vertical-align: middle"/></li>
+												<li><h4 style="display:inline"><em>Color Naranja</em> = </h4><img src="images/keyboard/o.png" style="width:5%;vertical-align: middle"/></li>
+												<li><h4 style="display:inline"><em>Color Purpura </em> = </h4><img src="images/keyboard/p.png" style="width:5%;vertical-align: middle"/></li>
 											</ul>
 										</div>
 									</div>
@@ -209,9 +209,9 @@ function touchMoved() {
 
 // Se ejecuta cuando se presiona cualquier tecla
 function keyPressed() {
-	if (keyCode === RIGHT_ARROW) { // Aumenta el grosor de la linea
+	if (key === '+') { // Aumenta el grosor de la linea
 		strokeLine = strokeLine+2;
-	} else if (keyCode === LEFT_ARROW) { // Disminuye el grosor de la linea
+	} else if (key === '-') { // Disminuye el grosor de la linea
 		strokeLine = abs(strokeLine-2);
 	} // Cambia el color de la linea
 	else if (key === 'w') { // Blanco

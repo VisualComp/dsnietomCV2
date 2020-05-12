@@ -11,6 +11,7 @@ function setup() {
 	smallPoint = 4; // Tamaño minimo elipse
 	largePoint = 30; // Tamaño maximo elipse
 	background(210);
+	ellipseMode(CENTER);
 	img.loadPixels();
 }
 

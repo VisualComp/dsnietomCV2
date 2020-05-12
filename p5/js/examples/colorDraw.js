@@ -32,9 +32,9 @@ function touchMoved() {
 }
 // Se ejecuta cuando se presiona cualquier tecla
 function keyPressed() {
-  if (keyCode === RIGHT_ARROW) { // Aumenta el grosor de la linea
+  if (key === '+') { // Aumenta el grosor de la linea
     strokeLine = strokeLine+2;
-  } else if (keyCode === LEFT_ARROW) { // Disminuye el grosor de la linea
+  } else if (key === '-') { // Disminuye el grosor de la linea
     strokeLine = abs(strokeLine-2);
   } // Cambia el color de la linea
 	else if (key === 'w' || key === 'W') { // Blanco
