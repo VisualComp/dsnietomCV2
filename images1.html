@@ -130,7 +130,7 @@
 							<article class="post">
 								<header>
 									<div class="title">
-										<h2><a href="http://www.mywonderland.es/curso_js/processing/pro_ejemplos.html" target="_blank">First Steps</a></h2>
+										<h2><a href="https://p5js.org/es/reference/#/p5.Image/pixels" target="_blank">First Steps</a></h2>
 										<p>Painting Backgrounds with Pixels</p>
 									</div>
 									<div class="meta">
@@ -139,9 +139,58 @@
 										
 									</div>
 								</header>
-								<p>Los siguientes ejemplos tienen el propósito de desarrollar y practicar la transición entre el lenguaje Processing y el lenguaje p5.js observando sus principales diferencias, ya que ambos lenguajes se ven muy similar, y cómo convertir de uno a otro.</p>
+								<p>Antes de iniciar con el estudio de procesamiento de imágenes es necesario una introducción previa a los conceptos básicos de las matrices de pixeles, con el propósito de saber cómo cargar los pixeles a un lienzo y acceder al valor de cada pixel de manera individual para manipular su valor.</p>
 								
-								<p>Este programa esta basado en un sketch básico realizado por el sitio web <a href="http://www.mywonderland.es/curso_js/processing/pro_ejemplos.html" target="_blank">mywonderland.es</a>, en el lenguaje Processing, con el fin de observar un ejemplo en el que se utilizan las funciones 'mouseX, mouseY'. Crea una ventana con un ancho de 600px y una altura de 400px, y luego empieza a dibujar un cuadrado azul de 50px por 50px según la posición del mouse, al mismo tiempo que el fondo de la ventana se va rellenando de color gris, dando la ilusión que solo existe un cuadrado azul moviéndose por toda la ventana siguiendo al mouse.</p>
+								<p>El siguiente estudio está basado en la documentación obtenida del tutorial de YouTube <a href="https://www.youtube.com/watch?v=nMUMZ5YRxHI" target="_blank">'11.3: The Pixel Array'</a> y el sitio web <a href="https://p5js.org/es/reference/#/p5.Image/pixels" target="_blank">p5js.org</a>. Para comprender mejor como funciona una matriz de pixeles se pensará en una cuadricula como representación de un lienzo o una imagen, por ejemplo, una cuadricula de 8x8 estaría compuesta por 64 cuadrados más pequeños los cuales representan los pixeles. La pregunta que surge es cómo acceder al valor de esos pixeles. Entonces la matriz de pixeles es una matriz larga compuesta de muchos números los cuales oscilan entre 0 y 255, que corresponden a cada color del lienzo. La forma en que funciona esta matriz de pixeles es muy similar a como funciona en Processing, pero tienen ciertas diferencias. En p5.js un pixel toma 4 puntos de la matriz para un solo pixel, es decir, si en el lienzo hay 60 pixeles significa que la longitud de la matriz es de 240, dado que cada píxel se describe con cuatro piezas de información, que representa los valores R, G, B, A (rojo, verde, azul y alfa).</p>
+								
+								<div class="canvasp5js" >
+									<div>
+									<img src="images/study/loadPixels1.png" style="width:70%;vertical-align: middle"/>
+									</div>
+									
+								</div>
+								
+								<p>Ahora, esto significa que si el primer píxel en la pantalla es el de la esquina superior izquierda, este comenzaría en el índice 0 de la matriz y el segundo pixel en el índice 4, el siguiente en el 8, 12, 16, …, hasta completar toda la matriz.</p>
+								
+								<div class="canvasp5js" >
+									<div>
+									<img src="images/study/loadPixels2.png" style="width:20%;vertical-align: middle"/>
+									</div>
+									
+								</div>
+								
+								<p>Antes de acceder a esta matriz, los datos deben cargarse con la función loadPixels(). Después de que se hayan modificado los datos de la matriz, se debe ejecutar la función updatePixels() para actualizar los cambios. Teniendo esto claro ya podemos acceder al valor de cada pixel, para ello es necesario ubicar el índice del componente rojo dentro de la matriz de la siguiente manera <strong><em>x + y * width</em></strong>, ya que la posición del índice del valor rojo es 4 veces la cantidad de píxeles que tiene delante. Por ejemplo, si se desea encontrar el índice del pixel ubicado en la posición (4 , 1) sería <strong><em>4 + 1 * 8 = 12</em></strong>.</p>
+								
+								<div class="canvasp5js" >
+									<div>
+									<img src="images/study/loadPixels3.png" style="width:25%;vertical-align: middle"/>
+									</div>
+									
+								</div>
+								
+								<p>El siguiente programa tiene como propósito observar el comportamiento de cada uno de los pixeles del lienzo al modificar su valor accediendo a los componentes R, G, B, A de la matriz de pixeles.</p>
+								<hr />
+								<h3>Comandos por teclado</h3>
+								<div class="row">
+										<div class="col-6 col-12-medium">
+										<h4>Extraer componentes (MINUSCULAS)</h4>
+											<ul>												
+												<li><h4 style="display:inline"><em>Rojo</em> = </h4><img src="images/keyboard/r.png" style="width:4%;vertical-align: middle"/></li>
+												<li><h4 style="display:inline"><em>Verde</em> = </h4><img src="images/keyboard/g.png" style="width:4%;vertical-align: middle"/></li>
+												<li><h4 style="display:inline"><em>Azul</em> = </h4><img src="images/keyboard/b.png" style="width:4%;vertical-align: middle"/></li>
+												<li><h4 style="display:inline"><em>Alpha</em> = </h4><img src="images/keyboard/a.png" style="width:4%;vertical-align: middle"/></li>												
+											</ul>									
+										</div>
+										<div class="col-6 col-12-medium">
+										<h4>Agregar componentes (MAYUSCULAS)</h4>
+											<ul>												
+												<li><h4 style="display:inline"><em>Rojo</em> = </h4><img src="images/keyboard/shift.png" style="width:5%;vertical-align: middle"/> + <img src="images/keyboard/r.png" style="width:4%;vertical-align: middle"/></li>
+												<li><h4 style="display:inline"><em>Verde</em> = </h4><img src="images/keyboard/shift.png" style="width:5%;vertical-align: middle"/> + <img src="images/keyboard/g.png" style="width:4%;vertical-align: middle"/></li>
+												<li><h4 style="display:inline"><em>Azul</em> = </h4><img src="images/keyboard/shift.png" style="width:5%;vertical-align: middle"/> + <img src="images/keyboard/b.png" style="width:4%;vertical-align: middle"/></li>
+												<li><h4 style="display:inline"><em>Alpha</em> = </h4><img src="images/keyboard/shift.png" style="width:5%;vertical-align: middle"/> + <img src="images/keyboard/a.png" style="width:4%;vertical-align: middle"/></li>												
+											</ul>
+										</div>
+									</div>
 								
 								<div class="canvasp5js" >
 									<div>
@@ -153,19 +202,49 @@
 								</div>
 								<p></p>
 								<h4>p5*js Code</h4>
-									<pre><code class="prettyprint">function setup() { 
-	createCanvas(600, 400);
+									<pre><code class="prettyprint">let r = 1;
+let g = 1;
+let b = 1;
+let a = 1;
+
+function setup() { 
+  createCanvas(600, 400);
+  windowResized();
 } 
 
-function draw(){ 
-	// Dibuja un nuevo background en cada frame
-	background(210);
-	stroke(0);
-	fill(0,0,255);
-	// En modo CENTER, el rectángulo se dibuja en el centro del cursor
-	rectMode(CENTER);
-	// mouseX y mouseY posición del ratón
-	rect(mouseX,mouseY,50,50);
+function draw() {
+	loadPixels();
+	// Modifica cada pixel del canvas
+	for (let y = 0; y < height; y++) {
+		for (let x = 0; x < width; x++){
+			let index = (x+y*width)*4; // Posicion del pixel
+			pixels[index+0]=(y)*r; //Red
+			pixels[index+1]=(y-x)*g; //Green
+			pixels[index+2]=(x)*b; //Blue
+			pixels[index+3]=random(255)*a; //Alpha
+		}
+	}
+	updatePixels();
+}
+
+function keyPressed() {
+	if (key === 'r') { // Extrae el comoponente rojo
+		r = 0;
+	} else if (key === 'g') { // Extrae el comoponente verde
+		g = 0;
+	} else if (key === 'b') { // Extrae el comoponente azul
+		b = 0;
+	} else if (key === 'a') { // Extrae el comoponente alfa
+		a = 0;
+	} else if (key === 'R') { // Agrega el comoponente rojo
+		r = 1;
+	} else if (key === 'G') { // Agrega el comoponente verde
+		g = 1;
+	} else if (key === 'B') { // Agrega el comoponente azul
+		b = 1;
+	} else if (key === 'A') { // Agrega el comoponente alfa
+		a = 1;
+	}
 }</code></pre>
 								
 								<p></p>
