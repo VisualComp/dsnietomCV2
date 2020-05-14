@@ -130,7 +130,7 @@
 							<article class="post">
 								<header>
 									<div class="title">
-										<h2><a href="http://www.mywonderland.es/curso_js/processing/pro_ejemplos.html" target="_blank">Image Processing with Pixels</a></h2>
+										<h2><a href="https://processing.org/tutorials/pixels/" target="_blank">Image Processing with Pixels</a></h2>
 										<p>Load Images pixel by pixel</p>
 									</div>
 									<div class="meta">
@@ -139,9 +139,11 @@
 										
 									</div>
 								</header>
-								<p>Los siguientes ejemplos tienen el propósito de desarrollar y practicar la transición entre el lenguaje Processing y el lenguaje p5.js observando sus principales diferencias, ya que ambos lenguajes se ven muy similar, y cómo convertir de uno a otro.</p>
+								<p>Poniendo en practica los conceptos aprendidos en el estudio de matrices de pixeles que se vio en el ejemplo anterior <a href="images1.html" target="_parent">PAINTING BACKGROUNDS WITH PIXELS</a>  y la documentación del sitio web <a href="https://processing.org/tutorials/pixels/" target="_blank">processing.org</a>, podremos ahora empezar a trabajar de la misma manera con imágenes.  </p>
 								
-								<p>Este programa esta basado en un sketch básico realizado por el sitio web <a href="http://www.mywonderland.es/curso_js/processing/pro_ejemplos.html" target="_blank">mywonderland.es</a>, en el lenguaje Processing, con el fin de observar un ejemplo en el que se utilizan las funciones 'mouseX, mouseY'. Crea una ventana con un ancho de 600px y una altura de 400px, y luego empieza a dibujar un cuadrado azul de 50px por 50px según la posición del mouse, al mismo tiempo que el fondo de la ventana se va rellenando de color gris, dando la ilusión que solo existe un cuadrado azul moviéndose por toda la ventana siguiendo al mouse.</p>
+								<p>En este caso podemos ver la imagen como una cuadricula compuesta por pixeles, donde cada pixel está compuesto por cuatro piezas de información (R, G, B, A), esto quiere decir que, como se vio en el ejemplo anterior, es posible acceder al valor de cada pixel y modificarlo de tal manera que podamos cambiar o modificar ciertas características especificas de la imagen. Para ello se usará el mismo proceso de búsqueda de índices <strong><em>x + y * width * 4</em></strong> para recorrer la matriz de pixeles de la imagen y acceder a los valores RGBA de cada pixel.</p>
+								
+								<p>El siguiente programa tiene el propósito de ilustrar la forma en la que se cargan imágenes a un lienzo, pero en lugar de mostrarla se pintara cada pixel del lienzo según los valores y posición de cada pixel de la imagen. Para ello tanto el lienzo como la imagen deben ser del mismo tamaño, o por lo menos el mismo ancho, con el fin de que la posición del pixel de la imagen corresponda a la posición del lienzo (mas adelante se verá como pintar un lienzo con dimensiones distintas al de la imagen). Adicionalmente se podrá interactuar con la ventana por medio de Sliders para modificar los valores RGB de los pixeles.</p>
 								
 								<div class="canvasp5js" >
 									<div>
@@ -155,19 +157,53 @@
 								</div>
 								<p></p>
 								<h4>p5*js Code</h4>
-									<pre><code class="prettyprint">function setup() { 
-	createCanvas(600, 400);
-} 
+									<pre><code class="prettyprint">let rSlider, gSlider, bSlider; //Declarar variables de sliders
+let img; // Declarar variable 'img'
 
-function draw(){ 
-	// Dibuja un nuevo background en cada frame
-	background(210);
-	stroke(0);
-	fill(0,0,255);
-	// En modo CENTER, el rectángulo se dibuja en el centro del cursor
-	rectMode(CENTER);
-	// mouseX y mouseY posición del ratón
-	rect(mouseX,mouseY,50,50);
+function setup() {
+  createCanvas(800, 600);
+  textSize(14);
+  noStroke();
+
+  // Crear sliders
+  rSlider = createSlider(-255, 255, 0);
+  rSlider.position(20, 20);
+  gSlider = createSlider(-255, 255, 0);
+  gSlider.position(20, 50);
+  bSlider = createSlider(-255, 255, 0);
+  bSlider.position(20, 80);
+  img = loadImage('https://upload.wikimedia.org/wikipedia/commons/thumb/b/be/Red_eyed_tree_frog_edit2.jpg/800px-Red_eyed_tree_frog_edit2.jpg'); 
+}
+
+function draw() {
+  const R = rSlider.value();
+  const G = gSlider.value();
+  const B = bSlider.value();
+  loadPixels();
+  img.loadPixels(); //Carga los pixeles de la imagen
+  // Recorre la matriz de pixeles
+  for (let y = 0; y &lt height; y++) {
+		for (let x = 0; x &lt width; x++){ 
+			let index = (x+y*width)*4; // Posicion del pixel
+			let r=img.pixels[index+0]; // Componente Red
+			let g=img.pixels[index+1]; // Componente Green
+			let b=img.pixels[index+2]; // Componente Blue
+			let a=img.pixels[index+3]; // Componente Alpha
+			// Pinta el lienzo con los valores de los pixeles de la imagen
+			// Suma el valor del componente junto con el valor del slider
+			pixels[index+0]=r+R; 
+			pixels[index+1]=g+G; 
+			pixels[index+2]=b+B;
+			pixels[index+3]=a;
+		}
+	}
+  updatePixels();	
+  
+  stroke(255);
+  textStyle(BOLDITALIC);
+  text('RED', 175, 40);
+  text('GREEN', 175, 70);
+  text('BLUE', 175, 100);
 }</code></pre>
 								
 								<p></p>
