@@ -9,11 +9,11 @@ function setup() {
   noStroke();
 
   // crear barras deslizantes
-  rSlider = createSlider(-128, 384, 128);
+  rSlider = createSlider(-255, 255, 0);
   rSlider.position(20, 20);
-  gSlider = createSlider(-128, 384, 128);
+  gSlider = createSlider(-255, 255, 0);
   gSlider.position(20, 50);
-  bSlider = createSlider(-128, 384, 128);
+  bSlider = createSlider(-255, 255, 0);
   bSlider.position(20, 80);
   img = loadImage('https://upload.wikimedia.org/wikipedia/commons/thumb/b/be/Red_eyed_tree_frog_edit2.jpg/800px-Red_eyed_tree_frog_edit2.jpg'); 
 }
@@ -32,10 +32,10 @@ function draw() {
             let g=img.pixels[index+1]; // Componente Green
             let b=img.pixels[index+2]; // Componente Blue
             let a=img.pixels[index+3]; // Componente Alpha
-			            
-			pixels[index+0]=r+R-128;
-			pixels[index+1]=g+G-128;
-			pixels[index+2]=b+B-128;
+			// Suma el valor del componente junto con el valor del slider
+			pixels[index+0]=r+R; 
+			pixels[index+1]=g+G; 
+			pixels[index+2]=b+B;
 			pixels[index+3]=a;
 		}
 	}
