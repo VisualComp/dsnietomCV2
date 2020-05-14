@@ -159,7 +159,7 @@
 									
 								</div>
 								
-								<p>Antes de acceder a esta matriz, los datos deben cargarse con la función loadPixels(). Después de que se hayan modificado los datos de la matriz, se debe ejecutar la función updatePixels() para actualizar los cambios. Teniendo esto claro ya podemos acceder al valor de cada pixel, para ello es necesario ubicar el índice del componente rojo dentro de la matriz de la siguiente manera <strong><em>x + y * width</em></strong>, ya que la posición del índice del valor rojo es 4 veces la cantidad de píxeles que tiene delante. Por ejemplo, si se desea encontrar el índice del pixel ubicado en la posición (4 , 1) sería <strong><em>4 + 1 * 8 = 12</em></strong>.</p>
+								<p>Antes de acceder a esta matriz, los datos deben cargarse con la función loadPixels(). Después de que se hayan modificado los datos de la matriz, se debe ejecutar la función updatePixels() para actualizar los cambios. Teniendo esto claro ya podemos acceder al valor de cada pixel, para ello es necesario ubicar el índice del componente rojo dentro de la matriz de la siguiente manera <strong><em>x + y * width</em></strong>. Ya que la posición del índice del valor rojo es 4 veces la cantidad de píxeles que tiene delante, en el código se multiplicar este valor por 4. Por ejemplo, si se desea encontrar el índice del pixel ubicado en la posición (4 , 1) sería <strong><em>4 + 1 * 8 = 12</em></strong>.</p>
 								
 								<div class="canvasp5js" >
 									<div>
@@ -215,8 +215,8 @@ function setup() {
 function draw() {
 	loadPixels();
 	// Modifica cada pixel del canvas
-	for (let y = 0; y < height; y++) {
-		for (let x = 0; x < width; x++){
+	for (let y = 0; y &lt height; y++) {
+		for (let x = 0; x &lt width; x++){
 			let index = (x+y*width)*4; // Posicion del pixel
 			pixels[index+0]=(y)*r; //Red
 			pixels[index+1]=(y-x)*g; //Green
