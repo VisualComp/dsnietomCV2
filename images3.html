@@ -130,7 +130,7 @@
 							<article class="post">
 								<header>
 									<div class="title">
-										<h2><a href="http://www.mywonderland.es/curso_js/processing/pro_ejemplos.html" target="_blank">Lantern</a></h2>
+										<h2><a href="https://processing.org/tutorials/pixels/" target="_blank">Lantern</a></h2>
 										<p>Alter the Brightness of an Image</p>
 									</div>
 									<div class="meta">
@@ -139,9 +139,18 @@
 										
 									</div>
 								</header>
-								<p>Los siguientes ejemplos tienen el propósito de desarrollar y practicar la transición entre el lenguaje Processing y el lenguaje p5.js observando sus principales diferencias, ya que ambos lenguajes se ven muy similar, y cómo convertir de uno a otro.</p>
+								<p>Los siguientes ejemplos tienen el propósito de practicar la transición entre el lenguaje Processing y el lenguaje p5.js por medio del uso de diferentes funciones y ejemplos relacionados con el procesamiento de imágenes.</p>
 								
-								<p>Este programa esta basado en un sketch básico realizado por el sitio web <a href="http://www.mywonderland.es/curso_js/processing/pro_ejemplos.html" target="_blank">mywonderland.es</a>, en el lenguaje Processing, con el fin de observar un ejemplo en el que se utilizan las funciones 'mouseX, mouseY'. Crea una ventana con un ancho de 600px y una altura de 400px, y luego empieza a dibujar un cuadrado azul de 50px por 50px según la posición del mouse, al mismo tiempo que el fondo de la ventana se va rellenando de color gris, dando la ilusión que solo existe un cuadrado azul moviéndose por toda la ventana siguiendo al mouse.</p>
+								<p>El siguiente programa está basado en el estudio realizado a partir del tutorial de YouTube <a href="https://www.youtube.com/watch?v=j-ZLDEnhT3Q" target="_blank">'10.5: Image Processing with Pixels'</a> y el sitio web <a href="https://processing.org/tutorials/pixels/" target="_blank">processing.org</a>. Tiene como objetivo pintar un lienzo a partir del valor de los pixeles de una imagen, pero modificando sus valores RGB aumentando el brillo de los pixeles que están más cerca de la posición del mouse y disminuyendo el brillo de los pixeles que están mas lejos de la posición del mouse, en un radio de 150 pixeles.</p>
+								
+								<div class="canvasp5js" >
+									<div>
+									<img src="images/study/lantern1.png" style="width:25%;vertical-align: middle"/>
+									</div>
+									
+								</div>
+								
+								<p>Ya que los valores RGB oscilan entre 0 y 255, y el <a href="https://en.wikipedia.org/wiki/RGB_color_model" target="_blank">Modelo RGB</a> menciona que la combinación y ausencia de los tres componentes Rojo, Verde y Azul producen el color blanco y negro, respectivamente, los pixeles más cercanos a la posición del mouse se acercaran más al blanco y los más lejanos se acercaran más al negro, creando así un efecto de linterna.</p>
 								
 								<div class="canvasp5js" >
 									<div>
@@ -154,19 +163,37 @@
 								</div>
 								<p></p>
 								<h4>p5*js Code</h4>
-									<pre><code class="prettyprint">function setup() { 
-	createCanvas(600, 400);
+									<pre><code class="prettyprint">let img; // Declarar variable 'img'
+
+function setup() { 
+	var myCanvas = createCanvas(666, 460);
+	myCanvas.parent('lanternImg');
+	background(210);
+	pixelDensity();
+	img = loadImage('https://upload.wikimedia.org/wikipedia/commons/9/9a/Green_Peafowl%2C_Hanoi.jpg');
 } 
 
-function draw(){ 
-	// Dibuja un nuevo background en cada frame
-	background(210);
-	stroke(0);
-	fill(0,0,255);
-	// En modo CENTER, el rectángulo se dibuja en el centro del cursor
-	rectMode(CENTER);
-	// mouseX y mouseY posición del ratón
-	rect(mouseX,mouseY,50,50);
+function draw() {
+	loadPixels();
+	img.loadPixels();
+	for (let y = 0; y &lt height; y++) {
+		for (let x = 0; x &lt width; x++){ 
+			let index = (x+y*width)*4; // Posicion del pixel
+			let r = img.pixels[index+0]; // Componente Red
+			let g = img.pixels[index+1]; // Componente Green
+			let b = img.pixels[index+2]; // Componente Blue
+			let a = img.pixels[index+3]; // Componente Alpha
+			
+			let d=dist(mouseX,mouseY,x,y); // Distancia entre la posicion del mouse y el punto (x,y)
+			let factor=map(d,0,150,2,0); // Escala el valor de d en los valores de 0-150 a 2-0 
+			// Aumenta el brillo de los pixeles que estan cerca del mouse a un radio de 150 pixeles
+			pixels[index+0] = r*factor;
+			pixels[index+1] = g*factor;
+			pixels[index+2] = b*factor;
+			pixels[index+3] = a;
+		}
+	}
+	updatePixels();
 }</code></pre>
 								
 								<p></p>
