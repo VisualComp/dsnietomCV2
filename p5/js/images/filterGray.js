@@ -1,5 +1,5 @@
 let img; // Declarar variable 'img'
-let lightness = 210; // Variable de ligereza
+let lightness = 0; // Variable de ligereza
 let gray=0;
 
 function setup() { 
@@ -8,6 +8,11 @@ function setup() {
   background(210);
   pixelDensity();
   img = loadImage('https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/Peacock_Plumage.jpg/1024px-Peacock_Plumage.jpg');
+  var title = 'IMAGEN ORIGINAL';
+  textSize(14);
+  stroke(255);
+  textStyle(BOLDITALIC);
+  textAlign(CENTER);
 } 
 
 function draw() {
@@ -26,42 +31,62 @@ function draw() {
 			if (gray===1){
 				let I=(r+g+b)/3; // Promedio de los tres componentes
 				lightness = I;
+				title = 'MEDIA ARITMÉTICA';
 			} else if (gray===2){
 				let V= max(r,g,b); // Componente mas grande de un color
 				lightness = V;
+				title = 'COMPONENTE MÁS GRANDE';
 			} else if (gray===3){
 				let L=(max(r,g,b)+min(r,g,b))/2; // Promedio entre el componente mas grande y el mas pequeño
 				lightness = L;
+				title = 'RANGO MEDIO';
 			} else if (gray===4){ // Promedio ponderado de RGB con corrección gamma (Luma)
 				let Y601= 0.2989*r + 0.5870*g + 0.1140*b; // SDTV
 				lightness = Y601;
+				title = 'LUMA (SDTV)';
 			} else if (gray===5){ 
 				let Y240= 0.212*r + 0.701*g + 0.087*b; // Adobe
 				lightness = Y240;
+				title = 'LUMA (ADOBE)';
 			} else if (gray===6){ 
 				let Y709= 0.2126*r + 0.7152*g + 0.0722*b; // HDTV
 				lightness = Y709;
+				title = 'LUMA (HDTV)';
 			} else if (gray===7){ 
 				let Y2020= 0.2627*r + 0.6780*g + 0.0593*b; // UHDTV,HDR
 				lightness = Y2020;
-			} 
-			
-			            
-			pixels[index+0]=lightness;
-			pixels[index+1]=lightness;
-			pixels[index+2]=lightness;
-			pixels[index+3]=a;
+				title = 'LUMA (UHDTV, HDR)';
+			} else if (gray===11){ 
+				let V= 10*sqrt(r); // Munsell Rojo
+				lightness = V;
+				title = 'MUNSELL (ROJO)'
+			} else if (gray===12){ 
+				let V= 10*sqrt(g); // Munsell Verde
+				lightness = V;
+				title = 'MUNSELL (VERDE)'
+			} else if (gray===13){ 
+				let V= 10*sqrt(b); // Munsell Azul
+				lightness = V;
+				title = 'MUNSELL (AZUL)'
+			}
+						            
+			pixels[index+0] = lightness;
+			pixels[index+1] = lightness;
+			pixels[index+2] = lightness;
+			pixels[index+3] = a;
 			
 			if (gray===0){ // Imagen original
-				pixels[index+0]=r;
-				pixels[index+1]=g;
-				pixels[index+2]=b;
-				pixels[index+3]=a;
+				pixels[index+0] = r;
+				pixels[index+1] = g;
+				pixels[index+2] = b;
+				pixels[index+3] = a;
+				title = 'IMAGEN ORIGINAL';
 			}
 		}
 	}
 	updatePixels();
 	image(img, 12, 12, img.width *0.26, img.height *0.26);
+	text(title, width/2, 20);
 }
 
 // Se ejecuta cuando se presiona cualquier tecla
@@ -82,5 +107,11 @@ function keyPressed() {
     gray = 6;
   } else if (key === '7') {
     gray = 7;
+  } else if (key === 'r') {
+    gray = 11;
+  } else if (key === 'g') {
+    gray = 12;
+  } else if (key === 'b') {
+    gray = 13;
   }  
 }
