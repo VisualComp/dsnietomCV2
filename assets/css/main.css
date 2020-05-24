@@ -87,6 +87,10 @@ iframe {
 	text-align:center;
 }
 
+.text-center {
+	text-align:center;
+}
+
 
 input, select, textarea {
 	-moz-appearance: none;
@@ -3092,7 +3096,6 @@ input, select, textarea {
 			font-size: 0.9em;
 			font-weight: 700;
 			padding: 0 0.75em 0.75em 0.75em;
-			text-align: left;
 		}
 
 		table thead {
