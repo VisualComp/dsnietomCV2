@@ -9,8 +9,8 @@ function setup() {
   pixelDensity();
   img = loadImage('https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/Peacock_Plumage.jpg/1024px-Peacock_Plumage.jpg');
   var title = 'IMAGEN ORIGINAL';
-  textSize(14);
-  stroke(255);
+  textSize(18);
+  stroke(128,255,255);
   textStyle(BOLDITALIC);
   textAlign(CENTER);
 } 

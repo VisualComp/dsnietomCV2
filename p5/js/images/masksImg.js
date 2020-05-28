@@ -27,10 +27,9 @@ function setup() {
 
 	lienzo_01 = createGraphics(500, 450);
 	lienzo_02 = createGraphics(600, 450);
-	lienzo_03 = createGraphics(600, 450);
 
-	lienzo_01.textSize(20);
-	lienzo_01.stroke(128,255,255);
+	lienzo_01.textSize(18);
+	lienzo_01.stroke(255,255,128);
 	lienzo_01.textStyle(BOLDITALIC);
 	lienzo_01.textAlign(CENTER);
 } 
