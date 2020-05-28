@@ -1,9 +1,11 @@
-var lienzo_01;
-var lienzo_02;
+var lienzo_01; // Lienzo imagen original
+var lienzo_02; // Lienzo imagen invertida
 var img_01;
 var img_02;
-let opposite = 0;
-let sign = -1;
+
+let c =false;
+let m =false;
+let y =false;
 
 function setup() {
     var myCanvas = createCanvas(772, 600);
@@ -13,7 +15,7 @@ function setup() {
     img_02 = loadImage('https://upload.wikimedia.org/wikipedia/commons/thumb/c/c0/Ara_macao_qtl1.jpg/386px-Ara_macao_qtl1.jpg');
     
     lienzo_01 = createGraphics(386, 600);
-    lienzo_02 = createGraphics(386, 600);
+	lienzo_02 = createGraphics(386, 600);
 }
 
 function draw() {
@@ -29,14 +31,18 @@ function drawImage_01() {
     var title = "IMAGEN ORIGINAL";
 	
 	lienzo_01.textSize(14);
+	lienzo_01.stroke(255);
+	lienzo_01.textStyle(BOLDITALIC);
 	lienzo_01.textAlign(CENTER);
     lienzo_01.text(title, 0, 20,lienzo_01.width); 
 }
 // Dibuja la imagen de la Derecha
 function drawImage_02() {
-    var title = "OPRIMA LAS TECLAS '->' o '<-' DEL TECLADO";
+    var title = "IMAGEN OPUESTA";
 	
 	lienzo_02.textSize(14);
+	lienzo_02.stroke(255);
+	lienzo_02.textStyle(BOLDITALIC);
 	lienzo_02.textAlign(CENTER);
     lienzo_02.text(title, 0, 20,lienzo_02.width);
     
@@ -52,23 +58,42 @@ function drawImage_02() {
 		let g=img_02.pixels[index+1]; // Componente Green
 		let b=img_02.pixels[index+2]; // Componente Blue
 		let a=img_02.pixels[index+3]; // Componente Alpha
-		
-		img.pixels[index+0]=opposite-(sign)*r; // Se calcula el complemento del Rojo (255-r)
-		img.pixels[index+1]=opposite-(sign)*g; // Se calcula el complemento del Verde (255-g)
-		img.pixels[index+2]=opposite-(sign)*b; // Se calcula el complemento del Azul (255-b)
+
+		if (c){
+			img.pixels[index+0]=255-r; // Se calcula el opuesto del Rojo (cian)
+		}else{
+			img.pixels[index+0]=r;
+		}
+		if (m){
+			img.pixels[index+1]=255-g; // Se calcula el opuesto del Verde (magenta)
+		}else{
+			img.pixels[index+1]=g;
+		}
+		if (y){
+			img.pixels[index+2]=255-b; // Se calcula el opuesto del Azul (amarrillo)
+		}else{
+			img.pixels[index+2]=b;
+		}		
 		img.pixels[index+3]=a;
 	}
 	img.updatePixels();
 	image(img, 386, 0);
 }
-// Se ejecuta cuandp se presiona cualquier tecla
+// Se ejecuta cuando se presiona cualquier tecla
 function keyPressed() {
-	if (keyCode === RIGHT_ARROW) { // Colores complementarios
-		opposite = 255;
-		sign = 1;
-	} else if (keyCode === LEFT_ARROW) { // Imagen original
-		opposite = 0;
-		sign = -1;
+	if (key === '1') { // Colores complementarios
+		c=true;
+		m=true;
+		y=true;
+	} else if (key === '0') { // Imagen original
+		c=false;
+		m=false;
+		y=false;
+  } else if (key === 'r' || key === 'R') { // Complemento Rojo
+		c=true;
+  } else if (key === 'g' || key === 'G') { // Complemento Verde
+		m=true;
+  } else if (key === 'b' || key === 'B') { // Complemento Azul
+		y=true;
   }
 }
-

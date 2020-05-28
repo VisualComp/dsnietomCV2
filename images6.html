@@ -130,7 +130,7 @@
 							<article class="post">
 								<header>
 									<div class="title">
-										<h2><a href="http://www.mywonderland.es/curso_js/processing/pro_ejemplos.html" target="_blank">Pointillism</a></h2>
+										<h2><a href="https://processing.org/tutorials/pixels/" target="_blank">Pointillism</a></h2>
 										<p>Fill Ellipses with the Color of a Pixel</p>
 									</div>
 									<div class="meta">
@@ -139,10 +139,10 @@
 										
 									</div>
 								</header>
-								<p>Los siguientes ejemplos tienen el propósito de desarrollar y practicar la transición entre el lenguaje Processing y el lenguaje p5.js observando sus principales diferencias, ya que ambos lenguajes se ven muy similar, y cómo convertir de uno a otro.</p>
-								
-								<p>Este programa esta basado en un sketch básico realizado por el sitio web <a href="http://www.mywonderland.es/curso_js/processing/pro_ejemplos.html" target="_blank">mywonderland.es</a>, en el lenguaje Processing, con el fin de observar un ejemplo en el que se utilizan las funciones 'mouseX, mouseY'. Crea una ventana con un ancho de 600px y una altura de 400px, y luego empieza a dibujar un cuadrado azul de 50px por 50px según la posición del mouse, al mismo tiempo que el fondo de la ventana se va rellenando de color gris, dando la ilusión que solo existe un cuadrado azul moviéndose por toda la ventana siguiendo al mouse.</p>
-								
+								<p>Los siguientes ejemplos tienen el propósito de practicar la transición entre el lenguaje Processing y el lenguaje p5.js por medio del uso de diferentes funciones y ejemplos relacionados con el procesamiento de imágenes.</p>
+
+								<p>El siguiente programa está basado en lo aprendido durante el estudio del ejemplo <a href="images2.html" target="_parent">IMAGE PROCESSING WITH PIXELS</a>, que se vio anteriormente, y en un ejemplo expuesto en la documentación del sitio web <a href="https://processing.org/tutorials/pixels/" target="_blank">processing.org</a>. Este ejemplo tiene como propósito pintar una imagen en el lienzo, con elipses, a partir del componente RGB de cada pixel y su posición en la imagen original. De manera más detallada, lo que se hará es cargar la imagen, pero en lugar de pintar cada uno de sus pixeles en el lienzo, se pintará una elipse en una posición aleatoria de la ventana y esta elipse será rellenada con el color del pixel de la imagen en esa misma posición, es decir, en vez de pintar el pixel en el lienzo se pintara un punto. Adicionalmente se utilizara la función map() para cambiar el tamaño de la elipse según la posición del mouse <img src="images/keyboard/pointer.png" style="width:1.5%;vertical-align: middle"/>; si el mouse se mueve hacia la izquierda el punto será pequeño y si se mueve hacia la derecha, el punto se hará más grande.</p>
+																								
 								<div class="canvasp5js" >
 									<div>
 									<div id="pointillize">
@@ -154,19 +154,42 @@
 								</div>
 								<p></p>
 								<h4>p5*js Code</h4>
-									<pre><code class="prettyprint">function setup() { 
-	createCanvas(600, 400);
-} 
+									<pre><code class="prettyprint">let img;
+let smallPoint, largePoint;
 
-function draw(){ 
-	// Dibuja un nuevo background en cada frame
+function preload() {
+	img = loadImage('https://upload.wikimedia.org/wikipedia/commons/thumb/8/8b/20091007_Koi_Fish_Shanghai_7301.jpg/800px-20091007_Koi_Fish_Shanghai_7301.jpg');
+}
+
+function setup() {
+	createCanvas(800, 532);
+	smallPoint = 4; // Tamaño minimo elipse
+	largePoint = 30; // Tamaño maximo elipse
 	background(210);
-	stroke(0);
-	fill(0,0,255);
-	// En modo CENTER, el rectángulo se dibuja en el centro del cursor
-	rectMode(CENTER);
-	// mouseX y mouseY posición del ratón
-	rect(mouseX,mouseY,50,50);
+	ellipseMode(CENTER);
+	img.loadPixels();
+}
+
+function draw() {
+	img.loadPixels();	
+	// Imagen miniatura
+	image(img, img.width-img.width / 4, 0, img.width / 4, img.height / 4);
+	
+	// Tamaño de la elipse segun las posicion X del mouse
+	let pointillize = map(mouseX, 0, width, smallPoint, largePoint);
+	// Posicion aleatoria para escoger un pixel
+	let x = floor(random(img.width));
+	let y = floor(random(img.height));
+
+	let index = (x+y*width)*4; // Posicion del pixel
+	let r=img.pixels[index+0]; // Componente Red
+	let g=img.pixels[index+1]; // Componente Green
+	let b=img.pixels[index+2]; // Componente Blue
+	let a=img.pixels[index+3]; // Componente Alpha
+
+	noStroke();
+	fill(r,g,b,a); // Color de la elipse segun el color del pixel
+	ellipse(x, y, pointillize, pointillize);
 }</code></pre>
 								
 								<p></p>
