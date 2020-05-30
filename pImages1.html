@@ -130,19 +130,21 @@
 							<article class="post">
 								<header>
 									<div class="title">
-										<h2><a href="http://www.mywonderland.es/curso_js/processing/pro_ejemplos.html" target="_blank">Lantern</a></h2>
-										<p>Alter the Brightness of an Image</p>
+										<h2><a href="https://en.wikipedia.org/wiki/HSL_and_HSV" target="_blank">Grayscale Image</a></h2>
+										<p>RGB Average and Luma Coefficient</p>
 									</div>
 									<div class="meta">
-										<time class="published" datetime="2015-11-01">April 16, 2020</time>
+										<time class="published" datetime="2020-04-16">April 16, 2020</time>
 										<a href="https://dsnietom.github.io/myPageIngSoft/" target="_blank" class="author"><span class="name">David Nieto</span><img src="images/avatar.jpg" alt="dsnietom" /></a>
 										
 									</div>
 								</header>
-								<p>Los siguientes ejemplos tienen el propósito de desarrollar y practicar la transición entre el lenguaje Processing y el lenguaje p5.js observando sus principales diferencias, ya que ambos lenguajes se ven muy similar, y cómo convertir de uno a otro.</p>
+								<p>En la siguiente publicación se pondrá en practica lo aprendido durante el estudio de procesamiento de imágenes en los ejemplos expuestos y desarrollados en <a href="images1.html" target="_parent">PIXELS AND IMAGES</a>, donde se observó cómo funciona una matriz de pixeles y cómo modificar los pixeles de una imagen accediendo a los valores de este arreglo.</p>
 								
-								<p>Este programa esta basado en un sketch básico realizado por el sitio web <a href="http://www.mywonderland.es/curso_js/processing/pro_ejemplos.html" target="_blank">mywonderland.es</a>, en el lenguaje Processing, con el fin de observar un ejemplo en el que se utilizan las funciones 'mouseX, mouseY'. Crea una ventana con un ancho de 600px y una altura de 400px, y luego empieza a dibujar un cuadrado azul de 50px por 50px según la posición del mouse, al mismo tiempo que el fondo de la ventana se va rellenando de color gris, dando la ilusión que solo existe un cuadrado azul moviéndose por toda la ventana siguiendo al mouse.</p>
+								<p>A continuación, se observará cómo se puede obtener una imagen a escala de grises a partir del <em>Promedio</em> de los componentes RGB de una imagen y el caculo del coeficiente <em>Luma</em>. Para ello este estudio esta basado en la documentación <a href="https://en.wikipedia.org/wiki/HSL_and_HSV#Lightness" target="_blank">HSL and HSV</a> y en gran medida estará basado en el ejemplo <a href="images4.html" target="_parent">BLACK AND WHITE</a> anteriormente trabajado, por lo tanto, no se profundizará en los cálculos de las expresiones, sino en la manera de aplicar estas expresiones a nuestro programa en p5.js para modificar la luminancia de la imagen y obtener los resultados esperados.</p>
 								
+								<p>Para obtener una imagen a escala de grises por medio del siguiente programa, bastará con acceder al componente RGB de cada pixel de la imagen, hacer el cálculo del <strong>Promedio RGB</strong> o el coeficiente <strong>Luma</strong> utilizando las expresiones descritas en la tabla de Comandos por Teclado y por último se reemplazará el valor obtenido en cada uno de los componentes de color RGB del pixel. Adicionalmente también se observarán otras posibilidades para modificar la luminancia de la imagen y obtener la imagen a escala de grises a partir del calculo del <strong>Componente mas grande</strong>, el <strong>Rango medio</strong> y el <strong>Valor de Munsell</strong> visto en la documentación <a href="https://en.wikipedia.org/wiki/Lightness#Relationship_to_value_and_relative_luminance" target="_blank">Lightness</a>.</p>
+															
 								<hr />
 								<h3>Comandos por teclado</h3>
 								<div class="table-wrapper text-center">
