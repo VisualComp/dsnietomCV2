@@ -1,0 +1,326 @@
+<!DOCTYPE HTML>
+<!--
+	David Styven Nieto Marin
+	Ingenieria de Sistemas | @dsnietom
+	Universidad Nacional de Colombia
+-->
+<html>
+	<head>
+		<title>Pixeles e Imagenes | :: Computación Visual ::</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+		
+		<!-- Code-Prettify -->
+		<script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
+		
+		<!-- P5.js -->
+		<script src="p5/p5.min.js"></script>
+		<script src="p5/addons/p5.sound.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.0.0/p5.min.js"></script>
+		<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.0.0/addons/p5.sound.min.js"></script> -->
+		
+		<!-- Bootstrap CSS 
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">-->
+	
+		<!-- Favicon -->
+		<link rel="icon" href="images/favicon.png" sizes="32x32" type="image/png">
+
+		
+	</head>
+	
+	<body class="single is-preload">
+	
+	
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+			
+
+				<!-- Header -->
+					<header id="header">
+						
+						<nav class="links">
+						
+						<!-- Se crea un encabezado para insertar el html donde esta el menu-->
+							<iframe src="menu.html" ></iframe>
+							
+						</nav>
+						<nav class="main">
+							<ul>
+								<li class="search">
+									<a class="fa-search" href="#search">Search</a>
+									<form id="search" method="get" action="#">
+										<input type="text" name="query" placeholder="Search" />
+									</form>
+								</li>
+								<li class="menu">
+									<a class="fa-bars" href="#menu">Menu</a>
+								</li>
+							</ul>
+						</nav>
+					</header>
+
+				<!-- Menu -->
+					<section id="menu">
+
+						<!-- Search -->
+							<section>
+							<h1><a href="index.html" target="_parent">Visual Computing</a></h1>
+								<form class="search" method="get" action="#">
+									<input type="text" name="query" placeholder="Search" />
+								</form>
+							</section>
+
+						<!-- Links -->
+							<section>
+								<ul class="links">
+									<li>
+										<a href="images1.html" target="_parent">
+											<h3>FIRST STEPS</h3>
+											<p>Painting Backgrounds with Pixels</p>
+										</a>
+									</li>
+									<li>
+										<a href="images2.html" target="_parent">
+											<h3>IMAGE PROCESSING WITH PIXELS</h3>
+											<p>Load Images pixel by pixel</p>
+										</a>
+									</li>
+									<li>
+										<a href="images3.html" target="_parent">
+											<h3>LANTERN</h3>
+											<p>Alter the Brightness of an Image</p>
+										</a>
+									</li>
+									<li>
+										<a href="images4.html" target="_parent">
+											<h3>BLACK AND WHITE</h3>
+											<p>Gray filter modifying lightness</p>
+										</a>
+									</li>
+									<li>
+										<a href="images5.html" target="_parent">
+											<h3>COMPLEMENTARY COLORS</h3>
+											<p>createGraphics two Canvases in One</p>
+										</a>
+									</li>
+									<li>
+										<a href="images6.html" target="_parent">
+											<h3>POINTILLISM</h3>
+											<p>Fill Ellipses with the Color of a Pixel</p>
+										</a>
+									</li>
+								</ul>
+							</section>
+
+						<!-- Actions -->
+							<section>
+								<ul class="actions stacked">
+									<li><a href="#" class="button large fit">Log In</a></li>
+								</ul>
+							</section>
+
+					</section>
+
+				<!-- Main -->
+					<div id="main">
+
+						<!-- Post -->
+							<article class="post">
+								<header>
+									<div class="title">
+										<h2><a href="https://en.wikipedia.org/wiki/Complementary_colors" target="_blank">Complementary Colors</a></h2>
+										<p>createGraphics two Canvases in One</p>
+									</div>
+									<div class="meta">
+										<time class="published" datetime="2015-11-01">April 02, 2020</time>
+										<a href="https://dsnietom.github.io/myPageIngSoft/" target="_blank" class="author"><span class="name">David Nieto</span><img src="images/avatar.jpg" alt="dsnietom" /></a>
+										
+									</div>
+								</header>
+								<p>Los siguientes ejemplos tienen el propósito de practicar la transición entre el lenguaje Processing y el lenguaje p5.js por medio del uso de diferentes funciones y ejemplos relacionados con el procesamiento de imágenes. Adicionalmente se hará uso de la función createGraphics() como se vio en el ejemplo <a href="example4.html" target="_parent">DRAW AND PAINT</a> con el objetivo de crear dos lienzos en la ventana principal, para poder observar y comparar los cambios de la imagen obtenida con la imagen original.</p>
+
+								<p>El siguiente programa está basado en los ejemplos trabajados durante la clase de Computación Visual y el estudio de la documentación <a href="https://en.wikipedia.org/wiki/Complementary_colors" target="_blank">Complementary colors</a>. Este ejemplo tiene como objetivo calcular y observar los colores complementarios u opuestos de los pixeles de la imagen en el modelo RGB.</p>
+								
+								<div class="text-center">
+									<img src="images/study/complementary1.png" style="width: 30%;vertical-align: middle"/>
+								</div><br>
+								<p>El cálculo de los colores opuestos o complementarios es muy sencillo, pero con ello se logra obtener un efecto muy interesante al conseguir como resultado una imagen invertida o el negativo de la imagen. Si sabemos que el rango de valor de un pixel va de 0 a 255, como se vio en el ejemplo <a href="images1.html" target="_parent">FIRST STEPS</a>, es posible calcular su valor opuesto igualando el valor de cada componente RGB del pixel a 255 y sustrayendo el componente RGB del pixel original; es decir, <em><strong>255</strong> – <strong style="color:red;">Rojo</strong> = <strong style="color: aqua;">Cian</strong></em>, <em><strong>255</strong> - <strong style="color:lime;">Verde</strong> = <strong style="color: magenta;">Magenta</strong></em> y <em><strong>255</strong> - <strong style="color: blue;">Azul</strong> = <strong style="color: yellow;">Amarillo</strong></em>.</p>
+								
+								<hr />
+								<h3>Comandos por teclado</h3>
+								<div class="row">
+										<div class="col-6 col-12-medium">										
+											<ul>	
+												<li><h4 style="display:inline"><em>Imagen Opuesta</em> = </h4><img src="images/keyboard/1.png" style="width:4%;vertical-align: middle"/></li>												
+												<li><h4 style="display:inline"><em>Complemento Rojo</em> = </h4><img src="images/keyboard/r.png" style="width:4%;vertical-align: middle"/></li>
+												<li><h4 style="display:inline"><em>Complemento Verde</em> = </h4><img src="images/keyboard/g.png" style="width:4%;vertical-align: middle"/></li>
+												<li><h4 style="display:inline"><em>Complemento Azul</em> = </h4><img src="images/keyboard/b.png" style="width:4%;vertical-align: middle"/></li>
+												
+											</ul>									
+										</div>
+										<div class="col-6 col-12-medium">
+											<ul>
+												<li><h4 style="display:inline"><em>Imagen Original</em> = </h4><img src="images/keyboard/0.png" style="width:4%;vertical-align: middle"/></li>										
+												<li><h4 style="display:inline"><em>Complemento Rojo y Verde</em> = </h4><img src="images/keyboard/r.png" style="width:4%;vertical-align: middle"/> + <img src="images/keyboard/g.png" style="width:4%;vertical-align: middle"/></li>
+												<li><h4 style="display:inline"><em>Complemento Rojo y Azul</em> = </h4><img src="images/keyboard/r.png" style="width:4%;vertical-align: middle"/> + <img src="images/keyboard/b.png" style="width:4%;vertical-align: middle"/></li>
+												<li><h4 style="display:inline"><em>Complemento Verde y Azul</em> = </h4><img src="images/keyboard/g.png" style="width:4%;vertical-align: middle"/> + <img src="images/keyboard/b.png" style="width:4%;vertical-align: middle"/></li>
+												
+											</ul>
+										</div>
+									</div>
+
+								<div class="canvasp5js" >
+									<div>
+									<div id="complementary">
+									
+									</div>
+																										
+								</div>
+								<blockquote>Image of Psittacoidea Scarlet Macaw (Ara macao). Source: Wikipedia, the free encyclopedia.<p><strong>Scarlet Macaw (Ara macao) in the Vogelburg (bird park) Hochtaunus, Weilrod, Germany</strong></p></blockquote>
+								</div>
+								<p></p>
+								<h4>p5*js Code</h4>
+									<pre><code class="prettyprint">var lienzo_01; // Lienzo imagen original
+var lienzo_02; // Lienzo imagen invertida
+var img_01;
+var img_02;
+
+let c =false;
+let m =false;
+let y =false;
+
+function setup() {
+	createCanvas(772, 600);
+	img_01 = loadImage('https://upload.wikimedia.org/wikipedia/commons/thumb/c/c0/Ara_macao_qtl1.jpg/386px-Ara_macao_qtl1.jpg');
+	img_02 = loadImage('https://upload.wikimedia.org/wikipedia/commons/thumb/c/c0/Ara_macao_qtl1.jpg/386px-Ara_macao_qtl1.jpg');
+	lienzo_01 = createGraphics(386, 600);
+	lienzo_02 = createGraphics(386, 600);
+}
+
+function draw() {
+	drawImage_01();
+	drawImage_02();
+
+	image(lienzo_01, 0, 0);
+	image(lienzo_02, 386, 0);
+}
+// Dibuja la imagen de la Izquierda
+function drawImage_01() {
+	lienzo_01.image(img_01, 0, 0);
+	var title = "IMAGEN ORIGINAL";
+	
+	lienzo_01.textSize(14);
+	lienzo_01.textAlign(CENTER);
+	lienzo_01.text(title, 0, 20,lienzo_01.width); 
+}
+// Dibuja la imagen de la Derecha
+function drawImage_02() {
+	var title = "IMAGEN OPUESTA";
+	
+	lienzo_02.textSize(14);
+	lienzo_02.textAlign(CENTER);
+	lienzo_02.text(title, 0, 20,lienzo_02.width);
+	
+	loadPixels();
+	img_02.loadPixels();
+	let img = createImage(386, 600);
+	img.loadPixels();
+	
+	for (let index = 0; index &lt 4 * (width * height); index += 4){
+		let r=img_02.pixels[index+0]; // Componente Red
+		let g=img_02.pixels[index+1]; // Componente Green
+		let b=img_02.pixels[index+2]; // Componente Blue
+		let a=img_02.pixels[index+3]; // Componente Alpha
+
+		if (c){
+			img.pixels[index+0]=255-r; // Se calcula el opuesto del Rojo (cian)
+		}else{
+			img.pixels[index+0]=r;
+		}
+		if (m){
+			img.pixels[index+1]=255-g; // Se calcula el opuesto del Verde (magenta)
+		}else{
+			img.pixels[index+1]=g;
+		}
+		if (y){
+			img.pixels[index+2]=255-b; // Se calcula el opuesto del Azul (amarrillo)
+		}else{
+			img.pixels[index+2]=b;
+		}		
+		img.pixels[index+3]=a;
+	}
+	img.updatePixels();
+	image(img, 386, 0);
+}
+// Se ejecuta cuando se presiona cualquier tecla
+function keyPressed() {
+	if (key === '1') { // Colores complementarios
+		c=true;
+		m=true;
+		y=true;
+	} else if (key === '0') { // Imagen original
+		c=false;
+		m=false;
+		y=false;
+	} else if (key === 'r' || key === 'R') { // Complemento Rojo
+		c=true;
+	} else if (key === 'g' || key === 'G') { // Complemento Verde
+		m=true;
+	} else if (key === 'b' || key === 'B') { // Complemento Azul
+		y=true;
+	}
+}</code></pre>
+								
+								<p></p>
+								
+								<!-- Pagination -->
+							<ul class="actions pagination">
+								<li><a href="images4.html" target="_parent" class="button large previous">Previous Page</a></li>
+								<li><a href="images6.html" target="_parent" class="button large next">Next Page</a></li>
+							</ul>
+							
+							<!-- Footer 
+								<footer>
+									<ul class="stats">
+										<li><a href="#">General</a></li>
+										<li><a href="#" class="icon solid fa-heart">28</a></li>
+										<li><a href="#" class="icon solid fa-comment">128</a></li>
+									</ul>
+								</footer>-->
+								
+							</article>
+
+					</div>
+
+				<!-- Footer -->
+					<section id="footer">
+					<!-- Se crea un iframe para insertar el html donde esta el pie de pagina-->
+						<footer>
+							<iframe id="iframepie" src="footer.html"></iframe>
+						</footer>
+						
+					</section>
+
+			</div>
+
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/browser.min.js"></script>
+			<script src="assets/js/breakpoints.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
+			
+		<!-- Ejemplos P5.js -->
+			<script src="p5/js/pixels/complementary.js"></script>
+
+			
+		<!-- Optional JavaScript -->
+		<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+			<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+			<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+			<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+	</body>
+</html>

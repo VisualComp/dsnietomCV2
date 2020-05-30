@@ -1,0 +1,470 @@
+<!DOCTYPE HTML>
+<!--
+	David Styven Nieto Marin
+	Ingenieria de Sistemas | @dsnietom
+	Universidad Nacional de Colombia
+-->
+<html>
+	<head>
+		<title>Procesamiento de Imagenes | :: Computación Visual ::</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+		
+		<!-- Code-Prettify -->
+		<script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
+		
+		<!-- P5.js -->
+		<script src="p5/p5.min.js"></script>
+		<script src="p5/addons/p5.sound.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.0.0/p5.min.js"></script>
+		<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.0.0/addons/p5.sound.min.js"></script> -->
+		
+		<!-- Bootstrap CSS 
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">-->
+	
+		<!-- Favicon -->
+		<link rel="icon" href="images/favicon.png" sizes="32x32" type="image/png">
+
+		
+	</head>
+	
+	<body class="single is-preload">
+	
+	
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+			
+
+				<!-- Header -->
+					<header id="header">
+						
+						<nav class="links">
+						
+						<!-- Se crea un encabezado para insertar el html donde esta el menu-->
+							<iframe src="menu.html" ></iframe>
+							
+						</nav>
+						<nav class="main">
+							<ul>
+								<li class="search">
+									<a class="fa-search" href="#search">Search</a>
+									<form id="search" method="get" action="#">
+										<input type="text" name="query" placeholder="Search" />
+									</form>
+								</li>
+								<li class="menu">
+									<a class="fa-bars" href="#menu">Menu</a>
+								</li>
+							</ul>
+						</nav>
+					</header>
+
+				<!-- Menu -->
+					<section id="menu">
+
+						<!-- Search -->
+							<section>
+							<h1><a href="index.html" target="_parent">Visual Computing</a></h1>
+								<form class="search" method="get" action="#">
+									<input type="text" name="query" placeholder="Search" />
+								</form>
+							</section>
+
+						<!-- Links -->
+							<section>
+								<ul class="links">
+									<li>
+										<a href="images1.html" target="_parent">
+											<h3>FIRST STEPS</h3>
+											<p>Painting Backgrounds with Pixels</p>
+										</a>
+									</li>
+									<li>
+										<a href="images2.html" target="_parent">
+											<h3>IMAGE PROCESSING WITH PIXELS</h3>
+											<p>Load Images pixel by pixel</p>
+										</a>
+									</li>
+									<li>
+										<a href="images3.html" target="_parent">
+											<h3>LANTERN</h3>
+											<p>Alter the Brightness of an Image</p>
+										</a>
+									</li>
+									<li>
+										<a href="images4.html" target="_parent">
+											<h3>BLACK AND WHITE</h3>
+											<p>Gray filter modifying lightness</p>
+										</a>
+									</li>
+									<li>
+										<a href="images5.html" target="_parent">
+											<h3>COMPLEMENTARY COLORS</h3>
+											<p>createGraphics two Canvases in One</p>
+										</a>
+									</li>
+									<li>
+										<a href="images6.html" target="_parent">
+											<h3>POINTILLISM</h3>
+											<p>Fill Ellipses with the Color of a Pixel</p>
+										</a>
+									</li>
+								</ul>
+							</section>
+
+						<!-- Actions -->
+							<section>
+								<ul class="actions stacked">
+									<li><a href="#" class="button large fit">Log In</a></li>
+								</ul>
+							</section>
+
+					</section>
+
+				<!-- Main -->
+					<div id="main">
+
+						<!-- Post -->
+							<article class="post">
+								<header>
+									<div class="title">
+										<h2><a href="http://www.mywonderland.es/curso_js/processing/pro_ejemplos.html" target="_blank">Lantern</a></h2>
+										<p>Alter the Brightness of an Image</p>
+									</div>
+									<div class="meta">
+										<time class="published" datetime="2015-11-01">April 23, 2020</time>
+										<a href="https://dsnietom.github.io/myPageIngSoft/" target="_blank" class="author"><span class="name">David Nieto</span><img src="images/avatar.jpg" alt="dsnietom" /></a>
+										
+									</div>
+								</header>
+								<p>Los siguientes ejemplos tienen el propósito de desarrollar y practicar la transición entre el lenguaje Processing y el lenguaje p5.js observando sus principales diferencias, ya que ambos lenguajes se ven muy similar, y cómo convertir de uno a otro.</p>
+								
+								<p>Este programa esta basado en un sketch básico realizado por el sitio web <a href="http://www.mywonderland.es/curso_js/processing/pro_ejemplos.html" target="_blank">mywonderland.es</a>, en el lenguaje Processing, con el fin de observar un ejemplo en el que se utilizan las funciones 'mouseX, mouseY'. Crea una ventana con un ancho de 600px y una altura de 400px, y luego empieza a dibujar un cuadrado azul de 50px por 50px según la posición del mouse, al mismo tiempo que el fondo de la ventana se va rellenando de color gris, dando la ilusión que solo existe un cuadrado azul moviéndose por toda la ventana siguiendo al mouse.</p>
+								
+								<hr />
+								<h3>Comandos por teclado</h3>
+								<div class="table-wrapper text-center">
+									<table>
+										<thead>
+											<tr>
+												<th>Tecla</th>
+												<th>Operación</th>
+												<th>Kernel (Núcleo)</th>
+												<th>Imagen resultante</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr>
+												<td><img src="images/keyboard/0.png" style="width:40px;vertical-align: middle"/></td>
+												<td>Identidad</td>
+												<td><img src="images/matrix/matrix0.png" style="width:100px;vertical-align: middle"/></td>
+												<td><img src="images/matrix/img0.png" style="width:130px;vertical-align: middle"/></td>
+											</tr>
+											<tr>
+												<td><img src="images/keyboard/1.png" style="width:40px;vertical-align: middle"/></td>
+												<td>Acentuar los bordes</td>
+												<td><img src="images/matrix/matrix1.png" style="width:100px;vertical-align: middle"/></td>
+												<td><img src="images/matrix/img1.png" style="width:130px;vertical-align: middle"/></td>
+											</tr>
+											<tr>
+												<td><img src="images/keyboard/2.png" style="width:40px;vertical-align: middle"/></td>
+												<td>Repujado</td>
+												<td><img src="images/matrix/matrix2.png" style="width:100px;vertical-align: middle"/></td>
+												<td><img src="images/matrix/img2.png" style="width:130px;vertical-align: middle"/></td>
+											</tr>
+											<tr>
+												<td><img src="images/keyboard/3.png" style="width:40px;vertical-align: middle"/></td>
+												<td>Detección de bordes</td>
+												<td><img src="images/matrix/matrix3.png" style="width:100px;vertical-align: middle"/></td>
+												<td><img src="images/matrix/img3.png" style="width:130px;vertical-align: middle"/></td>
+											</tr>											
+											<tr>
+												<td><img src="images/keyboard/4.png" style="width:40px;vertical-align: middle"/></td>
+												<td>Detección de bordes</td>
+												<td><img src="images/matrix/matrix4.png" style="width:100px;vertical-align: middle"/></td>
+												<td><img src="images/matrix/img4.png" style="width:130px;vertical-align: middle"/></td>
+											</tr>
+											<tr>
+												<td><img src="images/keyboard/5.png" style="width:40px;vertical-align: middle"/></td>
+												<td>Detección de bordes</td>
+												<td><img src="images/matrix/matrix5.png" style="width:100px;vertical-align: middle"/></td>
+												<td><img src="images/matrix/img5.png" style="width:130px;vertical-align: middle"/></td>
+											</tr>
+											<tr>
+												<td><img src="images/keyboard/6.png" style="width:40px;vertical-align: middle"/></td>
+												<td>Enfocar</td>
+												<td><img src="images/matrix/matrix6.png" style="width:100px;vertical-align: middle"/></td>
+												<td><img src="images/matrix/img6.png" style="width:130px;vertical-align: middle"/></td>
+											</tr>
+											<tr>
+												<td><img src="images/keyboard/7.png" style="width:40px;vertical-align: middle"/></td>
+												<td>Desenfoque de cuadro<h5>(normalizado)</h5></td>
+												<td><img src="images/matrix/matrix7.png" style="width:150px;vertical-align: middle"/></td>
+												<td><img src="images/matrix/img7.png" style="width:130px;vertical-align: middle"/></td>
+											</tr>
+											<tr>
+												<td><img src="images/keyboard/8.png" style="width:40px;vertical-align: middle"/></td>
+												<td>Desenfoque gaussiano 5 × 5<h5>(aproximación)</h5></td>
+												<td><img src="images/matrix/matrix8.png" style="width:150px;vertical-align: middle"/></td>
+												<td><img src="images/matrix/img8.png" style="width:130px;vertical-align: middle"/></td>
+											</tr>
+											<tr>
+												<td><img src="images/keyboard/9.png" style="width:40px;vertical-align: middle"/></td>
+												<td>Máscara de desenfoque 5 × 5<h5>(sin máscara de imagen)</h5></td>
+												<td><img src="images/matrix/matrix9.png" style="width:150px;vertical-align: middle"/></td>
+												<td><img src="images/matrix/img9.png" style="width:130px;vertical-align: middle"/></td>
+											</tr>
+											<tr>
+												<td><img src="images/keyboard/s.png" style="width:40px;vertical-align: middle"/></td>
+												<td>Operador de Sobel</td>
+												<td><img src="images/matrix/matrix11.png" style="width:160px;vertical-align: middle"/></td>
+												<td><img src="images/matrix/img11.png" style="width:130px;vertical-align: middle"/></td>
+											</tr>
+											<tr>
+												<td><img src="images/keyboard/p.png" style="width:40px;vertical-align: middle"/></td>
+												<td>Operador de Prewitt</td>
+												<td><img src="images/matrix/matrix12.png" style="width:150px;vertical-align: middle"/></td>
+												<td><img src="images/matrix/img12.png" style="width:130px;vertical-align: middle"/></td>
+											</tr>
+											<tr>
+												<td><img src="images/keyboard/f.png" style="width:40px;vertical-align: middle"/></td>
+												<td>Operador de Frei-Chen</td>
+												<td><img src="images/matrix/matrix13.png" style="width:150px;vertical-align: middle"/></td>
+												<td><img src="images/matrix/img13.png" style="width:130px;vertical-align: middle"/></td>
+											</tr>
+											<tr>
+												<td><img src="images/keyboard/r.png" style="width:40px;vertical-align: middle"/></td>
+												<td>Operador de Robinson</td>
+												<td><img src="images/matrix/matrix14.png" style="width:100px;vertical-align: middle"/></td>
+												<td><img src="images/matrix/img14.png" style="width:130px;vertical-align: middle"/></td>
+											</tr>
+											<tr>
+												<td><img src="images/keyboard/k.png" style="width:40px;vertical-align: middle"/></td>
+												<td>Operador de Kirsch</td>
+												<td><img src="images/matrix/matrix15.png" style="width:100px;vertical-align: middle"/></td>
+												<td><img src="images/matrix/img15.png" style="width:130px;vertical-align: middle"/></td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+
+								<div class="canvasp5js" >
+									<div>
+									<div id="masksImg">
+									
+									</div>
+																										
+								</div>
+								<blockquote>Image of Furcifer pardalis. Panther chameleon from the island of La Réunion. Source: Wikipedia, the free encyclopedia. <p><strong>Panther Chameleon</strong></p></blockquote>
+								</div>
+								<p></p>
+								<h4>p5*js Code</h4>
+									<pre><code class="prettyprint">var lienzo_01;
+var lienzo_02;
+var img_01;
+var img_02;
+
+// It's possible to convolve the image with many different 
+// matrices to produce different effects. This is a high-pass 
+// filter; it accentuates the edges. 
+let matrixsize = 3;
+var matrix = [ [  0,  0,  0 ],
+	       [  0,  1,  0 ],
+	       [  0,  0,  0 ] ];
+
+function setup() { 
+	createCanvas(1100, 450);
+	background(210);
+	pixelDensity();
+
+	img_01 = loadImage('https://upload.wikimedia.org/wikipedia/commons/b/b8/Panther_Chameleon_%28Furcifer_pardalis%29.jpg');
+	img_02 = loadImage('https://upload.wikimedia.org/wikipedia/commons/b/b8/Panther_Chameleon_%28Furcifer_pardalis%29.jpg');
+
+	lienzo_01 = createGraphics(500, 450);
+	lienzo_02 = createGraphics(600, 450);
+} 
+
+function draw() {
+	drawImage_01();
+	drawImage_02();
+
+	image(lienzo_01, 0, 0);
+	image(lienzo_02, 550, 0);
+}
+// Dibuja la imagen de la Izquierda
+function drawImage_01() {
+	lienzo_01.image(img_01, 0, 0);
+	var title = "IMAGEN ORIGINAL";
+	
+	lienzo_01.textSize(14);
+	lienzo_01.textAlign(CENTER);
+	lienzo_01.text(title, 0, 20,lienzo_01.width); 
+}
+// Dibuja la imagen de la Derecha
+function drawImage_02() {
+	var title = "MATRIZ DE CONVOLUCION";
+
+	lienzo_02.textSize(14);
+	lienzo_02.textAlign(CENTER);
+	lienzo_02.text(title, 0, 20,lienzo_02.width);
+
+	// We're only going to process a portion of the image
+	// so let's set the whole image as the background first
+	image(img_02, 0, 0);
+
+	loadPixels();
+	img_02.loadPixels();
+	let img = createImage(600, 450);
+	img.loadPixels();
+
+	for (let x = 0; x &lt width; x++) {
+		for (let y = 0; y &lt height; y++ ) { 
+			let c = convolution(x, y, matrix, matrixsize, img_02);
+			let loc = (x + y*img_02.width)*4;
+
+			img.pixels[loc] = red(c);
+			img.pixels[loc+1] = green(c);
+			img.pixels[loc+2] = blue(c);
+			img.pixels[loc+3] = alpha(c);
+		}
+	}
+	img.updatePixels();
+	image(img, 550, 0);
+}
+
+function convolution(x, y, matrix, matrixsize, img){
+	var rtotal = 0;
+	var gtotal = 0
+	var btotal = 0;
+	var atotal = 0;
+	var offset = matrixsize / 2;
+	for (let i = 0; i < matrixsize; i++){
+		for (let j= 0; j < matrixsize; j++){
+			// What pixel are we testing
+			var xloc = x+i;
+			var yloc = y+j;
+			var loc = (xloc + img.width*yloc)*4;
+
+			// Make sure we haven't walked off our image, we could do better here
+			loc = constrain(loc,0,img.pixels.length-1);
+			// Calculate the convolution
+			rtotal += ((img.pixels[loc]) * matrix[i][j]);
+			gtotal += ((img.pixels[loc+1]) * matrix[i][j]);
+			btotal += ((img.pixels[loc+2]) * matrix[i][j]);
+			atotal += ((img.pixels[loc+3]) * matrix[i][j]);
+		}
+	}
+
+	// Make sure RGB is within range
+	rtotal = constrain(rtotal, 0, 255);
+	gtotal = constrain(gtotal, 0, 255);
+	btotal = constrain(btotal, 0, 255);
+	atotal = constrain(atotal, 0, 255);
+	// Return the resulting color
+	return color(rtotal, gtotal, btotal);
+}
+// Se ejecuta cuando se presiona cualquier tecla
+function keyPressed() {
+	matrixsize = 3;
+	if (key === '0') { // Identidad
+	matrix = [ [  0,  0,  0 ],
+		   [  0,  1,  0 ],
+		   [  0,  0,  0 ] ]; 
+	} else if (key === '1') { // Acentúa los bordes
+	matrix = [ [ -1, -1, -1 ],
+		   [ -1,  9, -1 ],
+		   [ -1, -1, -1 ] ]; 
+	} else if (key === '2') { // Repujado
+	matrix = [ [ -2, -1,  0 ],
+		   [ -1,  1,  1 ],
+		   [  0,  1,  2 ] ]; 
+	} else if (key === '3') { // Detección de bordes
+	matrix = [ [  1,  0, -1 ],
+		   [  0,  0,  0 ],
+		   [ -1,  0,  1 ] ]; 
+	} else if (key === '4') {
+	matrix = [ [  0,  1,  0 ],
+		   [  1, -4,  1 ],
+		   [  0,  1,  0 ] ]; 
+	} else if (key === '5') {
+	matrix = [ [ -1, -1, -1 ],
+		   [ -1,  8, -1 ],
+		   [ -1, -1, -1 ] ]; 
+	} else if (key === '6') { // Enfocar
+	matrix = [ [  0, -1,  0 ],
+		   [ -1,  5, -1 ],
+		   [  0, -1,  0 ] ];
+	} else if (key === '7') { // Desenfoque de cuadro (normalizado)
+	matrix = [ [ 1/9, 1/9, 1/9 ],
+		   [ 1/9, 1/9, 1/9 ],
+		   [ 1/9, 1/9, 1/9 ] ]; 
+	} else if (key === '8') { // Desenfoque gaussiano 5 × 5 (aproximación)
+	matrixsize = 5;
+	matrix = [ [ 1/256,  4/256,  6/256,  4/256, 1/256 ],
+		   [ 4/256, 16/256, 24/256, 16/256, 4/256 ],
+		   [ 6/256, 24/256, 36/256, 24/256, 6/256 ],
+		   [ 4/256, 16/256, 24/256, 16/256, 4/256 ],
+		   [ 1/256,  4/256,  6/256,  4/256, 1/256 ] ];
+	} else if (key === '9') { // Máscara de desenfoque 5 × 5 (sin máscara de imagen)
+	matrixsize = 5;
+	matrix = [ [ -1/256,  -4/256,  -6/256,  -4/256, -1/256 ],
+		   [ -4/256, -16/256, -24/256, -16/256, -4/256 ],
+		   [ -6/256, -24/256, 476/256, -24/256, -6/256 ],
+		   [ -4/256, -16/256, -24/256, -16/256, -4/256 ],
+		   [ -1/256,  -4/256,  -6/256,  -4/256, -1/256 ] ];
+	} 
+}</code></pre>
+								
+								<p></p>
+								
+								<!-- Pagination -->
+							<ul class="actions pagination">
+								<li><a href="pImages1.html" target="_parent" class="button large previous">Previous Page</a></li>
+								<li><a href="pImages3.html" target="_parent" class="button large next">Next Page</a></li>
+							</ul>
+							
+							<!-- Footer 
+								<footer>
+									<ul class="stats">
+										<li><a href="#">General</a></li>
+										<li><a href="#" class="icon solid fa-heart">28</a></li>
+										<li><a href="#" class="icon solid fa-comment">128</a></li>
+									</ul>
+								</footer>-->
+								
+							</article>
+
+					</div>
+
+				<!-- Footer -->
+					<section id="footer">
+					<!-- Se crea un iframe para insertar el html donde esta el pie de pagina-->
+						<footer>
+							<iframe id="iframepie" src="footer.html"></iframe>
+						</footer>
+						
+					</section>
+
+			</div>
+
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/browser.min.js"></script>
+			<script src="assets/js/breakpoints.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
+			
+		<!-- Ejemplos P5.js -->
+			<script src="p5/js/images/masksImg.js"></script>
+
+			
+		<!-- Optional JavaScript -->
+		<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+			<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+			<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+			<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+	</body>
+</html>

@@ -11,6 +11,9 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="assets/css/main.css" />
 		
+		<!-- Code-Prettify -->
+		<script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
+		
 		<!-- P5.js -->
 		<script src="p5/p5.min.js"></script>
 		<script src="p5/addons/p5.sound.min.js"></script>
@@ -71,29 +74,40 @@
 						<!-- Links -->
 							<section>
 								<ul class="links">
-								<h1><a href="index.html" target="_parent">Visual Computing</a></h1>
 									<li>
-										<a href="#">
-											<h3>Lorem ipsum</h3>
-											<p>Feugiat tempus veroeros dolor</p>
+										<a href="example1.html" target="_parent">
+											<h3>BASIC SKETCH</h3>
+											<p>Move a Square with the Mouse</p>
 										</a>
 									</li>
 									<li>
-										<a href="#">
-											<h3>Dolor sit amet</h3>
-											<p>Sed vitae justo condimentum</p>
+										<a href="example2.html" target="_parent">
+											<h3>PATTERNS</h3>
+											<p>Ellipses and Random Colors</p>
 										</a>
 									</li>
 									<li>
-										<a href="#">
-											<h3>Feugiat veroeros</h3>
-											<p>Phasellus sed ultricies mi congue</p>
+										<a href="example3.html" target="_parent">
+											<h3>PENCIL</h3>
+											<p>Drawing with Ellipses</p>
 										</a>
 									</li>
 									<li>
-										<a href="#">
-											<h3>Etiam sed consequat</h3>
-											<p>Porta lectus amet ultricies</p>
+										<a href="example4.html" target="_parent">
+											<h3>DRAW AND PAINT</h3>
+											<p>Changing the Color of the Pencil</p>
+										</a>
+									</li>
+									<li>
+										<a href="example5.html" target="_parent">
+											<h3>SQUARES TURNING</h3>
+											<p>2D Squares Perspective</p>
+										</a>
+									</li>
+									<li>
+										<a href="example6.html" target="_parent">
+											<h3>LOAD AND DISPLAY IMAGES</h3>
+											<p>Approach to Image Processing</p>
 										</a>
 									</li>
 								</ul>
@@ -126,7 +140,7 @@
 								</header>
 								<p>Los siguientes ejemplos tienen el propósito de desarrollar y practicar la transición entre el lenguaje Processing y el lenguaje p5.js observando sus principales diferencias, ya que ambos lenguajes se ven muy similar, y cómo convertir de uno a otro.</p>
 								
-								<p>Este programa está basado en un sketch básico encontrado en el sitio web <a href="https://p5js.org/es/get-started/" target="_blank">p5js.org</a>, en el lenguaje p5.js, con el fin de observar un ejemplo básico que sirva como transición para usuarios de Processing que están empezando en p5.js y así realizar su primer bosquejo. Crea una ventana con un ancho de 600px y una altura de 400px, y luego empieza a dibujar elipses rosas de 50px por 50px en la posición donde se encuentre el mouse. Haciendo uso de la función 'mouseIsPressed', cuando se presione el botón del mouse las elipses que se dibujen cambiaran de color a negro, dando la ilusión o posibilidad de dibujar a voluntad con el mouse.</p>
+								<p>Este programa está basado en un sketch básico encontrado en el sitio web <a href="https://p5js.org/es/get-started/" target="_blank">p5js.org</a>, en el lenguaje p5.js, con el fin de observar un ejemplo básico que sirva como transición para usuarios de Processing que están empezando en p5.js y así realizar su primer bosquejo. Crea una ventana con un ancho de 600px y una altura de 400px, y luego empieza a dibujar elipses rosas de 50px por 50px en la posición donde se encuentre el mouse <img src="images/keyboard/pointer.png" style="width:1.5%;vertical-align: middle"/>. Haciendo uso de la función 'mouseIsPressed', cuando se presione el botón del mouse <img src="images/keyboard/mouse_click_left.png" style="width:2%;vertical-align: middle"/> las elipses que se dibujen cambiaran de color a negro, dando la ilusión o posibilidad de dibujar a voluntad con el mouse.</p>
 								
 								<div class="canvasp5js" >
 									<div>
@@ -138,7 +152,7 @@
 								</div>
 								<p></p>
 								<h4>p5*js Code</h4>
-									<pre><code>function setup() { 
+									<pre><code class="prettyprint">function setup() { 
 	createCanvas(600, 400);
 	background(210);
 } 

@@ -1,0 +1,300 @@
+<!DOCTYPE HTML>
+<!--
+	David Styven Nieto Marin
+	Ingenieria de Sistemas | @dsnietom
+	Universidad Nacional de Colombia
+-->
+<html>
+	<head>
+		<title>Pixeles e Imagenes | :: Computación Visual ::</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+		
+		<!-- Code-Prettify -->
+		<script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
+		
+		<!-- P5.js -->
+		<script src="p5/p5.min.js"></script>
+		<script src="p5/addons/p5.sound.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.0.0/p5.min.js"></script>
+		<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.0.0/addons/p5.sound.min.js"></script> -->
+		
+		<!-- Bootstrap CSS 
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">-->
+	
+		<!-- Favicon -->
+		<link rel="icon" href="images/favicon.png" sizes="32x32" type="image/png">
+
+		
+	</head>
+	
+	<body class="single is-preload">
+	
+	
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+			
+
+				<!-- Header -->
+					<header id="header">
+						
+						<nav class="links">
+						
+						<!-- Se crea un encabezado para insertar el html donde esta el menu-->
+							<iframe src="menu.html" ></iframe>
+							
+						</nav>
+						<nav class="main">
+							<ul>
+								<li class="search">
+									<a class="fa-search" href="#search">Search</a>
+									<form id="search" method="get" action="#">
+										<input type="text" name="query" placeholder="Search" />
+									</form>
+								</li>
+								<li class="menu">
+									<a class="fa-bars" href="#menu">Menu</a>
+								</li>
+							</ul>
+						</nav>
+					</header>
+
+				<!-- Menu -->
+					<section id="menu">
+
+						<!-- Search -->
+							<section>
+							<h1><a href="index.html" target="_parent">Visual Computing</a></h1>
+								<form class="search" method="get" action="#">
+									<input type="text" name="query" placeholder="Search" />
+								</form>
+							</section>
+
+						<!-- Links -->
+							<section>
+								<ul class="links">
+									<li>
+										<a href="images1.html" target="_parent">
+											<h3>FIRST STEPS</h3>
+											<p>Painting Backgrounds with Pixels</p>
+										</a>
+									</li>
+									<li>
+										<a href="images2.html" target="_parent">
+											<h3>IMAGE PROCESSING WITH PIXELS</h3>
+											<p>Load Images pixel by pixel</p>
+										</a>
+									</li>
+									<li>
+										<a href="images3.html" target="_parent">
+											<h3>LANTERN</h3>
+											<p>Alter the Brightness of an Image</p>
+										</a>
+									</li>
+									<li>
+										<a href="images4.html" target="_parent">
+											<h3>BLACK AND WHITE</h3>
+											<p>Gray filter modifying lightness</p>
+										</a>
+									</li>
+									<li>
+										<a href="images5.html" target="_parent">
+											<h3>COMPLEMENTARY COLORS</h3>
+											<p>createGraphics two Canvases in One</p>
+										</a>
+									</li>
+									<li>
+										<a href="images6.html" target="_parent">
+											<h3>POINTILLISM</h3>
+											<p>Fill Ellipses with the Color of a Pixel</p>
+										</a>
+									</li>
+								</ul>
+							</section>
+
+						<!-- Actions -->
+							<section>
+								<ul class="actions stacked">
+									<li><a href="#" class="button large fit">Log In</a></li>
+								</ul>
+							</section>
+
+					</section>
+
+				<!-- Main -->
+					<div id="main">
+
+						<!-- Post -->
+							<article class="post">
+								<header>
+									<div class="title">
+										<h2><a href="https://p5js.org/es/reference/#/p5.Image/pixels" target="_blank">First Steps</a></h2>
+										<p>Painting Backgrounds with Pixels</p>
+									</div>
+									<div class="meta">
+										<time class="published" datetime="2015-11-01">March 26, 2020</time>
+										<a href="https://dsnietom.github.io/myPageIngSoft/" target="_blank" class="author"><span class="name">David Nieto</span><img src="images/avatar.jpg" alt="dsnietom" /></a>
+										
+									</div>
+								</header>
+								<p>Antes de iniciar con el estudio de procesamiento de imágenes es necesario una introducción previa a los conceptos básicos de las matrices de pixeles, con el propósito de saber cómo cargar los pixeles a un lienzo y acceder al valor de cada pixel de manera individual para manipular su valor.</p>
+								
+								<p>El siguiente estudio está basado en la documentación obtenida del tutorial de YouTube <a href="https://www.youtube.com/watch?v=nMUMZ5YRxHI" target="_blank">'11.3: The Pixel Array'</a> y el sitio web <a href="https://p5js.org/es/reference/#/p5.Image/pixels" target="_blank">p5js.org</a>. Para comprender mejor como funciona una matriz de pixeles se pensará en una cuadricula como representación de un lienzo o una imagen, por ejemplo, una cuadricula de 8x8 estaría compuesta por 64 cuadrados más pequeños los cuales representan los pixeles. La pregunta que surge es cómo acceder al valor de esos pixeles. Entonces la matriz de pixeles es una matriz larga compuesta de muchos números los cuales oscilan entre 0 y 255, que corresponden a cada color del lienzo. La forma en que funciona esta matriz de pixeles es muy similar a como funciona en Processing, pero tienen ciertas diferencias. En p5.js un pixel toma 4 puntos de la matriz para un solo pixel, es decir, si en el lienzo hay 60 pixeles significa que la longitud de la matriz es de 240, dado que cada píxel se describe con cuatro piezas de información, que representa los valores R, G, B, A (rojo, verde, azul y alfa).</p>
+								
+								<div class="canvasp5js" >
+									<div>
+									<img src="images/study/loadPixels1.png" style="width:70%;vertical-align: middle"/>
+									</div>
+									
+								</div>
+								
+								<p>Ahora, esto significa que si el primer píxel en la pantalla es el de la esquina superior izquierda, este comenzaría en el índice 0 de la matriz y el segundo pixel en el índice 4, el siguiente en el 8, 12, 16, …, hasta completar toda la matriz.</p>
+								
+								<div class="canvasp5js" >
+									<div>
+									<img src="images/study/loadPixels2.png" style="width:20%;vertical-align: middle"/>
+									</div>
+									
+								</div>
+								
+								<p>Antes de acceder a esta matriz, los datos deben cargarse con la función loadPixels(). Después de que se hayan modificado los datos de la matriz, se debe ejecutar la función updatePixels() para actualizar los cambios. Teniendo esto claro ya podemos acceder al valor de cada pixel, para ello es necesario ubicar el índice del componente rojo dentro de la matriz de la siguiente manera <strong><em>x + y * width</em></strong>. Ya que la posición del índice del valor rojo es 4 veces la cantidad de píxeles que tiene delante, en el código se multiplicar este valor por 4. Por ejemplo, si se desea encontrar el índice del pixel ubicado en la posición (4 , 1) sería <strong><em>4 + 1 * 8 = 12</em></strong>.</p>
+								
+								<div class="canvasp5js" >
+									<div>
+									<img src="images/study/loadPixels3.png" style="width:25%;vertical-align: middle"/>
+									</div>
+									
+								</div>
+								
+								<p>El siguiente programa tiene como propósito observar el comportamiento de cada uno de los pixeles del lienzo al modificar su valor accediendo a los componentes R, G, B, A de la matriz de pixeles.</p>
+								<hr />
+								<h3>Comandos por teclado</h3>
+								<div class="row">
+										<div class="col-6 col-12-medium">
+										<h4>Extraer componentes (MINUSCULAS)</h4>
+											<ul>												
+												<li><h4 style="display:inline"><em>Rojo</em> = </h4><img src="images/keyboard/r.png" style="width:4%;vertical-align: middle"/></li>
+												<li><h4 style="display:inline"><em>Verde</em> = </h4><img src="images/keyboard/g.png" style="width:4%;vertical-align: middle"/></li>
+												<li><h4 style="display:inline"><em>Azul</em> = </h4><img src="images/keyboard/b.png" style="width:4%;vertical-align: middle"/></li>
+												<li><h4 style="display:inline"><em>Alpha</em> = </h4><img src="images/keyboard/a.png" style="width:4%;vertical-align: middle"/></li>												
+											</ul>									
+										</div>
+										<div class="col-6 col-12-medium">
+										<h4>Agregar componentes (MAYUSCULAS)</h4>
+											<ul>												
+												<li><h4 style="display:inline"><em>Rojo</em> = </h4><img src="images/keyboard/shift.png" style="width:5%;vertical-align: middle"/> + <img src="images/keyboard/r.png" style="width:4%;vertical-align: middle"/></li>
+												<li><h4 style="display:inline"><em>Verde</em> = </h4><img src="images/keyboard/shift.png" style="width:5%;vertical-align: middle"/> + <img src="images/keyboard/g.png" style="width:4%;vertical-align: middle"/></li>
+												<li><h4 style="display:inline"><em>Azul</em> = </h4><img src="images/keyboard/shift.png" style="width:5%;vertical-align: middle"/> + <img src="images/keyboard/b.png" style="width:4%;vertical-align: middle"/></li>
+												<li><h4 style="display:inline"><em>Alpha</em> = </h4><img src="images/keyboard/shift.png" style="width:5%;vertical-align: middle"/> + <img src="images/keyboard/a.png" style="width:4%;vertical-align: middle"/></li>												
+											</ul>
+										</div>
+									</div>
+								
+								<div class="canvasp5js" >
+									<div>
+									<div id="pixel">
+									
+									</div>
+																										
+								</div>
+								</div>
+								<p></p>
+								<h4>p5*js Code</h4>
+									<pre><code class="prettyprint">let r = 1;
+let g = 1;
+let b = 1;
+let a = 1;
+
+function setup() { 
+  createCanvas(600, 400);
+  windowResized();
+} 
+
+function draw() {
+	loadPixels();
+	// Modifica cada pixel del canvas
+	for (let y = 0; y &lt height; y++) {
+		for (let x = 0; x &lt width; x++){
+			let index = (x+y*width)*4; // Posicion del pixel
+			pixels[index+0]=(y)*r; //Red
+			pixels[index+1]=(y-x)*g; //Green
+			pixels[index+2]=(x)*b; //Blue
+			pixels[index+3]=random(255)*a; //Alpha
+		}
+	}
+	updatePixels();
+}
+
+function keyPressed() {
+	if (key === 'r') { // Extrae el comoponente rojo
+		r = 0;
+	} else if (key === 'g') { // Extrae el comoponente verde
+		g = 0;
+	} else if (key === 'b') { // Extrae el comoponente azul
+		b = 0;
+	} else if (key === 'a') { // Extrae el comoponente alfa
+		a = 0;
+	} else if (key === 'R') { // Agrega el comoponente rojo
+		r = 1;
+	} else if (key === 'G') { // Agrega el comoponente verde
+		g = 1;
+	} else if (key === 'B') { // Agrega el comoponente azul
+		b = 1;
+	} else if (key === 'A') { // Agrega el comoponente alfa
+		a = 1;
+	}
+}</code></pre>
+								
+								<p></p>
+								
+								<!-- Pagination -->
+							<ul class="actions pagination">
+								<li><a href="" class="disabled button large previous">Previous Page</a></li>
+								<li><a href="images2.html" target="_parent" class="button large next">Next Page</a></li>
+							</ul>
+							
+							<!-- Footer 
+								<footer>
+									<ul class="stats">
+										<li><a href="#">General</a></li>
+										<li><a href="#" class="icon solid fa-heart">28</a></li>
+										<li><a href="#" class="icon solid fa-comment">128</a></li>
+									</ul>
+								</footer>-->
+								
+							</article>
+
+					</div>
+
+				<!-- Footer -->
+					<section id="footer">
+					<!-- Se crea un iframe para insertar el html donde esta el pie de pagina-->
+						<footer>
+							<iframe id="iframepie" src="footer.html"></iframe>
+						</footer>
+						
+					</section>
+
+			</div>
+
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/browser.min.js"></script>
+			<script src="assets/js/breakpoints.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
+			
+		<!-- Ejemplos P5.js -->
+			<script src="p5/js/pixels/pixel.js"></script>
+
+			
+		<!-- Optional JavaScript -->
+		<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+			<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+			<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+			<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+	</body>
+</html>
