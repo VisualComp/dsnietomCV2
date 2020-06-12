@@ -1,66 +1,102 @@
 let theShader;
 let shaderTexture;
+let cam;
+let shaderVideo;
+let theShaderVideo;
+let video;
 
 let angle=0;
 let img;
 let gray = 0;
 
-
 function preload(){
-  img = loadImage('https://upload.wikimedia.org/wikipedia/en/7/7d/Lenna_%28test_image%29.png');
-  // load the shader
-  theShader = loadShader('texture.vert','texture.frag');
+  img = loadImage('https://upload.wikimedia.org/wikipedia/commons/thumb/b/bb/Hawaii_turtle_2.JPG/640px-Hawaii_turtle_2.JPG');
+  // Cargar los shaders
+  theShader = loadShader('shader.vert','shader.frag');
+  theShaderVideo = loadShader('shader.vert','shader.frag');
   
 }
 
 function setup() {
-  // shaders require WEBGL mode to work
-  createCanvas(img.width, img.height, WEBGL);
+  pixelDensity(1);
+  //cam = createCapture(VIDEO); //crea una captura de video
+  //cam.size(windowWidth, windowHeight); //definde el tamaño de la captura
+  video = createVideo('https://d2v9y0dukr6mq2.cloudfront.net/video/preview/GTYSdDW/divers-watching-sea-turtle-swim-through-coral-reef_zksb-usls__PMNW.mp4');
+  
+  // Se requiere trabajar con WEBGL
+  createCanvas(windowWidth, 400, WEBGL);
   noStroke();
 
-  // initialize the createGraphics layers
-  shaderTexture = createGraphics(img.width, img.height, WEBGL);
-
-  // turn off the createGraphics layers stroke
+  // inicializar la capa del createGraphics
+  shaderTexture = createGraphics(512, 512, WEBGL);
+  shaderVideo = createGraphics(windowWidth, windowHeight, WEBGL);
+  
+  // Quitar bordes en el createGraphics
   shaderTexture.noStroke();
-
-   x = -50;
-   y = 0;
+  shaderVideo.noStroke();
+  
+  
+  //cam.hide();
+  video.hide();
+  video.loop();
 }
 
 function draw() {
-
-  // instead of just setting the active shader we are passing it to the createGraphics layer
+  // Se pasa el shader a la capa del createGraphics
   shaderTexture.shader(theShader);
+  shaderVideo.shader(theShaderVideo);
 
-  // here we're using setUniform() to send our uniform values to the shader
+  // Valores uniform para el fragment shader
   theShader.setUniform("u_img", img);
   theShader.setUniform("u_key", gray);
+  theShaderVideo.setUniform('u_img', video);
+  theShaderVideo.setUniform('u_key', gray);
+  
   
 
-  // passing the shaderTexture layer geometry to render on
+  // Renderizar el shader
   shaderTexture.rect(0,0,width,height);
+  shaderVideo.rect(0,0,width,height);
 
-  background(210);
+  background(250);
 
-  // pass the shader as a texture
-  // anything drawn after this will have this texture.
-  texture(shaderTexture);
+  // Puntos de luz 
+  pointLight(255, 255, 255, 0, 0, 500);
+  // Efecto linterna
+  let dx= mouseX-width/2;
+  let dy= mouseY-height/2;
+  pointLight(100,200,255,dx,dy,100);
 
-  translate(-110, 0, 0);
+  translate(0, 0, 0);
   push();
+  //Se pasa el shader como textura
+  texture(shaderTexture);
+  translate(200, 0, 0);
   rotateZ(angle);
   rotateX(angle);
-  rotateY(angle); 
-  box(140);
+  rotateY(angle*2); 
+  box(200);
   pop();
-  angle+=0.005;
-
-  /* when you put a texture or shader on an ellipse it is rendered in 3d,
-     so a fifth parameter that controls the # vertices in it becomes necessary,
-     or else you'll have sharp corners. setting it to 100 is smooth. */
-  let ellipseFidelity = int(map(mouseX, 0, width, 8, 100));
-  ellipse(260, 0, 200, 200, ellipseFidelity);
+  
+  // Rotacion de la caja
+  angle += 0.002;
+  
+  push();
+  // Se pasa la imagen original como textura
+  texture(img);
+  // Numero de puntas de la figura
+  let ellipseFidelity = int(map(mouseX, 25, width, 8, 100));
+  ellipse(-200, 0, 350, 350, ellipseFidelity);
+  //plane(500,500);
+  pop();
+  
+  push();
+  //Se pasa el shader como textura
+  texture(shaderVideo);
+  translate(0, 0, -100);
+  plane(900,500);
+  pop();
+  
 }
 
 // Se ejecuta cuando se presiona cualquier tecla
@@ -76,4 +112,8 @@ function keyPressed() {
 	} else if (key === '4') {
 	gray = 4;
 	}
+}
+
+function windowResized(){
+  resizeCanvas(windowWidth, windowHeight);
 }
