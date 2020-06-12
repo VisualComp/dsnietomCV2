@@ -1,16 +1,19 @@
 let theShader;
 let shaderTexture;
+let img;
 let cam;
-let shaderVideo;
+
 let theShaderVideo;
+let shaderVideo;
 let video;
 
 let angle=0;
-let img;
 let gray = 0;
 
 function preload(){
   img = loadImage('https://upload.wikimedia.org/wikipedia/commons/thumb/b/bb/Hawaii_turtle_2.JPG/640px-Hawaii_turtle_2.JPG');
+  video = createVideo('https://d2v9y0dukr6mq2.cloudfront.net/video/preview/GTYSdDW/divers-watching-sea-turtle-swim-through-coral-reef_zksb-usls__PMNW.mp4');
+  video.hide();
   // Cargar los shaders
   theShader = loadShader('texture.vert','texture.frag');
   theShaderVideo = loadShader('texture.vert','texture.frag');
@@ -21,7 +24,6 @@ function setup() {
   pixelDensity(1);
   //cam = createCapture(VIDEO); //crea una captura de video
   //cam.size(windowWidth, windowHeight); //definde el tamaño de la captura
-  video = createVideo('https://d2v9y0dukr6mq2.cloudfront.net/video/preview/GTYSdDW/divers-watching-sea-turtle-swim-through-coral-reef_zksb-usls__PMNW.mp4');
   
   // Se requiere trabajar con WEBGL
   createCanvas(windowWidth, 400, WEBGL);
@@ -33,11 +35,9 @@ function setup() {
   
   // Quitar bordes en el createGraphics
   shaderTexture.noStroke();
-  shaderVideo.noStroke();
-  
+  shaderVideo.noStroke();  
   
   //cam.hide();
-  video.hide();
   video.loop();
 }
 
@@ -52,8 +52,6 @@ function draw() {
   theShaderVideo.setUniform('u_img', video);
   theShaderVideo.setUniform('u_key', gray);
   
-  
-
   // Renderizar el shader
   shaderTexture.rect(0,0,width,height);
   shaderVideo.rect(0,0,width,height);
@@ -91,12 +89,11 @@ function draw() {
   pop();
   
   push();
-  //Se pasa el shader como textura
+  //Se pasa el shader del video como textura
   texture(shaderVideo);
   translate(0, 0, -100);
   plane(900,500);
-  pop();
-  
+  pop();  
 }
 
 // Se ejecuta cuando se presiona cualquier tecla
