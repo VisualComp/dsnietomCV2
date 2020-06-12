@@ -12,8 +12,8 @@ let gray = 0;
 function preload(){
   img = loadImage('https://upload.wikimedia.org/wikipedia/commons/thumb/b/bb/Hawaii_turtle_2.JPG/640px-Hawaii_turtle_2.JPG');
   // Cargar los shaders
-  theShader = loadShader('shader.vert','shader.frag');
-  theShaderVideo = loadShader('shader.vert','shader.frag');
+  theShader = loadShader('texture.vert','texture.frag');
+  theShaderVideo = loadShader('texture.vert','texture.frag');
   
 }
 
