@@ -65,7 +65,7 @@ function draw() {
   // Efecto linterna
   let dx= mouseX-width/2;
   let dy= mouseY-height/2;
-  pointLight(100,200,255,dx,dy,100);
+  pointLight(100,250,255,dx,dy,100);
 
   translate(0, 0, 0);
   push();
@@ -86,7 +86,7 @@ function draw() {
   texture(img);
   // Numero de puntas de la figura
   let ellipseFidelity = int(map(mouseX, 25, width, 8, 100));
-  ellipse(-200, 0, 350, 350, ellipseFidelity);
+  ellipse(-250, 0, 350, 350, ellipseFidelity);
   //plane(500,500);
   pop();
   
