@@ -1,9 +1,3 @@
-/*
- * @name Applying Shaders as Textures
- * @description Shaders can be applied to 2D/3D shapes as textures. 
- * To learn more about shaders and p5.js: https://itp-xstory.github.io/p5js-shaders/
- */
-
 let theShader;
 let shaderTexture;
 
@@ -13,22 +7,24 @@ let x;
 let y;
 let outsideRadius = 200;
 let insideRadius = 100;
+let angle=0;
+let img;
 
 
 function preload(){
+  img = loadImage('https://upload.wikimedia.org/wikipedia/en/7/7d/Lenna_%28test_image%29.png');
   // load the shader
   theShader = loadShader('texture.vert','texture.frag');
+  
 }
 
 function setup() {
-  // disables scaling for retina screens which can create inconsistent scaling between displays
-  //pixelDensity(1);
   // shaders require WEBGL mode to work
-  createCanvas(710, 400, WEBGL);
+  createCanvas(img.width, img.height, WEBGL);
   noStroke();
 
   // initialize the createGraphics layers
-  shaderTexture = createGraphics(710, 400, WEBGL);
+  shaderTexture = createGraphics(img.width, img.height, WEBGL);
 
   // turn off the createGraphics layers stroke
   shaderTexture.noStroke();
@@ -43,27 +39,29 @@ function draw() {
   shaderTexture.shader(theShader);
 
   // here we're using setUniform() to send our uniform values to the shader
-  theShader.setUniform("resolution", [width, height]);
-  theShader.setUniform("time", millis() / 1000.0);
-  theShader.setUniform("mouse", [mouseX, map(mouseY, 0, height, height, 0)]);
+  theShader.setUniform("u_resolution", [width, height]);
+  theShader.setUniform("u_img", img);
+  
 
   // passing the shaderTexture layer geometry to render on
   shaderTexture.rect(0,0,width,height);
 
-  background(255);
-  
-  //pass the shader as a texture
+  background(210);
+
+  // pass the shader as a texture
+  // anything drawn after this will have this texture.
   texture(shaderTexture);
-  
-  translate(-150, 0, 0);
+
+  translate(-110, 0, 0);
   push();
-  rotateZ(theta * mouseX * 0.0001);
-  rotateX(theta * mouseX * 0.0001);
-  rotateY(theta * mouseX * 0.0001);  
+  rotateZ(angle);
+  rotateX(angle);
+  rotateY(angle);  
   theta += 0.05;
-  sphere(125);
+  box(140);
   pop();
-  
+  angle+=0.005;
+
   /* when you put a texture or shader on an ellipse it is rendered in 3d,
      so a fifth parameter that controls the # vertices in it becomes necessary,
      or else you'll have sharp corners. setting it to 100 is smooth. */
