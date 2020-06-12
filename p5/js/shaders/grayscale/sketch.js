@@ -9,7 +9,7 @@ let gray = 0;
 function preload(){
   img = loadImage('https://upload.wikimedia.org/wikipedia/en/7/7d/Lenna_%28test_image%29.png');
   // load the shader
-  theShader = loadShader('shader.vert','shader.frag');
+  theShader = loadShader('texture.vert','texture.frag');
   
 }
 
