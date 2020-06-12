@@ -1,0 +1,259 @@
+<!DOCTYPE HTML>
+<!--
+	David Styven Nieto Marin
+	Ingenieria de Sistemas | @dsnietom
+	Universidad Nacional de Colombia
+-->
+<html>
+	<head>
+		<title>Procesamiento de Imagenes | :: Computación Visual ::</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+		
+		<!-- Code-Prettify -->
+		<script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
+		
+		<!-- P5.js -->
+		<script src="p5/p5.min.js"></script>
+		<script src="p5/addons/p5.sound.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.0.0/p5.min.js"></script>
+		<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.0.0/addons/p5.sound.min.js"></script> -->
+		
+		<!-- Bootstrap CSS 
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">-->
+	
+		<!-- Favicon -->
+		<link rel="icon" href="images/favicon.png" sizes="32x32" type="image/png">
+
+		
+	</head>
+	
+	<body class="single is-preload">
+	
+	
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+			
+
+				<!-- Header -->
+					<header id="header">
+						
+						<nav class="links">
+						
+						<!-- Se crea un encabezado para insertar el html donde esta el menu-->
+							<iframe src="menu.html" ></iframe>
+							
+						</nav>
+						<nav class="main">
+							<ul>
+								<li class="search">
+									<a class="fa-search" href="#search">Search</a>
+									<form id="search" method="get" action="#">
+										<input type="text" name="query" placeholder="Search" />
+									</form>
+								</li>
+								<li class="menu">
+									<a class="fa-bars" href="#menu">Menu</a>
+								</li>
+							</ul>
+						</nav>
+					</header>
+
+				<!-- Menu -->
+					<section id="menu">
+
+						<!-- Search -->
+							<section>
+							<h1><a href="index.html" target="_parent">Visual Computing</a></h1>
+								<form class="search" method="get" action="#">
+									<input type="text" name="query" placeholder="Search" />
+								</form>
+							</section>
+
+						<!-- Links -->
+							<section>
+								<ul class="links">
+									<li>
+										<a href="images1.html" target="_parent">
+											<h3>FIRST STEPS</h3>
+											<p>Painting Backgrounds with Pixels</p>
+										</a>
+									</li>
+									<li>
+										<a href="images2.html" target="_parent">
+											<h3>IMAGE PROCESSING WITH PIXELS</h3>
+											<p>Load Images pixel by pixel</p>
+										</a>
+									</li>
+									<li>
+										<a href="images3.html" target="_parent">
+											<h3>LANTERN</h3>
+											<p>Alter the Brightness of an Image</p>
+										</a>
+									</li>
+									<li>
+										<a href="images4.html" target="_parent">
+											<h3>BLACK AND WHITE</h3>
+											<p>Gray filter modifying lightness</p>
+										</a>
+									</li>
+									<li>
+										<a href="images5.html" target="_parent">
+											<h3>COMPLEMENTARY COLORS</h3>
+											<p>createGraphics two Canvases in One</p>
+										</a>
+									</li>
+									<li>
+										<a href="images6.html" target="_parent">
+											<h3>POINTILLISM</h3>
+											<p>Fill Ellipses with the Color of a Pixel</p>
+										</a>
+									</li>
+								</ul>
+							</section>
+
+						<!-- Actions -->
+							<section>
+								<ul class="actions stacked">
+									<li><a href="#" class="button large fit">Log In</a></li>
+								</ul>
+							</section>
+
+					</section>
+
+				<!-- Main -->
+					<div id="main">
+
+						<!-- Post -->
+							<article class="post">
+								<header>
+									<div class="title">
+										<h2><a href="https://processing.org/tutorials/pixels/" target="_blank">Image Processing with Pixels</a></h2>
+										<p>Load Images pixel by pixel</p>
+									</div>
+									<div class="meta">
+										<time class="published" datetime="2015-11-01">March 26, 2020</time>
+										<a href="https://dsnietom.github.io/myPageIngSoft/" target="_blank" class="author"><span class="name">David Nieto</span><img src="images/avatar.jpg" alt="dsnietom" /></a>
+										
+									</div>
+								</header>
+								<p>Poniendo en practica los conceptos aprendidos en el estudio de matrices de pixeles que se vio en el ejemplo anterior <a href="images1.html" target="_parent">PAINTING BACKGROUNDS WITH PIXELS</a>  y la documentación del sitio web <a href="https://processing.org/tutorials/pixels/" target="_blank">processing.org</a>, podremos ahora empezar a trabajar de la misma manera con imágenes.  </p>
+								
+								<p>En este caso podemos ver la imagen como una cuadricula compuesta por pixeles, donde cada pixel está compuesto por cuatro piezas de información (R, G, B, A), esto quiere decir que, como se vio en el ejemplo anterior, es posible acceder al valor de cada pixel y modificarlo de tal manera que podamos cambiar o modificar ciertas características especificas de la imagen. Para ello se usará el mismo proceso de búsqueda de índices <strong><em>x + y * width * 4</em></strong> para recorrer la matriz de pixeles de la imagen y acceder a los valores RGBA de cada pixel.</p>
+								
+								<p>El siguiente programa tiene el propósito de ilustrar la forma en la que se cargan imágenes a un lienzo, pero en lugar de mostrarla se pintara cada pixel del lienzo según los valores y posición de cada pixel de la imagen. Para ello tanto el lienzo como la imagen deben ser del mismo tamaño, o por lo menos el mismo ancho, con el fin de que la posición del pixel de la imagen corresponda a la posición del lienzo (mas adelante se verá como pintar un lienzo con dimensiones distintas al de la imagen). Adicionalmente se podrá interactuar con la ventana por medio de Sliders para modificar los valores RGB de los pixeles.</p>
+								
+								<div class="canvasp5js" >
+									<div>
+									<p align="center">
+									<!-- HTML slider-->
+									<iframe src="p5/js/shaders/grayscale/index.html" style="position:relative;height:610px;width:800px"></iframe>
+									</p>
+																										
+									</div>
+									<blockquote>Image of Agalychnis callidryas, known as the Red Eyed Treefrog. Source: Wikipedia, the free encyclopedia.<p><strong>Red-eyed Tree Frog (Agalychnis callidryas), photographed near Playa Jaco in Costa Rica</strong></p></blockquote>
+								</div>
+								<p></p>
+								<h4>p5*js Code</h4>
+									<pre><code class="prettyprint">let rSlider, gSlider, bSlider; //Declarar variables de sliders
+let img; // Declarar variable 'img'
+
+function setup() {
+  createCanvas(800, 600);
+  textSize(14);
+  noStroke();
+
+  // Crear sliders
+  rSlider = createSlider(-255, 255, 0);
+  rSlider.position(20, 20);
+  gSlider = createSlider(-255, 255, 0);
+  gSlider.position(20, 50);
+  bSlider = createSlider(-255, 255, 0);
+  bSlider.position(20, 80);
+  img = loadImage('https://upload.wikimedia.org/wikipedia/commons/thumb/b/be/Red_eyed_tree_frog_edit2.jpg/800px-Red_eyed_tree_frog_edit2.jpg'); 
+}
+
+function draw() {
+  const R = rSlider.value();
+  const G = gSlider.value();
+  const B = bSlider.value();
+  loadPixels();
+  img.loadPixels(); //Carga los pixeles de la imagen
+  // Recorre la matriz de pixeles
+  for (let y = 0; y &lt height; y++) {
+		for (let x = 0; x &lt width; x++){ 
+			let index = (x+y*width)*4; // Posicion del pixel
+			let r=img.pixels[index+0]; // Componente Red
+			let g=img.pixels[index+1]; // Componente Green
+			let b=img.pixels[index+2]; // Componente Blue
+			let a=img.pixels[index+3]; // Componente Alpha
+			// Pinta el lienzo con los valores de los pixeles de la imagen
+			// Suma el valor del componente junto con el valor del slider
+			pixels[index+0]=r+R; 
+			pixels[index+1]=g+G; 
+			pixels[index+2]=b+B;
+			pixels[index+3]=a;
+		}
+	}
+  updatePixels();	
+  
+  stroke(255);
+  textStyle(BOLDITALIC);
+  text('RED', 175, 40);
+  text('GREEN', 175, 70);
+  text('BLUE', 175, 100);
+}</code></pre>
+								
+								<p></p>
+								
+								<!-- Pagination -->
+							<ul class="actions pagination">
+								<li><a href="images1.html" target="_parent" class="button large previous">Previous Page</a></li>
+								<li><a href="images3.html" target="_parent" class="button large next">Next Page</a></li>
+							</ul>
+							
+							<!-- Footer 
+								<footer>
+									<ul class="stats">
+										<li><a href="#">General</a></li>
+										<li><a href="#" class="icon solid fa-heart">28</a></li>
+										<li><a href="#" class="icon solid fa-comment">128</a></li>
+									</ul>
+								</footer>-->
+								
+							</article>
+
+					</div>
+
+				<!-- Footer -->
+					<section id="footer">
+					<!-- Se crea un iframe para insertar el html donde esta el pie de pagina-->
+						<footer>
+							<iframe id="iframepie" src="footer.html"></iframe>
+						</footer>
+						
+					</section>
+
+			</div>
+
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/browser.min.js"></script>
+			<script src="assets/js/breakpoints.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
+			
+		<!-- Ejemplos P5.js 
+			<script src="p5/js/pixels/pixelsImg.js"></script>-->
+
+			
+		<!-- Optional JavaScript -->
+		<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+			<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+			<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+			<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+	</body>
+</html>
