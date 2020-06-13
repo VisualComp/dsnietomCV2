@@ -32,8 +32,8 @@ float grayscale(vec3 color) {
 void main() {
   vec2 uv = vTexCoord;
 
-  // the texture is loaded upside down and backwards by default so lets flip it
-  uv.y = 1.0 - uv.y;//Invierte la posicion de la cordenada y para que la imagen no quede alrreves
+  //Invierte la posicion de la cordenada  para que la imagen no quede alrreves
+  uv.y = 1.0 - uv.y;
 
   vec4 tex = texture2D(u_img, uv);
   // Escala de grises
@@ -50,6 +50,6 @@ void main() {
   }
   vec3 thresh = vec3(threshR, threshG, threshB);
 
-  // render the output
+  // render de la salida
   gl_FragColor = vec4(thresh, 1.0);
 }

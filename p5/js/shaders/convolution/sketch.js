@@ -8,11 +8,11 @@ let shaderVideo;
 let video;
 
 let angle=0;
-let gray = 0;
+let mask = 0;
 
 function preload(){
-  img = loadImage('https://upload.wikimedia.org/wikipedia/commons/thumb/b/bb/Hawaii_turtle_2.JPG/640px-Hawaii_turtle_2.JPG');
-  video = createVideo('https://d2v9y0dukr6mq2.cloudfront.net/video/preview/GTYSdDW/divers-watching-sea-turtle-swim-through-coral-reef_zksb-usls__PMNW.mp4');
+  img = loadImage('https://upload.wikimedia.org/wikipedia/commons/thumb/a/a3/Alligator_mississippiensis_babies.jpg/640px-Alligator_mississippiensis_babies.jpg');
+  video = createVideo('https://dm0qx8t0i9gc9.cloudfront.net/previews/video/YSvEcxy/videoblocks-alligators-eye-close-up-of-a-live-alligators-eye-crocodile-caiman-dinosaur-monster_rmlq8ertq__cb8b5c0c7799d4c97439ed0d1d639f09__P360.mp4');
   video.hide();
   // Cargar los shaders
   theShader = loadShader('texture.vert','texture.frag');
@@ -48,9 +48,11 @@ function draw() {
 
   // Valores uniform para el fragment shader
   theShader.setUniform("u_img", img);
-  theShader.setUniform("u_key", gray);
+  theShader.setUniform("u_key", mask);
+  theShader.setUniform("stepSize", [1.0/width,1.0/height]);
   theShaderVideo.setUniform('u_img', video);
-  theShaderVideo.setUniform('u_key', gray);
+  theShaderVideo.setUniform('u_key', mask);
+  theShaderVideo.setUniform("stepSize", [1.0/width,1.0/height]);
   
   // Renderizar el shader
   shaderTexture.rect(0,0,width,height);
@@ -63,7 +65,7 @@ function draw() {
   // Efecto linterna
   let dx= mouseX-width/2;
   let dy= mouseY-height/2;
-  pointLight(100,250,255,dx,dy,100);
+  pointLight(100,255,100,dx,dy,100);
 
   translate(0, 0, 0);
   push();
@@ -99,15 +101,25 @@ function draw() {
 // Se ejecuta cuando se presiona cualquier tecla
 function keyPressed() {
 	if (key === '0') {
-	gray = 0;
+	mask = 0;
 	} else if (key === '1') { 
-	gray = 1;
+	mask = 1;
 	} else if (key === '2') {
-	gray = 2;
+	mask = 2;
 	} else if (key === '3') {
-	gray = 3;
+	mask = 3;
 	} else if (key === '4') {
-	gray = 4;
+	mask = 4;
+	} else if (key === '5') {
+	mask = 5;
+	} else if (key === '6') {
+	mask = 6;
+	} else if (key === '7') {
+	mask = 7;
+	} else if (key === '8') {
+	mask = 8;
+	} else if (key === '9') {
+	mask = 9;
 	}
 }
 

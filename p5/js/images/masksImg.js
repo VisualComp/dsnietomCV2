@@ -81,7 +81,7 @@ function drawImage_02() {
 function convolution(x, y, matrix, matrixsize, img){
 	//img.loadPixels();
 	var rtotal = 0;
-	var gtotal = 0
+	var gtotal = 0;
 	var btotal = 0;
 	var atotal = 0;
 	var offset = matrixsize / 2;
