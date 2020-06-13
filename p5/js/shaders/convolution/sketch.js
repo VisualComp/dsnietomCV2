@@ -11,13 +11,12 @@ let angle=0;
 let mask = 0;
 
 function preload(){
-  img = loadImage('https://upload.wikimedia.org/wikipedia/commons/thumb/a/a3/Alligator_mississippiensis_babies.jpg/640px-Alligator_mississippiensis_babies.jpg');
+  img = loadImage('https://upload.wikimedia.org/wikipedia/commons/thumb/c/cd/Two_american_alligators.jpg/640px-Two_american_alligators.jpg');
   video = createVideo('https://dm0qx8t0i9gc9.cloudfront.net/previews/video/YSvEcxy/videoblocks-alligators-eye-close-up-of-a-live-alligators-eye-crocodile-caiman-dinosaur-monster_rmlq8ertq__cb8b5c0c7799d4c97439ed0d1d639f09__P360.mp4');
   video.hide();
   // Cargar los shaders
   theShader = loadShader('texture.vert','texture.frag');
-  theShaderVideo = loadShader('texture.vert','texture.frag');
-  
+  theShaderVideo = loadShader('texture.vert','texture.frag');  
 }
 
 function setup() {
@@ -69,7 +68,7 @@ function draw() {
 
   translate(0, 0, 0);
   push();
-  //Se pasa el shader como textura
+  // Se pasa el shader como textura
   texture(shaderTexture);
   translate(200, 0, 0);
   rotateZ(angle);
