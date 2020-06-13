@@ -130,11 +130,11 @@
 							<article class="post">
 								<header>
 									<div class="title">
-										<h2><a href="https://en.wikipedia.org/wiki/HSL_and_HSV" target="_blank">Grayscale Image and Video</a></h2>
-										<p>Shaders y WEBGL</p>
+										<h2><a href="https://en.wikipedia.org/wiki/HSL_and_HSV" target="_blank">Convolution Matrix</a></h2>
+										<p>Shaders and WEBGL</p>
 									</div>
 									<div class="meta">
-										<time class="published" datetime="2020-04-16">May 28, 2020</time>
+										<time class="published" datetime="2020-04-16">June 04, 2020</time>
 										<a href="https://dsnietom.github.io/myPageIngSoft/" target="_blank" class="author"><span class="name">David Nieto</span><img src="images/avatar.jpg" alt="dsnietom" /></a>
 										
 									</div>
@@ -152,42 +152,72 @@
 										<thead>
 											<tr>
 												<th>Tecla</th>
-												<th>Luminancia</th>
-												<th>Expresión</th>
+												<th>Operación</th>
+												<th>Kernel (Núcleo)</th>
 												<th>Imagen resultante</th>
 											</tr>
 										</thead>
 										<tbody>
 											<tr>
 												<td><img src="images/keyboard/0.png" style="width:40px;vertical-align: middle"/></td>
-												<td>Original</td>
-												<td><strong><i><img src="images/gray/equation0.png" style="height:20px;;vertical-align: middle"/></i></strong></td>
-												<td><img src="images/gray/imgs0.png" style="width:130px;vertical-align: middle"/></td>
+												<td>Identidad</td>
+												<td><img src="images/matrix/matrix0.png" style="width:100px;vertical-align: middle"/></td>
+												<td><img src="images/matrix/imgs0.png" style="width:130px;vertical-align: middle"/></td>
 											</tr>
 											<tr>
 												<td><img src="images/keyboard/1.png" style="width:40px;vertical-align: middle"/></td>
-												<td>Media aritmética</td>
-												<td><img src="images/gray/equation1.png" style="height:25px;;vertical-align: middle"/></td>
-												<td><img src="images/gray/imgs1.png" style="width:130px;vertical-align: middle"/></td>
+												<td>Acentuar los bordes</td>
+												<td><img src="images/matrix/matrix1.png" style="width:100px;vertical-align: middle"/></td>
+												<td><img src="images/matrix/imgs1.png" style="width:130px;vertical-align: middle"/></td>
 											</tr>
 											<tr>
 												<td><img src="images/keyboard/2.png" style="width:40px;vertical-align: middle"/></td>
-												<td>Componente más grande</td>
-												<td><img src="images/gray/equation2.png" style="height:20px;;vertical-align: middle"/></td>
-												<td><img src="images/gray/imgs2.png" style="width:130px;vertical-align: middle"/></td>
+												<td>Repujado</td>
+												<td><img src="images/matrix/matrix2.png" style="width:100px;vertical-align: middle"/></td>
+												<td><img src="images/matrix/imgs2.png" style="width:130px;vertical-align: middle"/></td>
 											</tr>
 											<tr>
 												<td><img src="images/keyboard/3.png" style="width:40px;vertical-align: middle"/></td>
-												<td>Rango medio</td>
-												<td><img src="images/gray/equation3.png" style="height:25px;;vertical-align: middle"/></td>
-												<td><img src="images/gray/imgs3.png" style="width:130px;vertical-align: middle"/></td>
+												<td>Detección de bordes</td>
+												<td><img src="images/matrix/matrix3.png" style="width:100px;vertical-align: middle"/></td>
+												<td><img src="images/matrix/imgs3.png" style="width:130px;vertical-align: middle"/></td>
 											</tr>											
 											<tr>
 												<td><img src="images/keyboard/4.png" style="width:40px;vertical-align: middle"/></td>
-												<td>Promedio ponderado Luma<h5>(SDTV)</h5></td>
-												<td><img src="images/gray/equation4.png" style="height:18px;;vertical-align: middle"/></td>
-												<td><img src="images/gray/imgs4.png" style="width:130px;vertical-align: middle"/></td>
-											</tr>																				
+												<td>Detección de bordes</td>
+												<td><img src="images/matrix/matrix4.png" style="width:100px;vertical-align: middle"/></td>
+												<td><img src="images/matrix/imgs4.png" style="width:130px;vertical-align: middle"/></td>
+											</tr>
+											<tr>
+												<td><img src="images/keyboard/5.png" style="width:40px;vertical-align: middle"/></td>
+												<td>Detección de bordes</td>
+												<td><img src="images/matrix/matrix5.png" style="width:100px;vertical-align: middle"/></td>
+												<td><img src="images/matrix/imgs5.png" style="width:130px;vertical-align: middle"/></td>
+											</tr>
+											<tr>
+												<td><img src="images/keyboard/6.png" style="width:40px;vertical-align: middle"/></td>
+												<td>Enfocar</td>
+												<td><img src="images/matrix/matrix6.png" style="width:100px;vertical-align: middle"/></td>
+												<td><img src="images/matrix/imgs6.png" style="width:130px;vertical-align: middle"/></td>
+											</tr>
+											<tr>
+												<td><img src="images/keyboard/7.png" style="width:40px;vertical-align: middle"/></td>
+												<td>Desenfoque de cuadro<h5>(normalizado)</h5></td>
+												<td><img src="images/matrix/matrix7.png" style="width:150px;vertical-align: middle"/></td>
+												<td><img src="images/matrix/imgs7.png" style="width:130px;vertical-align: middle"/></td>
+											</tr>																					
+											<tr>
+												<td><img src="images/keyboard/8.png" style="width:40px;vertical-align: middle"/></td>
+												<td>Operador de Robinson</td>
+												<td><img src="images/matrix/matrix14.png" style="width:100px;vertical-align: middle"/></td>
+												<td><img src="images/matrix/imgs8.png" style="width:130px;vertical-align: middle"/></td>
+											</tr>
+											<tr>
+												<td><img src="images/keyboard/9.png" style="width:40px;vertical-align: middle"/></td>
+												<td>Operador de Kirsch</td>
+												<td><img src="images/matrix/matrix15.png" style="width:100px;vertical-align: middle"/></td>
+												<td><img src="images/matrix/imgs9.png" style="width:130px;vertical-align: middle"/></td>
+											</tr>
 										</tbody>
 									</table>
 								</div>
@@ -199,69 +229,182 @@
 									</p>
 																										
 									</div>
-									<blockquote>Image of The Green sea Turtle (Chelonia Mydas), also known as the green Turtle, black Turtle or Pacific Green Turtle. Source: Wikipedia, the free encyclopedia.<p><strong>Green turtle (Chelonia mydas), Hawai'i, USA</strong></p>
+									<blockquote>Image of Alligator a crocodilian in the genus Alligator of the family Alligatoridae. Source: Wikipedia, the free encyclopedia.<p><strong>Two American Alligators (Alligator mississippiensis), Florida, USA</strong></p>
 										<hr />
-										Video Clip of A Green sea Turtle swim through coral. Source: RawShorts.<p><strong>Divers Watching Sea Turtle Swim Through Coral Reef stock video</strong></p>									
+										Video Clip of a live Alligator's eye. Source: RawShorts.<p><strong>Close-up of a live alligator's eye. Crocodile, caiman. Dinosaur monster stock video</strong></p>									
 									</blockquote>
 									
 								</div>
 								<p></p>
 								<h4>p5*js Code</h4>
-									<pre><code class="prettyprint">let rSlider, gSlider, bSlider; //Declarar variables de sliders
-let img; // Declarar variable 'img'
+									<pre><code class="prettyprint">let theShader;
+let shaderTexture;
+let img;
+
+let theShaderVideo;
+let shaderVideo;
+let video;
+
+let angle=0;
+let mask = 0;
+
+function preload(){
+	img = loadImage('https://upload.wikimedia.org/wikipedia/commons/thumb/c/cd/Two_american_alligators.jpg/640px-Two_american_alligators.jpg');
+	video = createVideo('https://dm0qx8t0i9gc9.cloudfront.net/previews/video/YSvEcxy/videoblocks-alligators-eye-close-up-of-a-live-alligators-eye-crocodile-caiman-dinosaur-monster_rmlq8ertq__cb8b5c0c7799d4c97439ed0d1d639f09__P360.mp4');
+	video.hide();
+	// Cargar los shaders
+	theShader = loadShader('texture.vert','texture.frag');
+	theShaderVideo = loadShader('texture.vert','texture.frag');  
+}
 
 function setup() {
-  createCanvas(800, 600);
-  textSize(14);
-  noStroke();
+	pixelDensity(1);
+	
+	// Se requiere trabajar con WEBGL
+	createCanvas(windowWidth, 400, WEBGL);
+	noStroke();
 
-  // Crear sliders
-  rSlider = createSlider(-255, 255, 0);
-  rSlider.position(20, 20);
-  gSlider = createSlider(-255, 255, 0);
-  gSlider.position(20, 50);
-  bSlider = createSlider(-255, 255, 0);
-  bSlider.position(20, 80);
-  img = loadImage('https://upload.wikimedia.org/wikipedia/commons/thumb/b/be/Red_eyed_tree_frog_edit2.jpg/800px-Red_eyed_tree_frog_edit2.jpg'); 
+	// Inicializar la capa del createGraphics
+	shaderTexture = createGraphics(512, 512, WEBGL);
+	shaderVideo = createGraphics(windowWidth, windowHeight, WEBGL);
+	
+	// Quitar bordes en el createGraphics
+	shaderTexture.noStroke();
+	shaderVideo.noStroke();  
+	
+	video.loop();
 }
 
 function draw() {
-  const R = rSlider.value();
-  const G = gSlider.value();
-  const B = bSlider.value();
-  loadPixels();
-  img.loadPixels(); //Carga los pixeles de la imagen
-  // Recorre la matriz de pixeles
-  for (let y = 0; y &lt height; y++) {
-		for (let x = 0; x &lt width; x++){ 
-			let index = (x+y*width)*4; // Posicion del pixel
-			let r=img.pixels[index+0]; // Componente Red
-			let g=img.pixels[index+1]; // Componente Green
-			let b=img.pixels[index+2]; // Componente Blue
-			let a=img.pixels[index+3]; // Componente Alpha
-			// Pinta el lienzo con los valores de los pixeles de la imagen
-			// Suma el valor del componente junto con el valor del slider
-			pixels[index+0]=r+R; 
-			pixels[index+1]=g+G; 
-			pixels[index+2]=b+B;
-			pixels[index+3]=a;
-		}
+	// Se pasa el shader a la capa del createGraphics
+	shaderTexture.shader(theShader);
+	shaderVideo.shader(theShaderVideo);
+
+	// Valores uniform para el fragment shader
+	theShader.setUniform("u_img", img);
+	theShader.setUniform("u_key", mask);
+	theShader.setUniform("u_stepSize", [1.0/width,1.0/height]);
+	theShaderVideo.setUniform('u_img', video);
+	theShaderVideo.setUniform('u_key', mask);
+	theShaderVideo.setUniform("u_stepSize", [1.0/width,1.0/height]);
+	
+	// Renderizar el shader
+	shaderTexture.rect(0,0,width,height);
+	shaderVideo.rect(0,0,width,height);
+
+	background(255);
+
+	// Puntos de luz 
+	pointLight(255, 255, 255, 0, 0, 500);
+	// Efecto linterna
+	let dx= mouseX-width/2;
+	let dy= mouseY-height/2;
+	pointLight(100,255,100,dx,dy,100);
+
+	translate(0, 0, 0);
+	push();
+	// Se pasa el shader como textura
+	texture(shaderTexture);
+	translate(200, 0, 0);
+	rotateZ(angle);
+	rotateX(angle);
+	rotateY(angle*2); 
+	box(200);
+	pop();
+	
+	// Rotacion de la caja
+	angle += 0.002;
+	
+	push();
+	// Se pasa la imagen original como textura
+	texture(img);
+	// Numero de puntas de la figura
+	let ellipseFidelity = int(map(mouseX, 25, width, 8, 100));
+	ellipse(-250, 0, 350, 350, ellipseFidelity);
+	//plane(500,500);
+	pop();
+	
+	push();
+	//Se pasa el shader del video como textura
+	texture(shaderVideo);
+	translate(0, 0, -100);
+	plane(900,500);
+	pop();  
+}
+
+// Se ejecuta cuando se presiona cualquier tecla
+function keyPressed() {
+	if (key === '0') {
+	mask = 0;
+	} else if (key === '1') { 
+	mask = 1;
+	} else if (key === '2') {
+	mask = 2;
+	} else if (key === '3') {
+	mask = 3;
+	} else if (key === '4') {
+	mask = 4;
+	} else if (key === '5') {
+	mask = 5;
+	} else if (key === '6') {
+	mask = 6;
+	} else if (key === '7') {
+	mask = 7;
+	} else if (key === '8') {
+	mask = 8;
+	} else if (key === '9') {
+	mask = 9;
 	}
-  updatePixels();	
-  
-  stroke(255);
-  textStyle(BOLDITALIC);
-  text('RED', 175, 40);
-  text('GREEN', 175, 70);
-  text('BLUE', 175, 100);
+}</code></pre>
+
+<h4>Vertex Code</h4>
+									<pre><code class="prettyprint">attribute vec3 aPosition;
+attribute vec2 aTexCoord;
+
+// Obtener texcoords
+varying vec2 vTexCoord;
+
+void main() {
+
+	// Copia los texcoords
+	vTexCoord = aTexCoord;
+	// Copia la poscicion de los datos en vec4, usando 1.0 como el componente w
+	vec4 positionVec4 = vec4(aPosition, 1.0);
+
+	// Escala la posicion por dos y la mueve al centro de la pantalla
+	positionVec4.xy = positionVec4.xy * 2.0 - 1.0;
+
+	// Envia la informacion del vertex al fragment shader
+	gl_Position = positionVec4;
+}</code></pre>
+
+<h4>Fragment Code</h4>
+									<pre><code class="prettyprint">attribute vec3 aPosition;
+attribute vec2 aTexCoord;
+
+// Obtener texcoords
+varying vec2 vTexCoord;
+
+void main() {
+
+	// Copia los texcoords
+	vTexCoord = aTexCoord;
+	// Copia la poscicion de los datos en vec4, usando 1.0 como el componente w
+	vec4 positionVec4 = vec4(aPosition, 1.0);
+
+	// Escala la posicion por dos y la mueve al centro de la pantalla
+	positionVec4.xy = positionVec4.xy * 2.0 - 1.0;
+
+	// Envia la informacion del vertex al fragment shader
+	gl_Position = positionVec4;
 }</code></pre>
 								
 								<p></p>
 								
 								<!-- Pagination -->
 							<ul class="actions pagination">
-								<li><a href="images1.html" target="_parent" class="button large previous">Previous Page</a></li>
-								<li><a href="images3.html" target="_parent" class="button large next">Next Page</a></li>
+								<li><a href="pShaders1.html" target="_parent" class="button large previous">Previous Page</a></li>
+								<li><a href="pShaders3.html" target="_parent" class="button large next">Next Page</a></li>
 							</ul>
 							
 							<!-- Footer 
