@@ -9,6 +9,10 @@ var lienzo02;
 var heightI = 600;
 var widthI = 450;
 
+let redC=0;
+let greenC=0;
+let blueC=0;
+
 //Histograma
 var hist = new Array(256);
 
@@ -41,10 +45,8 @@ function drawLienzo01(){
     lienzo01.noStroke();
 }
 
-
 //Calcula los valores del histograma.
 function calcHis(){
-
     //img.filter(GRAY);
     image(img_02, 0, 0);
     for (i = 0; i <= 256; i++) {
@@ -71,7 +73,6 @@ function drawHis(){
         var which = int(map(i, 0, 2.5*widthI, 0, 255));
         var y = int(map(hist[which], 0, histMax, img_02.height, img_02.height-500));
         lienzo02.line(i, img_02.height, i, y);
-
     }
 }
 
@@ -135,7 +136,6 @@ function complementary(){
             img_02.pixels[index + 0] = 255 - img_02.pixels[index + 0];
             img_02.pixels[index + 1] = 255 - img_02.pixels[index + 1];
             img_02.pixels[index + 2] = 255 - img_02.pixels[index + 2];
-
         }
     }
     img_02.updatePixels();
@@ -197,47 +197,47 @@ function filtrosBlancoNegro(gray){
 
 function keyPressed(){
     matrixsize = 3;
-	if (key === '0') { // Identidad
+	if (key === 'A') { // Identidad
     matrix = [ [  0,  0,  0 ],
                [  0,  1,  0 ],
                [  0,  0,  0 ] ]; 
         convolutions();
-    } else if (key === '1') { // Enfocar. Acentúa los bordes
+    } else if (key === '5') { // Enfocar. Acentúa los bordes
         matrix = [ [ -1, -1, -1 ],
                 [ -1,  9, -1 ],
                 [ -1, -1, -1 ] ]; 
         convolutions();
-    } else if (key === '2') { // Repujado
+    } else if (key === 'B') { // Repujado
         matrix = [ [ -2, -1,  0 ],
                 [ -1,  1,  1 ],
                 [  0,  1,  2 ] ]; 
         convolutions();
-    } else if (key === '3') { // Detección de bordes
+    } else if (key === 'C') { // Detección de bordes
         matrix = [ [  1,  0, -1 ],
                 [  0,  0,  0 ],
                 [ -1,  0,  1 ] ]; 
         convolutions();
-    } else if (key === '4') {
+    } else if (key === 'D') {
         matrix = [ [  0,  1,  0 ],
                 [  1, -4,  1 ],
                 [  0,  1,  0 ] ]; 
         convolutions();
-    } else if (key === '5') {
+    } else if (key === '6') {
         matrix = [ [ -1, -1, -1 ],
                 [ -1,  8, -1 ],
                 [ -1, -1, -1 ] ]; 
         convolutions();
-    } else if (key === '6') { // Enfocar
+    } else if (key === 'E') { // Enfocar
         matrix = [ [  0, -1,  0 ],
                 [ -1,  5, -1 ],
                 [  0, -1,  0 ] ];
         convolutions();
-    } else if (key === '7') { // Desenfoque de cuadro (normalizado)
+    } else if (key === 'F') { // Desenfoque de cuadro (normalizado)
         matrix = [ [ 1/9, 1/9, 1/9 ],
                 [ 1/9, 1/9, 1/9 ],
                 [ 1/9, 1/9, 1/9 ] ]; 
         convolutions();
-    } else if (key === '8') { // Desenfoque gaussiano 5 × 5 (aproximación)
+    } else if (key === 'G') { // Desenfoque gaussiano 5 × 5 (aproximación)
         matrixsize = 5;
         matrix = [ [ 1/256,  4/256,  6/256,  4/256, 1/256 ],
                 [ 4/256, 16/256, 24/256, 16/256, 4/256 ],
@@ -245,7 +245,7 @@ function keyPressed(){
                 [ 4/256, 16/256, 24/256, 16/256, 4/256 ],
                 [ 1/256,  4/256,  6/256,  4/256, 1/256 ] ];
         convolutions();
-    } else if (key === '9') { // Máscara de desenfoque 5 × 5 (sin máscara de imagen)
+    } else if (key === '7') { // Máscara de desenfoque 5 × 5 (sin máscara de imagen)
         matrixsize = 5;
         matrix = [ [ -1/256,  -4/256,  -6/256,  -4/256, -1/256 ],
                 [ -4/256, -16/256, -24/256, -16/256, -4/256 ],
@@ -253,31 +253,43 @@ function keyPressed(){
                 [ -4/256, -16/256, -24/256, -16/256, -4/256 ],
                 [ -1/256,  -4/256,  -6/256,  -4/256, -1/256 ] ];
         convolutions();
-    } else if (key == 'c'){
+    } else if (key == '4'){
         complementary();
-    }else if (key == 'f'){
+    }else if (key == '0'){
+        redC=0;
+        greenC=0;
+        blueC=0;
         regresar();
-    }else if (key == 'q'){
+    }else if (key == '1'){
         regresar();
         filtrosBlancoNegro(1);
-    }else if (key == 'w'){
+    }else if (key == '2'){
         regresar();
         filtrosBlancoNegro(2);
-    }else if (key == 'e'){
+    }else if (key == 'H'){
         regresar();
         filtrosBlancoNegro(3);
-    }else if (key == 'r'){
+    }else if (key == '3'){
         regresar();
         filtrosBlancoNegro(4);
-    }else if (key == 't'){
+    }else if (key == 'I'){
         regresar();
         filtrosBlancoNegro(5);
     }else if (key == 'y'){
         regresar();
         filtrosBlancoNegro(6);
-    }else if (key == 'u'){
+    }else if (key == 'J'){
         regresar();
         filtrosBlancoNegro(7);
+    }else if (key == 'r'){
+        redC=-255;
+        regresar();
+    }else if (key == 'g'){
+        greenC=-255;
+        regresar();
+    }else if (key == 'b'){
+        blueC=-255;
+        regresar();
     }
     calcHis();
 }
@@ -289,9 +301,9 @@ function regresar(){
     for(y = 0; y < img_02.height; y++ ){
         for(x = 0; x < img_02.width; x++){
             let index = (x + y*img_02.width)*4;
-            img_02.pixels[index + 0] = img_01.pixels[index + 0];
-            img_02.pixels[index + 1] = img_01.pixels[index + 1];
-            img_02.pixels[index + 2] = img_01.pixels[index + 2];
+            img_02.pixels[index + 0] = constrain(img_01.pixels[index + 0]+redC, 0, 255);
+            img_02.pixels[index + 1] = constrain(img_01.pixels[index + 1]+greenC, 0, 255);
+            img_02.pixels[index + 2] = constrain(img_01.pixels[index + 2]+blueC, 0, 255);
             img_02.pixels[index + 3] = img_01.pixels[index + 3];
         }
     }
