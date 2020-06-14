@@ -15,13 +15,13 @@ let intensity = 1; // Colores de los caracteres
 function preload() {
     img = createCapture(VIDEO);
     img_01 = createCapture(VIDEO);
+    img_01.hide(); //Ocultan los videos 
+    img.hide();
 }
 
 function setup() { 
     var myCanvas = createCanvas(widthI*2 + 20, heightI);
-    myCanvas.parent('asciiVideo');
-    img_01.hide(); //Ocultan los videos 
-    img.hide();
+    myCanvas.parent('asciiVideo');    
     background(255);
     lienzo01 = createGraphics(widthI, heightI);
     lienzo02 = createGraphics(widthI, heightI);
