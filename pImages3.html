@@ -233,160 +233,145 @@
 								</div>
 								<p></p>
 								<h4>p5*js Code</h4>
-									<pre><code class="prettyprint">var lienzo_01;
-var lienzo_02;
-var img_01;
-var img_02;
-
-// It's possible to convolve the image with many different 
-// matrices to produce different effects. This is a high-pass 
-// filter; it accentuates the edges. 
-let matrixsize = 3;
-var matrix = [ [  0,  0,  0 ],
-	       [  0,  1,  0 ],
-	       [  0,  0,  0 ] ];
-
-function setup() { 
-	createCanvas(1100, 450);
-	background(210);
-	pixelDensity();
-
-	img_01 = loadImage('https://upload.wikimedia.org/wikipedia/commons/b/b8/Panther_Chameleon_%28Furcifer_pardalis%29.jpg');
-	img_02 = loadImage('https://upload.wikimedia.org/wikipedia/commons/b/b8/Panther_Chameleon_%28Furcifer_pardalis%29.jpg');
-
-	lienzo_01 = createGraphics(500, 450);
-	lienzo_02 = createGraphics(600, 450);
-} 
-
-function draw() {
-	drawImage_01();
-	drawImage_02();
-
-	image(lienzo_01, 0, 0);
-	image(lienzo_02, 550, 0);
-}
-// Dibuja la imagen de la Izquierda
-function drawImage_01() {
-	lienzo_01.image(img_01, 0, 0);
-	var title = "IMAGEN ORIGINAL";
+									<pre><code class="prettyprint">let img;
+let img2;
 	
-	lienzo_01.textSize(14);
-	lienzo_01.textAlign(CENTER);
-	lienzo_01.text(title, 0, 20,lienzo_01.width); 
+// Resolucion: los colores se muestran cada n pixeles
+let resolution = 6;
+let repaint = 0; // Controla la cantidad de veces que se ejecuta asciify();
+let intensity = 1; // Validacion del modo de pintado de los caracteres
+	
+// Contiene los caracteres que van a reemplazar cada pixel
+let ascii=[];
+let link='https://upload.wikimedia.org/wikipedia/commons/thumb/2/2d/Keel-billed_toucan.jpg/466px-Keel-billed_toucan.jpg';
+	
+
+function preload() {
+	img = loadImage(link);
+	img2 = loadImage(link);
 }
-// Dibuja la imagen de la Derecha
-function drawImage_02() {
-	var title = "MATRIZ DE CONVOLUCION";
+function setup() {    
+	createCanvas(466, 600);
+	background(255);
+	fill(0);
+	noStroke();
+	
+	// Construye una matriz de caracteres que corresponda a los valores del brillo
+	let letters = "@&$o%#*+=-':. ";
+	for (let i = 0; i &lt 256; i++) {
+		let index = int(map(i, 0, 256, 0, letters.length));
+		ascii[i] = letters.charAt(index);
+	}
+	let mono = textFont("Georgia", resolution + 2);
+	textFont(mono);
+}
 
-	lienzo_02.textSize(14);
-	lienzo_02.textAlign(CENTER);
-	lienzo_02.text(title, 0, 20,lienzo_02.width);
-
-	// We're only going to process a portion of the image
-	// so let's set the whole image as the background first
-	image(img_02, 0, 0);
-
-	loadPixels();
-	img_02.loadPixels();
-	let img = createImage(600, 450);
+function draw(){
+	if (repaint &lt 1){
+		asciify();
+		repaint += 1;
+	}
+}
+	
+function asciify() {
+	// Se convierte la imagen a escala de grises para que sea mas preciso calcular el brillo
+	img.filter(GRAY);
 	img.loadPixels();
-
-	for (let x = 0; x &lt width; x++) {
-		for (let y = 0; y &lt height; y++ ) { 
-			let c = convolution(x, y, matrix, matrixsize, img_02);
-			let loc = (x + y*img_02.width)*4;
-
-			img.pixels[loc] = red(c);
-			img.pixels[loc+1] = green(c);
-			img.pixels[loc+2] = blue(c);
-			img.pixels[loc+3] = alpha(c);
+	img2.loadPixels();
+	
+	// Se recorre cada pixel de la imagen
+	for (let y = 0; y &lt img.height; y += resolution) {
+	for (let x = 0; x &lt img.width; x += resolution) {
+		
+		let index = (x+y*width)*4; // Posicion del pixel
+		let r=img.pixels[index+0]; // Componente Red
+		let g=img.pixels[index+1]; // Componente Green
+		let b=img.pixels[index+2]; // Componente Blue
+		let a=img.pixels[index+3]; // Componente Alpha
+		// Componenetes sin modificaciones
+		let R=img2.pixels[index+0]; // Componente Red
+		let G=img2.pixels[index+1]; // Componente Green
+		let B=img2.pixels[index+2]; // Componente Blue
+		let A=img2.pixels[index+3]; // Componente Alpha
+	
+		asciiPaint(R,G,B,A,x,y); // Color de los caracteres
+		// Toma el color del n-simo pixel y lo reemplza con el caracter de brillo similar
+		text(ascii[int(brightness(color(r,g,b,a)))], x, y); // Dibuja los caracteres
 		}
 	}
-	img.updatePixels();
-	image(img, 550, 0);
 }
 
-function convolution(x, y, matrix, matrixsize, img){
-	var rtotal = 0;
-	var gtotal = 0
-	var btotal = 0;
-	var atotal = 0;
-	var offset = matrixsize / 2;
-	for (let i = 0; i &lt matrixsize; i++){
-		for (let j= 0; j &lt matrixsize; j++){
-			// What pixel are we testing
-			var xloc = x+i;
-			var yloc = y+j;
-			var loc = (xloc + img.width*yloc)*4;
-
-			// Make sure we haven't walked off our image, we could do better here
-			loc = constrain(loc,0,img.pixels.length-1);
-			// Calculate the convolution
-			rtotal += ((img.pixels[loc]) * matrix[i][j]);
-			gtotal += ((img.pixels[loc+1]) * matrix[i][j]);
-			btotal += ((img.pixels[loc+2]) * matrix[i][j]);
-			atotal += ((img.pixels[loc+3]) * matrix[i][j]);
-		}
-	}
-
-	// Make sure RGB is within range
-	rtotal = constrain(rtotal, 0, 255);
-	gtotal = constrain(gtotal, 0, 255);
-	btotal = constrain(btotal, 0, 255);
-	atotal = constrain(atotal, 0, 255);
-	// Return the resulting color
-	return color(rtotal, gtotal, btotal);
-}
 // Se ejecuta cuando se presiona cualquier tecla
 function keyPressed() {
-	matrixsize = 3;
-	if (key === '0') { // Identidad
-	matrix = [ [  0,  0,  0 ],
-		   [  0,  1,  0 ],
-		   [  0,  0,  0 ] ]; 
-	} else if (key === '1') { // Acentúa los bordes
-	matrix = [ [ -1, -1, -1 ],
-		   [ -1,  9, -1 ],
-		   [ -1, -1, -1 ] ]; 
-	} else if (key === '2') { // Repujado
-	matrix = [ [ -2, -1,  0 ],
-		   [ -1,  1,  1 ],
-		   [  0,  1,  2 ] ]; 
-	} else if (key === '3') { // Detección de bordes
-	matrix = [ [  1,  0, -1 ],
-		   [  0,  0,  0 ],
-		   [ -1,  0,  1 ] ]; 
-	} else if (key === '4') {
-	matrix = [ [  0,  1,  0 ],
-		   [  1, -4,  1 ],
-		   [  0,  1,  0 ] ]; 
-	} else if (key === '5') {
-	matrix = [ [ -1, -1, -1 ],
-		   [ -1,  8, -1 ],
-		   [ -1, -1, -1 ] ]; 
-	} else if (key === '6') { // Enfocar
-	matrix = [ [  0, -1,  0 ],
-		   [ -1,  5, -1 ],
-		   [  0, -1,  0 ] ];
-	} else if (key === '7') { // Desenfoque de cuadro (normalizado)
-	matrix = [ [ 1/9, 1/9, 1/9 ],
-		   [ 1/9, 1/9, 1/9 ],
-		   [ 1/9, 1/9, 1/9 ] ]; 
-	} else if (key === '8') { // Desenfoque gaussiano 5 × 5 (aproximación)
-	matrixsize = 5;
-	matrix = [ [ 1/256,  4/256,  6/256,  4/256, 1/256 ],
-		   [ 4/256, 16/256, 24/256, 16/256, 4/256 ],
-		   [ 6/256, 24/256, 36/256, 24/256, 6/256 ],
-		   [ 4/256, 16/256, 24/256, 16/256, 4/256 ],
-		   [ 1/256,  4/256,  6/256,  4/256, 1/256 ] ];
-	} else if (key === '9') { // Máscara de desenfoque 5 × 5 (sin máscara de imagen)
-	matrixsize = 5;
-	matrix = [ [ -1/256,  -4/256,  -6/256,  -4/256, -1/256 ],
-		   [ -4/256, -16/256, -24/256, -16/256, -4/256 ],
-		   [ -6/256, -24/256, 476/256, -24/256, -6/256 ],
-		   [ -4/256, -16/256, -24/256, -16/256, -4/256 ],
-		   [ -1/256,  -4/256,  -6/256,  -4/256, -1/256 ] ];
+	if (key === '0') { // Imagen original
+		resetCanvas(width,height);
+		image(img2,0,0);
+	} else if (key === '1') { // Caracteres en negro
+		intensity=1;
+		resetCanvas(width,height);
+	} else if (key === '2') { // Caracteres a color
+		intensity=2;
+		resetCanvas(width,height);
+	} else if (key === '3') { // Borde caracteres a color
+		intensity=3;
+		resetCanvas(width,height);
+	} else if (key === '4') { // Repintar caracteres en el lienzo
+		intensity=4;
+		resetCanvas(width,height);
+	} else if (key === '5') { // Repintado horizontal 
+		intensity=5;
+		resetCanvas(width,height);
+		repaint=-1;
+	} else if (key === '6') { // Repintado diagonal 
+		intensity=6;
+		resetCanvas(width,height);
+		repaint=-1;
 	} 
+}
+// Resetea el lienzo y el contador de pintado
+function resetCanvas(w,h){
+	resizeCanvas(0, 0);
+	resizeCanvas(w, h);
+	repaint=0;
+}
+// Define el color de los caracteres ASCII
+function asciiPaint(R,G,B,A,x,y){
+	if (intensity===1){
+		fill(0);
+		noStroke();
+	} else if (intensity===2){
+		fill(R,G,B,A);
+		noStroke();
+	} else if (intensity===3){
+		fill(R,G,B,A);
+		stroke(R,G,B,A);
+	} else if (intensity===4){
+		fill(R,G,B,A);
+		stroke(R,G,B,A);
+		repaint=-10;
+	} else if (intensity===5){
+		if (x>floor(width/3)){
+			fill(R,G,B,A);
+		} else {
+			fill(0);
+		}
+		if(x>floor(width/3)*2){
+			stroke(R,G,B,A);
+		} else {
+			noStroke();
+		}
+	} else if (intensity===6){
+		if (x/2+y*2>floor((width+height)/3)){
+			fill(R,G,B,A);
+		} else {
+			fill(0);
+		}
+		if(x*2+y/2>floor((width+height)/3)*2){
+			stroke(R,G,B,A);
+		} else {
+			noStroke();
+		}
+	}
 }</code></pre>
 								
 								<p></p>

@@ -1,14 +1,12 @@
-// the image to asciify
 let img;
 let img2;
  
-// sampling resolution: colors will be sampled every n pixels 
-// to determine which character to display
+// Resolucion: los colores se muestran cada n pixeles
 let resolution = 6;
-let repaint = 0;
-let intensity = 1;
+let repaint = 0; // Controla la cantidad de veces que se ejecuta asciify();
+let intensity = 1; // Validacion del modo de pintado de los caracteres
  
-// array to hold characters for pixel replacement
+// Contiene los caracteres que van a reemplazar cada pixel
 let ascii=[];
 let link='https://upload.wikimedia.org/wikipedia/commons/thumb/2/2d/Keel-billed_toucan.jpg/466px-Keel-billed_toucan.jpg';
  
@@ -24,14 +22,13 @@ function setup() {
     fill(0);
     noStroke();
  
-    // build up a character array that corresponds to brightness values
+    // Construye una matriz de caracteres que corresponda a los valores del brillo
     //ascii = new char[256];
     let letters = "@&$o%#*+=-':. ";
     for (let i = 0; i < 256; i++) {
         let index = int(map(i, 0, 256, 0, letters.length));
         ascii[i] = letters.charAt(index);
     }
-
     let mono = textFont("Georgia", resolution + 2);
     textFont(mono);
 }
@@ -45,14 +42,12 @@ function draw(){
 }
  
 function asciify() {
-  // since the text is just black and white, converting the image
-  // to grayscale seems a little more accurate when calculating brightness
+  // Se convierte la imagen a escala de grises para que sea mas preciso calcular el brillo
   img.filter(GRAY);
   img.loadPixels();
   img2.loadPixels();
  
-  // grab the color of every nth pixel in the image
-  // and replace it with the character of similar brightness
+  // Se recorre cada pixel de la imagen
   for (let y = 0; y < img.height; y += resolution) {
     for (let x = 0; x < img.width; x += resolution) {
       
@@ -68,7 +63,7 @@ function asciify() {
         let A=img2.pixels[index+3]; // Componente Alpha
     
         asciiPaint(R,G,B,A,x,y); // Color de los caracteres
-      
+        // Toma el color del n-simo pixel y lo reemplza con el caracter de brillo similar
         text(ascii[int(brightness(color(r,g,b,a)))], x, y); // Dibuja los caracteres
     }
   }
