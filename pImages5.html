@@ -228,7 +228,7 @@
 								
 								<div class="canvasp5js" >
 									<div>
-										<div id="histogram">
+										<div id="maskGrayVideo">
 										
 										</div>																										
 									</div>
@@ -254,10 +254,14 @@ function preload() {
 }
 
 function setup() {
-	createCanvas(widthI*2, heightI);
+	var myCanvas = createCanvas(widthI*2, heightI);
+	myCanvas.parent('histograma');
+
 	background(255);
+
 	lienzo01 = createGraphics(widthI,heightI);
 	lienzo02 = createGraphics(widthI,heightI);
+
 	calcHis();
 }
 
@@ -442,7 +446,7 @@ const regresar = ()=>{ // Vuelve la imagen como inicialmente estaba
 			<script src="assets/js/main.js"></script>
 			
 		<!-- Ejemplos P5.js -->
-			<script src="p5/js/images/histogram.js"></script>
+			<script src="p5/js/images/maskGrayVideo.js"></script>
 
 			
 		<!-- Optional JavaScript -->

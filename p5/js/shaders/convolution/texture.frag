@@ -36,44 +36,44 @@ vec4 conv = vec4(0.0);
 void convolution(){
   if (u_key==0){
 		kernel[0] = 0.0; kernel[1] = 0.0; kernel[2] = 0.0;
-        kernel[3] = 0.0; kernel[4] = 1.0; kernel[5] = 0.0;
-        kernel[6] = 0.0; kernel[7] = 0.0; kernel[8] = 0.0;
+                kernel[3] = 0.0; kernel[4] = 1.0; kernel[5] = 0.0;
+                kernel[6] = 0.0; kernel[7] = 0.0; kernel[8] = 0.0;
 	} else if (u_key==1){
 		kernel[0] = -1.0; kernel[1] = -1.0; kernel[2] = -1.0;
-        kernel[3] = -1.0; kernel[4] =  9.0; kernel[5] = -1.0;
-        kernel[6] = -1.0; kernel[7] = -1.0; kernel[8] = -1.0;
+                kernel[3] = -1.0; kernel[4] =  9.0; kernel[5] = -1.0;
+                kernel[6] = -1.0; kernel[7] = -1.0; kernel[8] = -1.0;
 	} else if (u_key==2){
 		kernel[0] = -2.0; kernel[1] = -1.0; kernel[2] =  0.0;
-        kernel[3] = -1.0; kernel[4] =  1.0; kernel[5] =  1.0;
-        kernel[6] =  0.0; kernel[7] =  1.0; kernel[8] =  2.0;
+                kernel[3] = -1.0; kernel[4] =  1.0; kernel[5] =  1.0;
+                kernel[6] =  0.0; kernel[7] =  1.0; kernel[8] =  2.0;
 	} else if (u_key==3){
 		kernel[0] =  1.0; kernel[1] =  0.0; kernel[2] = -1.0;
-        kernel[3] =  0.0; kernel[4] =  0.0; kernel[5] =  0.0;
-        kernel[6] = -1.0; kernel[7] =  0.0; kernel[8] =  1.0;
+                kernel[3] =  0.0; kernel[4] =  0.0; kernel[5] =  0.0;
+                kernel[6] = -1.0; kernel[7] =  0.0; kernel[8] =  1.0;
 	} else if (u_key==4){
 		kernel[0] =  0.0; kernel[1] =  1.0; kernel[2] =  0.0;
-        kernel[3] =  1.0; kernel[4] = -4.0; kernel[5] =  1.0;
-        kernel[6] =  0.0; kernel[7] =  1.0; kernel[8] =  0.0;
+                kernel[3] =  1.0; kernel[4] = -4.0; kernel[5] =  1.0;
+                kernel[6] =  0.0; kernel[7] =  1.0; kernel[8] =  0.0;
 	} else if (u_key==5){
 		kernel[0] = -1.0; kernel[1] = -1.0; kernel[2] = -1.0;
-        kernel[3] = -1.0; kernel[4] =  8.0; kernel[5] = -1.0;
-        kernel[6] = -1.0; kernel[7] = -1.0; kernel[8] = -1.0;
+                kernel[3] = -1.0; kernel[4] =  8.0; kernel[5] = -1.0;
+                kernel[6] = -1.0; kernel[7] = -1.0; kernel[8] = -1.0;
 	} else if (u_key==6){
 		kernel[0] =  0.0; kernel[1] = -1.0; kernel[2] =  0.0;
-        kernel[3] = -1.0; kernel[4] =  5.0; kernel[5] = -1.0;
-        kernel[6] =  0.0; kernel[7] = -1.0; kernel[8] =  0.0;
+                kernel[3] = -1.0; kernel[4] =  5.0; kernel[5] = -1.0;
+                kernel[6] =  0.0; kernel[7] = -1.0; kernel[8] =  0.0;
 	} else if (u_key==7){
-        kernel[0] = 1.0/9.0; kernel[1] = 1.0/9.0; kernel[2] = 1.0/9.0;
-        kernel[3] = 1.0/9.0; kernel[4] = 0.1/9.0; kernel[5] = 1.0/9.0;
-        kernel[6] = 1.0/9.0; kernel[7] = 1.0/9.0; kernel[8] = 1.0/9.0;
+                kernel[0] = 1.0/9.0; kernel[1] = 1.0/9.0; kernel[2] = 1.0/9.0;
+                kernel[3] = 1.0/9.0; kernel[4] = 0.1/9.0; kernel[5] = 1.0/9.0;
+                kernel[6] = 1.0/9.0; kernel[7] = 1.0/9.0; kernel[8] = 1.0/9.0;
 	} else if (u_key==8){
-		    kernel[0] = -1.0; kernel[1] =  0.0; kernel[2] =  1.0;
-        kernel[3] = -2.0; kernel[4] =  0.0; kernel[5] =  2.0;
-        kernel[6] = -1.0; kernel[7] =  0.0; kernel[8] =  1.0;
+		kernel[0] = -1.0; kernel[1] =  0.0; kernel[2] =  1.0;
+                kernel[3] = -2.0; kernel[4] =  0.0; kernel[5] =  2.0;
+                kernel[6] = -1.0; kernel[7] =  0.0; kernel[8] =  1.0;
 	} else if (u_key==9){
-		    kernel[0] = -3.0; kernel[1] = -3.0; kernel[2] =  5.0;
-        kernel[3] = -3.0; kernel[4] =  0.0; kernel[5] =  5.0;
-        kernel[6] = -3.0; kernel[7] = -3.0; kernel[8] =  5.0;
+		kernel[0] = -3.0; kernel[1] = -3.0; kernel[2] =  5.0;
+                kernel[3] = -3.0; kernel[4] =  0.0; kernel[5] =  5.0;
+                kernel[6] = -3.0; kernel[7] = -3.0; kernel[8] =  5.0;
 	} 
 }
 
@@ -89,21 +89,7 @@ void main(){
   // take a look here for some more examples https://en.wikipedia.org/wiki/Kernel_(image_processing) or https://docs.gimp.org/en/plug-in-convmatrix.html
 
   // here are a few examples, try uncommenting them to see how they affect the image
-
-  
-  
-
-  // sharpen kernel
-  // kernel[0] = -1.0; kernel[1] = 0.0; kernel[2] = -1.0;
-  // kernel[3] = 0.0; kernel[4] = 5.0; kernel[5] = 0.0;
-  // kernel[6] = -1.0; kernel[7] = 0.0; kernel[8] = -1.0;
-
-  // gaussian blur kernel
- //  kernel[0] = 1.0; kernel[1] = 2.0; kernel[2] = 1.0;
-   //kernel[3] = 2.0; kernel[4] = 4.0; kernel[5] = 2.0;
-   //kernel[6] = 1.0; kernel[7] = 2.0; kernel[8] = 1.0;
-
-  
+ 
 	
 	offset[0] = vec2(-stepSize.x, -stepSize.y); // top left
 	offset[1] = vec2(0.0, -stepSize.y); // top middle
