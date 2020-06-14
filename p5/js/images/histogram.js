@@ -62,9 +62,8 @@ function calcHis(){
     }
 }
 
-//Dibuja los histogramas
+// Dibuja los histogramas
 function drawHis(){
-
     histMax = max(hist);
     lienzo02.background(255);
     lienzo02.stroke(0,0,255);    
@@ -77,7 +76,7 @@ function drawHis(){
 }
 
 function convolutions(){
-    regresar()
+    regresar();
     
     img_02.loadPixels();
 
