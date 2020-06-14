@@ -1,17 +1,13 @@
 
-let value; //permite escoger que filtro se va a realizar
-
-let matrixsize; //tamaño de la matriz
-var matrix; //matriz     
-
+let value; // Permite escoger que filtro se va a realizar
+let matrixsize; // Tamaño de la matriz
+var matrix; // Matriz de convoluciones     
 
 let canvas_01;
 let canvas_02;
 
-var heightI = 500;  //altura del lienzo
-var widthI = 500;   //anchura del lienzo
-
-
+var widthI = 500;   // Anchura del lienzo
+var heightI = 500;  // Altura del lienzo
 
 function preload() {
     img_01 = createCapture(VIDEO);
@@ -29,7 +25,6 @@ function setup() {
 }
 
 function draw(){
-
     drawCanvas_01();
     drawCanvas_02();
     
@@ -43,28 +38,28 @@ function keyPressed(){
     matrixsize = 3;
 
     switch(key) {
-        case 'q':
+        case 'a':
             value = 1;
             break;
-        case 'w':
+        case 'b':
             value = 2;
             break;
-        case 'e':
+        case 'c':
             value = 3;
             break;
-        case 'r':
+        case 'd':
             value = 4;
             break;
-        case 't':
+        case 'e':
             value = 5;
             break;
-        case 'y':
+        case 'f':
             value = 6;
             break;
-        case 'u':
+        case 'g':
             value = 7;
             break;
-        case 'c':
+        case 'x':
             value = 'c';
             break;
         case '0':   //Identidad
@@ -148,8 +143,7 @@ const drawCanvas_02 = ()=>{ // Pone el segundo video en el lienzo 2
     canvas_02.image(img_02, 0, 0);
 }
 
-const selectValue = ()=>{
-    // Selecciona el filtro a utilizar dependiendo del valor que tenga value
+const selectValue = ()=>{ // Selecciona el filtro a utilizar dependiendo del valor que tenga value
     if ( 0 < value && value <10 ) {
         filtrosBlancoNegro(value);
     } else if(value === 'c') {
