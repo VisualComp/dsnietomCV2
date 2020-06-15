@@ -139,10 +139,43 @@
 										
 									</div>
 								</header>
-								<p>Los siguientes ejemplos tienen el propósito de desarrollar y practicar la transición entre el lenguaje Processing y el lenguaje p5.js observando sus principales diferencias, ya que ambos lenguajes se ven muy similar, y cómo convertir de uno a otro.</p>
+								<p>La siguiente implementación tiene como fin mostrar una de los temas más importantes en el desarrollo de imágenes que es un histograma donde se representa la distribución que tiene cada uno de sus distintos tonos de la imagen, también nos sirve como una poderosa herramienta que permite controlar la forma que se quiere mostrar en una imagen.</p>
 								
-								<p>Este programa esta basado en un sketch básico realizado por el sitio web <a href="http://www.mywonderland.es/curso_js/processing/pro_ejemplos.html" target="_blank">mywonderland.es</a>, en el lenguaje Processing, con el fin de observar un ejemplo en el que se utilizan las funciones 'mouseX, mouseY'. Crea una ventana con un ancho de 600px y una altura de 400px, y luego empieza a dibujar un cuadrado azul de 50px por 50px según la posición del mouse, al mismo tiempo que el fondo de la ventana se va rellenando de color gris, dando la ilusión que solo existe un cuadrado azul moviéndose por toda la ventana siguiendo al mouse.</p>
+								<p>Las diferentes líneas horizontales presentes en el histograma representa la cantidad de píxeles existentes en la imagen para cada uno de los diferentes tonos, como se logra observar en la siguiente imagen. El histograma representa los tonos que van desde un negro puro, pasando por el gris, hasta el blanco puro.</p>
 								
+								<div class="text-center">
+									<img src="images/study/histogram1.png" style="height: 220px;vertical-align: middle"/>
+								</div>
+
+								<p>Es importante aclarar que un histograma no indica si la imagen esta mal, simplemente ayuda al observador como herramienta para que exponga la imagen como lo desea, por ejemplo el histograma nos permite identificar algunos aspectos como:</p>
+
+								<div class="table-wrapper text-center">
+									<table class="alt">
+										<thead>
+											<tr>
+												<th>Características de la Imagen</th>
+												<th>Histograma</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr>
+												<td>Para un paisaje nublado el histograma tiende a desplazarse a la izquierda<h5>Tonos apagados</h5></td>
+												<td><img src="images/study/histogram2.png" style="width:400px;vertical-align: middle"/></td>
+											</tr>
+											<tr>
+												<td>Para una imagen con muchas zonas oscuras o en sobra el histograma muestra un pico en el extremo izquierdo.<h5>Sombras o zonas oscuras</h5></td>
+												<td><img src="images/study/histogram3.png" style="width:400px;vertical-align: middle"/></td>												
+											</tr>
+											<tr>
+												<td>Para imágenes en contraluz el histograma muestra muy pocas zonas grises<h5>Contraluz</h5></td>
+												<td><img src="images/study/histogram4.png" style="width:400px;vertical-align: middle"/></td>
+											</tr>
+										</tbody>										
+									</table>
+								</div>
+
+								<p>Adicional a las características y tonalidades anteriormente mencionadas también podemos identificar sobreexposición de la luz y zonas quemadas, sombras pálidas, distribución homogénea, entre otras más. Esta información está basada en el  artículo de  referencia para profundizar en este tema del sitio web <a href="http://www.thewebfoto.com/2-hacer-fotos/217-el-histograma" target="_blank">thewebfoto.com</a>.</p>
+
 								<hr />
 								<h3>Comandos por teclado</h3>
 								<div class="table-wrapper text-center">
