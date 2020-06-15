@@ -130,7 +130,7 @@
 							<article class="post">
 								<header>
 									<div class="title">
-										<h2><a href="http://www.mywonderland.es/curso_js/processing/pro_ejemplos.html" target="_blank">Convolution Matrix</a></h2>
+										<h2><a href="https://en.wikipedia.org/wiki/Kernel_(image_processing)" target="_blank">Convolution Matrix</a></h2>
 										<p>Blurring, Sharpening, Embossing, Edge detection, and more</p>
 									</div>
 									<div class="meta">
@@ -139,9 +139,11 @@
 										
 									</div>
 								</header>
-								<p>Los siguientes ejemplos tienen el propósito de desarrollar y practicar la transición entre el lenguaje Processing y el lenguaje p5.js observando sus principales diferencias, ya que ambos lenguajes se ven muy similar, y cómo convertir de uno a otro.</p>
+								<p>En la presente publicación se expone la forma en que se aplican los diferentes tipos de convolución en el procesamiento de imágenes y, videos (como se observará en el ejemplo <a href="pImages5.html" target="_parent">VIDEO PROCESSING</a>), por medio de cálculos matemáticos realizados a cada uno de los pixeles y a los que lo rodean en su vecindario.</p>
 								
-								<p>Este programa esta basado en un sketch básico realizado por el sitio web <a href="http://www.mywonderland.es/curso_js/processing/pro_ejemplos.html" target="_blank">mywonderland.es</a>, en el lenguaje Processing, con el fin de observar un ejemplo en el que se utilizan las funciones 'mouseX, mouseY'. Crea una ventana con un ancho de 600px y una altura de 400px, y luego empieza a dibujar un cuadrado azul de 50px por 50px según la posición del mouse, al mismo tiempo que el fondo de la ventana se va rellenando de color gris, dando la ilusión que solo existe un cuadrado azul moviéndose por toda la ventana siguiendo al mouse.</p>
+								<p>El siguiente programa realiza la multiplicación de cada uno de los píxeles circundantes con una matriz llamada kernel o núcleo, como se vio en la documentación <a href="https://en.wikipedia.org/wiki/Kernel_(image_processing)#Details" target="_blank">Kernel (image processing)</a>, que contiene diferentes valores predeterminados para aplicar correctamente las diferentes máscaras de convolución. El resultado de cada una de estas multiplicaciones se suman y  este valor final  es asignado a cada uno de los componentes RGB del nuevo píxel, el procedimiento se realiza conforme se explica en la documentación <a href="http://gsp.humboldt.edu/olm_2016/courses/GSP_216_Online/lesson4-2/spatial.html" target="_blank">Spatial Enhancements</a>.</p>
+
+								<p>También es importante resaltar la gran importancia de la implementación de las máscaras de convolución ya que muchas de ellas son utilizados en la medicina para detectar cambios importantes o anomalías que no deberían tener el cuerpo, por ejemplo  podemos rescatar la máscara de convolución de Frei-Chen, Robinson y Kirsch utilizadas para la detección de cambios bruscos del brillo de la imagen lo cual indicaría cambios en las propiedades de un material, discontinuaciones en la superficie, entre otras más, como se profundiza en la documentación <a href="http://support.ptc.com/help/mathcad/en/index.html#page/PTC_Mathcad_Help%2Fconvolution_edge_finders.html%23" target="_blank">Convolution Edge Finders</a>.</p>
 								
 								<hr />
 								<h3>Comandos por teclado</h3>
