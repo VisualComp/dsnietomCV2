@@ -139,10 +139,12 @@
 										
 									</div>
 								</header>
-								<p>Los siguientes ejemplos tienen el propósito de desarrollar y practicar la transición entre el lenguaje Processing y el lenguaje p5.js observando sus principales diferencias, ya que ambos lenguajes se ven muy similar, y cómo convertir de uno a otro.</p>
+								<p>La siguiente publicación presenta un programa que consigue manipular cada uno de los pixeles de una imagen y asignarle un carácter dependiendo de las propiedades del mismo, reconstruyendo una completa por medio de caracteres ASCII.</p>
 								
-								<p>Este programa esta basado en un sketch básico realizado por el sitio web <a href="http://www.mywonderland.es/curso_js/processing/pro_ejemplos.html" target="_blank">mywonderland.es</a>, en el lenguaje Processing, con el fin de observar un ejemplo en el que se utilizan las funciones 'mouseX, mouseY'. Crea una ventana con un ancho de 600px y una altura de 400px, y luego empieza a dibujar un cuadrado azul de 50px por 50px según la posición del mouse, al mismo tiempo que el fondo de la ventana se va rellenando de color gris, dando la ilusión que solo existe un cuadrado azul moviéndose por toda la ventana siguiendo al mouse.</p>
+								<p>Para realizar este proceso es importante definir una cadena de caracteres que se guarda en un arreglo y donde su tamaño máximo es de 256 posiciones, cada una de ellas representará el brillo del píxel. Una vez creado el arreglo se procederá a dibujar cada uno de estos caracteres dependiendo del brillo correspondiente del pixel y su posición, para facilitar este proceso es recomendable pasar la imagen a escala de grises con cualquiera de los métodos vistos en el ejemplo <a href="pImages1.html" target="_parent">GRAYSCALE IMAGE</a>.</p>
 								
+								<p>Se recomienda asignar símbolos que más ocupan espacio como '#' en las primeras posiciones de caracteres de la cadena para representar las partes oscuras e ir colocando caracteres que ocupan menos espacio como por ejemplo '.' en las últimas posiciones para representar partes claras de la imagen, pero no es indispensable ya que también se maneja el nivel de resolución que puede tener cada uno de los caracteres ASCII.</p>
+
 								<hr />
 								<h3>Comandos por teclado</h3>
 								<div class="table-wrapper text-center">
@@ -185,11 +187,11 @@
 								
 								<div class="canvasp5js" >
 									<div>
-									<div id="asciiImg">
+										<div id="asciiImg">
 									
-									</div>
+										</div>
 																										
-								</div>
+									</div>
 								<blockquote>
 									<div class="table-wrapper text-center">
 										<table>
@@ -225,10 +227,6 @@
 										</table>
 									</div>
 									
-									
-									
-									
-								
 								</blockquote>
 								</div>
 								<p></p>
@@ -245,11 +243,11 @@ let intensity = 1; // Validacion del modo de pintado de los caracteres
 let ascii=[];
 let link='https://upload.wikimedia.org/wikipedia/commons/thumb/2/2d/Keel-billed_toucan.jpg/466px-Keel-billed_toucan.jpg';
 	
-
 function preload() {
 	img = loadImage(link);
 	img2 = loadImage(link);
 }
+
 function setup() {    
 	createCanvas(466, 600);
 	background(255);
@@ -300,7 +298,6 @@ function asciify() {
 		}
 	}
 }
-
 // Se ejecuta cuando se presiona cualquier tecla
 function keyPressed() {
 	if (key === '0') { // Imagen original
@@ -372,8 +369,7 @@ function asciiPaint(R,G,B,A,x,y){
 			noStroke();
 		}
 	}
-}</code></pre>
-								
+}</code></pre>								
 								<p></p>
 								
 								<!-- Pagination -->
