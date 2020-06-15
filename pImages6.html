@@ -130,7 +130,7 @@
 							<article class="post">
 								<header>
 									<div class="title">
-										<h2><a href="https://en.wikipedia.org/wiki/Image_histogram" target="_blank">Video to ASCII</a></h2>
+										<h2><a href="https://processing.org/tutorials/video/" target="_blank">Video to ASCII</a></h2>
 										<p>Change Pixels for Characters</p>
 									</div>
 									<div class="meta">
@@ -139,9 +139,9 @@
 										
 									</div>
 								</header>
-								<p>Los siguientes ejemplos tienen el propósito de desarrollar y practicar la transición entre el lenguaje Processing y el lenguaje p5.js observando sus principales diferencias, ya que ambos lenguajes se ven muy similar, y cómo convertir de uno a otro.</p>
+								<p>Al igual que en el estudio de procesamiento de imágenes, que se vio el ejemplo <a href="pImages3.html" target="_parent">IMAGE TO ASCII</a>, se realizó la siguiente implementación que muestra cómo realizar el procesamiento de videos. Para este fin se crearon dos lienzos, el primero permite visualizar el video original que es capturado directamente de la webcam que tenga conectada a su dispositivo <strong><em>(permitir acceder a la cámara desde el navegador)</em></strong>, de manera similar a la que se explica en la documentación de <a href="https://processing.org/tutorials/video/" target="_blank">processing.org</a> y, el segundo lienzo se encarga de mostrar los cambios que se le realizan en tiempo real dependiendo de las teclas que se presionen, según la tabla de comandos por teclado.</p>
 								
-								<p>Este programa esta basado en un sketch básico realizado por el sitio web <a href="http://www.mywonderland.es/curso_js/processing/pro_ejemplos.html" target="_blank">mywonderland.es</a>, en el lenguaje Processing, con el fin de observar un ejemplo en el que se utilizan las funciones 'mouseX, mouseY'. Crea una ventana con un ancho de 600px y una altura de 400px, y luego empieza a dibujar un cuadrado azul de 50px por 50px según la posición del mouse, al mismo tiempo que el fondo de la ventana se va rellenando de color gris, dando la ilusión que solo existe un cuadrado azul moviéndose por toda la ventana siguiendo al mouse.</p>
+								<p>Este programa muestra los cambios que sufre un video al convertir sus pixeles por caracteres ASCII, darles color y contorno a los caracteres, utilizando el mismo algoritmo que permitió realizar el procesamiento de imágenes en el ejemplo descrito anteriormente, pero esta vez modificando los pixeles de una imagen capturada por video.</p>
 								
 								<hr />
 								<h3>Comandos por teclado</h3>
@@ -189,175 +189,134 @@
 								</div>
 								<p></p>
 								<h4>p5*js Code</h4>
-									<pre><code class="prettyprint">var maxRange = 256;
-var histogram = new Array(maxRange);
+									<pre><code class="prettyprint">let img; // Almacena la primera captura
+let img_01; 
+let resolution = 6; // Determina la resolucion del caracter
 
-var lienzo01;
-var lienzo02;
+let lienzo01; // Lienzo donde se mostrara el codigo ascii
+let lienzo02;   // Lienzo que mostrara el video original
 
-var heightI = 600;
-var widthI = 450;
+const heightI = 512; // Define la altura de los lienzos
+const widthI = 550; // Define la anchura de los lienzos
 
-// Histograma
-var hist = new Array(256);
+let letters = "@&$o%8#*+=-':. " ; // Cadena de caracteres ascii
+let ascii=[];   // Almacena la cadena de caracteres
+let intensity = 1; // Colores de los caracteres
 
 function preload() {
-	img_01 = loadImage("https://upload.wikimedia.org/wikipedia/commons/thumb/0/0b/Amphiprion_ocellaris_at_Gilli_Banta.JPG/450px-Amphiprion_ocellaris_at_Gilli_Banta.JPG");
-	img_02 = loadImage("https://upload.wikimedia.org/wikipedia/commons/thumb/0/0b/Amphiprion_ocellaris_at_Gilli_Banta.JPG/450px-Amphiprion_ocellaris_at_Gilli_Banta.JPG");
+	img = createCapture(VIDEO);
+	img_01 = createCapture(VIDEO);
+	img_01.hide(); //Ocultan los videos 
+	img.hide();
 }
 
-function setup() {
-	var myCanvas = createCanvas(widthI*2, heightI);
-	myCanvas.parent('histograma');
-
+function setup() { 
+	var myCanvas = createCanvas(widthI*2 + 20, heightI);
+	myCanvas.parent('asciiVideo');    
 	background(255);
-
-	lienzo01 = createGraphics(widthI,heightI);
-	lienzo02 = createGraphics(widthI,heightI);
-
-	calcHis();
+	lienzo01 = createGraphics(widthI, heightI);
+	lienzo02 = createGraphics(widthI, heightI);
 }
 
-function draw() {    
-	drawLienzo01();
-	image(lienzo01,0,0);
-	image(lienzo02, widthI, 0);
-}
-
-function keyPressed() { 
-	switch(key){
-		case '0':
-			regresar(); 
-			break;
-		case '1':
-			regresar();
-			filtrosBlancoNegro(1);
-			break;
-		case '2':
-			regresar();
-			filtrosBlancoNegro(2);
-			break;
-		case '3':
-			regresar();
-			filtrosBlancoNegro(3);
-			break;
-		case '4':
-			regresar();
-			complementary();
-			break;
-		default:
-			break;
-	}
-	calcHis();
-	drawHis();
+function draw(){
+	lienzo01.textFont("Georgia", resolution + 2);
+	lienzo01.background(255);
+	calcArray();
+	asciify();
+	drawLienzo02();
+	image(lienzo01, widthI + 10 ,0);
+	image(lienzo02, 0, 0);
 }
 
 
 // Funciones diseñadas 
-const calcHis = ()=> { // Calcula los valores del histograma
+const calcArray = ()=>{ // Realiza el mapeo para almacenarlos en el array ascii
 
-	// Inicializa el arreglo 
-	for (i = 0; i &lt= 256; i++) {
-		hist[i] = 0;
-	}
-
-	// Calculate the histogram
-	for (var i = 0; i &lt img_02.width; i++) {
-		for (var j = 0; j &lt img_02.height; j++) {
-			var bright = int(brightness(get(i, j)));
-			hist[bright]++; 
-		}
-	}
+	for (let i = 0; i < 256; i++) {
+		let index = int(map(i, 0, 256, 0, letters.length));
+		ascii[i] = letters.charAt(index);
+	}    
 }
-	
-const drawLienzo01 = ()=>{ // Dibuja la imagen en el primer lienzo
-	lienzo01.image(img_02, 0, 0);
+
+const drawLienzo02 = ()=>{ // Diagrama el video en el lienzo 2
+	lienzo02.image(img_01,0,0);
 }
-	
-const drawHis = ()=>{ // Dibuja los histogramas
-	// Obtiene el valor maximo del arreglo
-	histMax = max(hist);
 
-	// Le da propiedades al lienzo
-	lienzo02.background(255);
-	lienzo02.stroke(0,0,255);
-
-	// Dibuja las lineas del histograma en el lienzo
-	for (var i = 0; i &lt 2.5*img_02.width; i += 3) {
-		var which = int(map(i, 0, 2.5*widthI, 0, 255));
-		var y = int(map(hist[which], 0, histMax, img_02.height, img_02.height-500));
-
-		lienzo02.line(i, img_02.height, i, y);
-	}
-}
-	
-const filtrosBlancoNegro = (gray)=>{ // Aplica los filtros de blanco y negro
-	let lightness;
-	img_02.loadPixels();
-
-	for (let y = 0; y &lt img_02.height; y++) 
-	{
-		for (let x = 0; x &lt img_02.width; x++)
-		{ 
-			let index = (x+y*img_02.width)*4; // Posicion del pixel
-			
-			let r=img_02.pixels[index+0]; // Componente Red
-			let g=img_02.pixels[index+1]; // Componente Green
-			let b=img_02.pixels[index+2]; // Componente Blue
-			let a=img_02.pixels[index+3]; // Componente Alpha
-			
-			if (gray===1) // Media aritmetica
-			{
-				let I=(r+g+b)/3; 
-				lightness = I;
-			} else if (gray===2) // Componente mas grande de un color
-			{
-				let V= max(r,g,b); 
-				lightness = V;
-			} else if (gray===3) // Promedio ponderado de RGB con corrección gamma (Luma)
-			{ 
-				let Y601= 0.2989*r + 0.5870*g + 0.1140*b; // SDTV
-				lightness = Y601;
-			}	
-			img_02.pixels[index+0]=lightness;
-			img_02.pixels[index+1]=lightness;
-			img_02.pixels[index+2]=lightness;
-			img_02.pixels[index+3]=a;
-		}
-	}
-	img_02.updatePixels();
-}
-	
-const complementary = ()=>{	// Aplica el filtro complementario
-	img_02.loadPixels();
-
-	for(var y = 0 ; y &lt heightI; y++) {
-		for(var x = 0; x &lt widthI; x++) {
-			let index = (x + y * widthI) * 4;
-
-			img_02.pixels[index + 0] = 255 - img_02.pixels[index + 0];
-			img_02.pixels[index + 1] = 255 - img_02.pixels[index + 1];
-			img_02.pixels[index + 2] = 255 - img_02.pixels[index + 2];
-		}
-	}
-	img_02.updatePixels();
-}
-	
-const regresar = ()=>{ // Vuelve la imagen como inicialmente estaba
-	img_02.loadPixels();
+const asciify = ()=>{ // Diagrama los caracteres en e lienzo 1  
+	img.loadPixels();
 	img_01.loadPixels();
 
-	for(y = 0; y &lt img_02.height; y++ ) {
-		for(x = 0; x &lt img_02.width; x++) {
-			let index = (x + y*img_02.width)*4;
-			img_02.pixels[index + 0] = img_01.pixels[index + 0];
-			img_02.pixels[index + 1] = img_01.pixels[index + 1];
-			img_02.pixels[index + 2] = img_01.pixels[index + 2];
-			img_02.pixels[index + 3] = img_01.pixels[index + 3];
+	// Recorre todos los pixeles
+	for (let y = 0; y < img.height; y += resolution) {
+		for (let x = 0; x < img.width; x += resolution) {
+			
+			let index = (x+y*img.width)*4; // Posicion del pixel
+			let r=img.pixels[index+0]; // Componente Red
+			let g=img.pixels[index+1]; // Componente Green
+			let b=img.pixels[index+2]; // Componente Blue
+			let a=img.pixels[index+3]; // Componente Alpha
+			// Componenetes sin modificaciones
+			let R=img_01.pixels[index+0]; // Componente Red
+			let G=img_01.pixels[index+1]; // Componente Green
+			let B=img_01.pixels[index+2]; // Componente Blue
+			let A=img_01.pixels[index+3]; // Componente Alpha
+
+			asciiPaint(R,G,B,A,x,y); // Color de los caracteres            
+			// Toma el color del n-simo pixel y lo reemplza con el caracter de brillo similar
+			lienzo01.text(ascii[int(brightness(color(r,g,b,a)))], x, y); // Dibuja los caracteres
 		}
 	}
-	img_01.updatePixels();
-	img_02.updatePixels();
+}
+// Define el color de los caracteres ASCII
+function asciiPaint(R,G,B,A,x,y){
+	if (intensity===1){
+		lienzo01.fill(0);
+		lienzo01.noStroke();
+	} else if (intensity===2){
+		lienzo01.fill(R,G,B,A);
+		lienzo01.noStroke();
+	} else if (intensity===3){
+		lienzo01.fill(R,G,B,A);
+		lienzo01.stroke(R,G,B,A);
+	} else if (intensity===4){
+		if (x>floor(widthI/3)){
+			lienzo01.fill(R,G,B,A);
+		} else {
+			lienzo01.fill(0);
+		}
+		if(x>floor(widthI/3)*2){
+			lienzo01.stroke(R,G,B,A);
+		} else {
+			lienzo01.noStroke();
+		}
+	} else if (intensity===5){
+		if (x/2+y*2>floor((widthI+heightI)/3)){
+			lienzo01.fill(R,G,B,A);
+		} else {
+			lienzo01.fill(0);
+		}
+		if(x*2+y/2>floor((widthI+heightI)/3)*2){
+			lienzo01.stroke(R,G,B,A);
+		} else {
+			lienzo01.noStroke();
+		}
+	}
+}
+// Se ejecuta cuando se presiona cualquier tecla
+function keyPressed() {
+	if (key === '0') { // Imagen original        
+		lienzo01.image(img_01,0,0);
+	} else if (key === '1') { // Caracteres en negro
+		intensity=1;
+	} else if (key === '2') { // Caracteres a color
+		intensity=2;
+	} else if (key === '3') { // Borde caracteres a color
+		intensity=3;
+	} else if (key === '4') { // Borde caracteres a color
+		intensity=4;
+	} else if (key === '5') { // Borde caracteres a color
+		intensity=5;
+	}
 }</code></pre>								
 								<p></p>
 								
