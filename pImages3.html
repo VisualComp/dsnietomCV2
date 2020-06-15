@@ -139,12 +139,14 @@
 										
 									</div>
 								</header>
-								<p>La siguiente publicación presenta un programa que consigue manipular cada uno de los pixeles de una imagen y asignarle un carácter dependiendo de las propiedades del mismo, reconstruyendo una completa por medio de caracteres ASCII.</p>
+								<p>La siguiente publicación presenta un programa que consigue manipular cada uno de los pixeles de una imagen y asignarle un carácter dependiendo de las propiedades del mismo, reconstruyendo una imagen completa por medio de caracteres ASCII.</p>
 								
 								<p>Para realizar este proceso es importante definir una cadena de caracteres que se guarda en un arreglo y donde su tamaño máximo es de 256 posiciones, cada una de ellas representará el brillo del píxel. Una vez creado el arreglo se procederá a dibujar cada uno de estos caracteres dependiendo del brillo correspondiente del pixel y su posición, para facilitar este proceso es recomendable pasar la imagen a escala de grises con cualquiera de los métodos vistos en el ejemplo <a href="pImages1.html" target="_parent">GRAYSCALE IMAGE</a>.</p>
 								
 								<p>Se recomienda asignar símbolos que más ocupan espacio como '#' en las primeras posiciones de caracteres de la cadena para representar las partes oscuras e ir colocando caracteres que ocupan menos espacio como por ejemplo '.' en las últimas posiciones para representar partes claras de la imagen, pero no es indispensable ya que también se maneja el nivel de resolución que puede tener cada uno de los caracteres ASCII.</p>
 
+								<p>Como valor agregado se les dio color a los caracteres ASCII haciendo uso de una técnica similar a la vista en el ejemplo <a href="images6.html" target="_parent">POINTILLISM</a>, donde se capturaba el color de un pixel aleatorio para asignárselo como relleno a una elipse; en este caso también se capturará el color del pixel en la posición XY del pixel, para asignárselo al carácter ASCII como relleno y contorno en esa misma posición XY.</p>
+								
 								<hr />
 								<h3>Comandos por teclado</h3>
 								<div class="table-wrapper text-center">

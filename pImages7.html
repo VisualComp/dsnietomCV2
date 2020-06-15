@@ -1,0 +1,412 @@
+<!DOCTYPE HTML>
+<!--
+	David Styven Nieto Marin
+	Ingenieria de Sistemas | @dsnietom
+	Universidad Nacional de Colombia
+-->
+<html>
+	<head>
+		<title>Procesamiento de Imagenes | :: Computación Visual ::</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+		
+		<!-- Code-Prettify -->
+		<script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
+		
+		<!-- P5.js -->
+		<script src="p5/p5.min.js"></script>
+		<script src="p5/addons/p5.sound.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.0.0/p5.min.js"></script>
+		<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.0.0/addons/p5.sound.min.js"></script> -->
+		
+		<!-- Bootstrap CSS 
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">-->
+	
+		<!-- Favicon -->
+		<link rel="icon" href="images/favicon.png" sizes="32x32" type="image/png">
+
+		
+	</head>
+	
+	<body class="single is-preload">
+	
+	
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+			
+
+				<!-- Header -->
+					<header id="header">
+						
+						<nav class="links">
+						
+						<!-- Se crea un encabezado para insertar el html donde esta el menu-->
+							<iframe src="menu.html" ></iframe>
+							
+						</nav>
+						<nav class="main">
+							<ul>
+								<li class="search">
+									<a class="fa-search" href="#search">Search</a>
+									<form id="search" method="get" action="#">
+										<input type="text" name="query" placeholder="Search" />
+									</form>
+								</li>
+								<li class="menu">
+									<a class="fa-bars" href="#menu">Menu</a>
+								</li>
+							</ul>
+						</nav>
+					</header>
+
+				<!-- Menu -->
+					<section id="menu">
+
+						<!-- Search -->
+							<section>
+							<h1><a href="index.html" target="_parent">Visual Computing</a></h1>
+								<form class="search" method="get" action="#">
+									<input type="text" name="query" placeholder="Search" />
+								</form>
+							</section>
+
+						<!-- Links -->
+							<section>
+								<ul class="links">
+									<li>
+										<a href="images1.html" target="_parent">
+											<h3>FIRST STEPS</h3>
+											<p>Painting Backgrounds with Pixels</p>
+										</a>
+									</li>
+									<li>
+										<a href="images2.html" target="_parent">
+											<h3>IMAGE PROCESSING WITH PIXELS</h3>
+											<p>Load Images pixel by pixel</p>
+										</a>
+									</li>
+									<li>
+										<a href="images3.html" target="_parent">
+											<h3>LANTERN</h3>
+											<p>Alter the Brightness of an Image</p>
+										</a>
+									</li>
+									<li>
+										<a href="images4.html" target="_parent">
+											<h3>BLACK AND WHITE</h3>
+											<p>Gray filter modifying lightness</p>
+										</a>
+									</li>
+									<li>
+										<a href="images5.html" target="_parent">
+											<h3>COMPLEMENTARY COLORS</h3>
+											<p>createGraphics two Canvases in One</p>
+										</a>
+									</li>
+									<li>
+										<a href="images6.html" target="_parent">
+											<h3>POINTILLISM</h3>
+											<p>Fill Ellipses with the Color of a Pixel</p>
+										</a>
+									</li>
+								</ul>
+							</section>
+
+						<!-- Actions -->
+							<section>
+								<ul class="actions stacked">
+									<li><a href="#" class="button large fit">Log In</a></li>
+								</ul>
+							</section>
+
+					</section>
+
+				<!-- Main -->
+					<div id="main">
+
+						<!-- Post -->
+							<article class="post">
+								<header>
+									<div class="title">
+										<h2><a href="https://processing.org/reference/frameRate.html" target="_blank">Computational Efficiency</a></h2>
+										<p>Video operations measurement</p>
+									</div>
+									<div class="meta">
+										<time class="published" datetime="2015-11-01">May 21, 2020</time>
+										<a href="https://dsnietom.github.io/myPageIngSoft/" target="_blank" class="author"><span class="name">David Nieto</span><img src="images/avatar.jpg" alt="dsnietom" /></a>
+										
+									</div>
+								</header>
+								<p>Los siguientes ejemplos tienen el propósito de desarrollar y practicar la transición entre el lenguaje Processing y el lenguaje p5.js observando sus principales diferencias, ya que ambos lenguajes se ven muy similar, y cómo convertir de uno a otro.</p>
+								
+								<p>Este programa esta basado en un sketch básico realizado por el sitio web <a href="http://www.mywonderland.es/curso_js/processing/pro_ejemplos.html" target="_blank">mywonderland.es</a>, en el lenguaje Processing, con el fin de observar un ejemplo en el que se utilizan las funciones 'mouseX, mouseY'. Crea una ventana con un ancho de 600px y una altura de 400px, y luego empieza a dibujar un cuadrado azul de 50px por 50px según la posición del mouse, al mismo tiempo que el fondo de la ventana se va rellenando de color gris, dando la ilusión que solo existe un cuadrado azul moviéndose por toda la ventana siguiendo al mouse.</p>
+								
+								<hr />
+								<h3>Comandos por teclado</h3>
+								<div class="table-wrapper text-center">
+									<table class="alt">
+										<thead>
+											<tr>
+												<th>ASCII</th>
+												<th>Caracteres a Color</th>
+												<th>Bordes a Color</th>
+												<th>Transición Horizontal</th>
+												<th>Transición Diagonal</th>
+												<th>Video Original</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr>
+												<td><img src="images/ascii/vid1.png" style="width:150px;vertical-align: middle"/></td>
+												<td><img src="images/ascii/vid2.png" style="width:150px;vertical-align: middle"/></td>
+												<td><img src="images/ascii/vid3.png" style="width:150px;vertical-align: middle"/></td>
+												<td><img src="images/ascii/vid4.png" style="width:150px;vertical-align: middle"/></td>
+												<td><img src="images/ascii/vid5.png" style="width:150px;vertical-align: middle"/></td>
+												<td><img src="images/ascii/vid0.gif" style="width:150px;vertical-align: middle"/></td>
+											</tr>
+											<tr>
+												<td><img src="images/keyboard/1.png" style="width:40px;vertical-align: middle"/></td>
+												<td><img src="images/keyboard/2.png" style="width:40px;vertical-align: middle"/></td>
+												<td><img src="images/keyboard/3.png" style="width:40px;vertical-align: middle"/></td>
+												<td><img src="images/keyboard/4.png" style="width:40px;vertical-align: middle"/></td>
+												<td><img src="images/keyboard/5.png" style="width:40px;vertical-align: middle"/></td>
+												<td><em>Activar cámara Web</em></td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+								
+								<div class="canvasp5js" >
+									<div>
+										<blockquote>Image of Lioness and her Lion cub (Panthera leo) are a species in the family Felidae. Source: <a href="https://66.media.tumblr.com/6779b609703c61130d8d59fcad857310/tumblr_n66mdcOUan1rpe379o2_500.gif" target="_blank">Giphy</a>.<p><strong>Lion Hello GIF - Find & Share on GIPHY</strong></p></blockquote>
+										<div id="asciiVideo">
+										
+										</div>																										
+									</div>
+								
+								</div>
+								<p></p>
+								<h4>p5*js Code</h4>
+									<pre><code class="prettyprint">var maxRange = 256;
+var histogram = new Array(maxRange);
+
+var lienzo01;
+var lienzo02;
+
+var heightI = 600;
+var widthI = 450;
+
+// Histograma
+var hist = new Array(256);
+
+function preload() {
+	img_01 = loadImage("https://upload.wikimedia.org/wikipedia/commons/thumb/0/0b/Amphiprion_ocellaris_at_Gilli_Banta.JPG/450px-Amphiprion_ocellaris_at_Gilli_Banta.JPG");
+	img_02 = loadImage("https://upload.wikimedia.org/wikipedia/commons/thumb/0/0b/Amphiprion_ocellaris_at_Gilli_Banta.JPG/450px-Amphiprion_ocellaris_at_Gilli_Banta.JPG");
+}
+
+function setup() {
+	var myCanvas = createCanvas(widthI*2, heightI);
+	myCanvas.parent('histograma');
+
+	background(255);
+
+	lienzo01 = createGraphics(widthI,heightI);
+	lienzo02 = createGraphics(widthI,heightI);
+
+	calcHis();
+}
+
+function draw() {    
+	drawLienzo01();
+	image(lienzo01,0,0);
+	image(lienzo02, widthI, 0);
+}
+
+function keyPressed() { 
+	switch(key){
+		case '0':
+			regresar(); 
+			break;
+		case '1':
+			regresar();
+			filtrosBlancoNegro(1);
+			break;
+		case '2':
+			regresar();
+			filtrosBlancoNegro(2);
+			break;
+		case '3':
+			regresar();
+			filtrosBlancoNegro(3);
+			break;
+		case '4':
+			regresar();
+			complementary();
+			break;
+		default:
+			break;
+	}
+	calcHis();
+	drawHis();
+}
+
+
+// Funciones diseñadas 
+const calcHis = ()=> { // Calcula los valores del histograma
+
+	// Inicializa el arreglo 
+	for (i = 0; i &lt= 256; i++) {
+		hist[i] = 0;
+	}
+
+	// Calculate the histogram
+	for (var i = 0; i &lt img_02.width; i++) {
+		for (var j = 0; j &lt img_02.height; j++) {
+			var bright = int(brightness(get(i, j)));
+			hist[bright]++; 
+		}
+	}
+}
+	
+const drawLienzo01 = ()=>{ // Dibuja la imagen en el primer lienzo
+	lienzo01.image(img_02, 0, 0);
+}
+	
+const drawHis = ()=>{ // Dibuja los histogramas
+	// Obtiene el valor maximo del arreglo
+	histMax = max(hist);
+
+	// Le da propiedades al lienzo
+	lienzo02.background(255);
+	lienzo02.stroke(0,0,255);
+
+	// Dibuja las lineas del histograma en el lienzo
+	for (var i = 0; i &lt 2.5*img_02.width; i += 3) {
+		var which = int(map(i, 0, 2.5*widthI, 0, 255));
+		var y = int(map(hist[which], 0, histMax, img_02.height, img_02.height-500));
+
+		lienzo02.line(i, img_02.height, i, y);
+	}
+}
+	
+const filtrosBlancoNegro = (gray)=>{ // Aplica los filtros de blanco y negro
+	let lightness;
+	img_02.loadPixels();
+
+	for (let y = 0; y &lt img_02.height; y++) 
+	{
+		for (let x = 0; x &lt img_02.width; x++)
+		{ 
+			let index = (x+y*img_02.width)*4; // Posicion del pixel
+			
+			let r=img_02.pixels[index+0]; // Componente Red
+			let g=img_02.pixels[index+1]; // Componente Green
+			let b=img_02.pixels[index+2]; // Componente Blue
+			let a=img_02.pixels[index+3]; // Componente Alpha
+			
+			if (gray===1) // Media aritmetica
+			{
+				let I=(r+g+b)/3; 
+				lightness = I;
+			} else if (gray===2) // Componente mas grande de un color
+			{
+				let V= max(r,g,b); 
+				lightness = V;
+			} else if (gray===3) // Promedio ponderado de RGB con corrección gamma (Luma)
+			{ 
+				let Y601= 0.2989*r + 0.5870*g + 0.1140*b; // SDTV
+				lightness = Y601;
+			}	
+			img_02.pixels[index+0]=lightness;
+			img_02.pixels[index+1]=lightness;
+			img_02.pixels[index+2]=lightness;
+			img_02.pixels[index+3]=a;
+		}
+	}
+	img_02.updatePixels();
+}
+	
+const complementary = ()=>{	// Aplica el filtro complementario
+	img_02.loadPixels();
+
+	for(var y = 0 ; y &lt heightI; y++) {
+		for(var x = 0; x &lt widthI; x++) {
+			let index = (x + y * widthI) * 4;
+
+			img_02.pixels[index + 0] = 255 - img_02.pixels[index + 0];
+			img_02.pixels[index + 1] = 255 - img_02.pixels[index + 1];
+			img_02.pixels[index + 2] = 255 - img_02.pixels[index + 2];
+		}
+	}
+	img_02.updatePixels();
+}
+	
+const regresar = ()=>{ // Vuelve la imagen como inicialmente estaba
+	img_02.loadPixels();
+	img_01.loadPixels();
+
+	for(y = 0; y &lt img_02.height; y++ ) {
+		for(x = 0; x &lt img_02.width; x++) {
+			let index = (x + y*img_02.width)*4;
+			img_02.pixels[index + 0] = img_01.pixels[index + 0];
+			img_02.pixels[index + 1] = img_01.pixels[index + 1];
+			img_02.pixels[index + 2] = img_01.pixels[index + 2];
+			img_02.pixels[index + 3] = img_01.pixels[index + 3];
+		}
+	}
+	img_01.updatePixels();
+	img_02.updatePixels();
+}</code></pre>								
+								<p></p>
+								
+								<!-- Pagination -->
+							<ul class="actions pagination">
+								<li><a href="pImages6.html" target="_parent" class="button large previous">Previous Page</a></li>
+								<li><a href="#" target="_parent" class="disabled button large next">Next Page</a></li>
+							</ul>
+							
+							<!-- Footer 
+								<footer>
+									<ul class="stats">
+										<li><a href="#">General</a></li>
+										<li><a href="#" class="icon solid fa-heart">28</a></li>
+										<li><a href="#" class="icon solid fa-comment">128</a></li>
+									</ul>
+								</footer>-->
+								
+							</article>
+
+					</div>
+
+				<!-- Footer -->
+					<section id="footer">
+					<!-- Se crea un iframe para insertar el html donde esta el pie de pagina-->
+						<footer>
+							<iframe id="iframepie" src="footer.html"></iframe>
+						</footer>
+						
+					</section>
+
+			</div>
+
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/browser.min.js"></script>
+			<script src="assets/js/breakpoints.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
+			
+		<!-- Ejemplos P5.js -->
+			<script src="p5/js/images/asciiVideo.js"></script>
+
+			
+		<!-- Optional JavaScript -->
+		<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+			<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+			<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+			<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+	</body>
+</html>
