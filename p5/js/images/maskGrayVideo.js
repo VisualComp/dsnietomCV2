@@ -1,4 +1,3 @@
-
 let value; // Permite escoger que filtro se va a realizar
 let matrixsize; // Tamaño de la matriz
 var matrix; // Matriz de convoluciones     
@@ -62,7 +61,7 @@ function keyPressed(){
         case 'x':
             value = 'c';
             break;
-        case '0':   //Identidad
+        case '0':   // Identidad
             value = 10;
             matrix = [ [  0,  0,  0 ],
                        [  0,  1,  0 ],
