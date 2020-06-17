@@ -205,8 +205,6 @@ function preload(){
 
 function setup() {
 	pixelDensity(1);
-	//cam = createCapture(VIDEO); //crea una captura de video
-	//cam.size(windowWidth, windowHeight); //definde el tamaño de la captura
 	
 	// Se requiere trabajar con WEBGL
 	createCanvas(windowWidth, 400, WEBGL);
@@ -220,7 +218,6 @@ function setup() {
 	shaderTexture.noStroke();
 	shaderVideo.noStroke();  
 	
-	//cam.hide();
 	video.loop();
 }
 
