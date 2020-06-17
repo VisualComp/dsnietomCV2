@@ -16,8 +16,7 @@ function preload(){
   video.hide();
   // Cargar los shaders
   theShader = loadShader('texture.vert','texture.frag');
-  theShaderVideo = loadShader('texture.vert','texture.frag');
-  
+  theShaderVideo = loadShader('texture.vert','texture.frag');  
 }
 
 function setup() {
