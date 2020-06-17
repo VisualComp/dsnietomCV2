@@ -1,12 +1,15 @@
-let value; // Permite escoger que filtro se va a realizar
-let matrixsize; // Tamaño de la matriz
-var matrix; // Matriz de convoluciones     
+let value; // permite escoger que filtro se va a realizar
+
+let matrixsize; // tamaño de la matriz
+var matrix; // matriz     
 
 let canvas_01;
 let canvas_02;
 
-var widthI = 500;   // Anchura del lienzo
-var heightI = 500;  // Altura del lienzo
+var heightI = 500;  // altura del lienzo
+var widthI = 500;   // anchura del lienzo
+
+let myTime = 0; // almacena la diferencia de tiempo de los frames en ms 
 
 function preload() {
     img_01 = createCapture(VIDEO);
@@ -16,14 +19,19 @@ function preload() {
 }
 
 function setup() {
+    frameRate(50);
     var myCanvas = createCanvas(widthI*2+20, heightI);
-    myCanvas.parent('maskGrayVideo'); 
+    myCanvas.parent('eficiency'); 
+    frameRate(30);
+    background(255);
 
     canvas_01 = createGraphics(widthI, heightI);
     canvas_02 = createGraphics(widthI, heightI);
 }
 
 function draw(){
+    myTime += deltaTime;
+
     drawCanvas_01();
     drawCanvas_02();
     
@@ -132,17 +140,28 @@ function keyPressed(){
     }
 }
 
-// Funciones Disenadas
-const drawCanvas_01 = ()=>{ // Pone el primer video en el lienzo 1
+//Funciones propias del desarrollo
+const drawCanvas_01 = ()=>{ // pone el primer video en el lienzo 1
+
     canvas_01.image(img_01, 0, 0);
-}
+    canvas_01.textSize(40);
 
-const drawCanvas_02 = ()=>{ // Pone el segundo video en el lienzo 2
+        //  imprime los frames por segundo 
+    canvas_01.text( (frameCount / (myTime/1000)).toFixed(2) + " F/S" , 20, 400);
+};
+
+const drawCanvas_02 = ()=>{ // pone el segundo video en el lienzo 2
+
     canvas_02.image(img_02, 0, 0);
-}
+    canvas_02.textSize(40);
 
-const selectValue = ()=>{ // Selecciona el filtro a utilizar dependiendo del valor que tenga value
-    if ( 0 < value && value <10 ) {
+        // imprime los frames por segundo 
+    canvas_02.text( (frameCount / (myTime/1000)).toFixed(2) + " F/S" , 20, 400);
+};
+
+const selectValue = ()=>{
+        // selecciona el filtro a utilizar dependiendo del valor que tenga value
+    if( 0 < value && value <10 ) {
         filtrosBlancoNegro(value);
     } else if(value === 'c') {
         complementary();
@@ -151,8 +170,10 @@ const selectValue = ()=>{ // Selecciona el filtro a utilizar dependiendo del val
     }
 }
 
-const filtrosBlancoNegro = (gray)=>{ // Escala de grises
+// Funciones para aplicar filtros
+const filtrosBlancoNegro = (gray)=>{
     let lightness = 210;
+
     img_02.loadPixels();
 
 	for (let y = 0; y < img_02.height; y++) {
@@ -186,7 +207,6 @@ const filtrosBlancoNegro = (gray)=>{ // Escala de grises
 				let Y2020= 0.2627*r + 0.6780*g + 0.0593*b; // UHDTV,HDR
 				lightness = Y2020;
 			} 
-
 			img_02.pixels[index+0]=lightness;
 			img_02.pixels[index+1]=lightness;
 			img_02.pixels[index+2]=lightness;
@@ -203,7 +223,7 @@ const filtrosBlancoNegro = (gray)=>{ // Escala de grises
 	img_02.updatePixels();
 }
 
-const complementary = ()=>{ // Colores opuestos
+const complementary = ()=>{
     //let img2 = createImage(512, 550);
 	img_02.loadPixels();
 
@@ -216,10 +236,11 @@ const complementary = ()=>{ // Colores opuestos
             img_02.pixels[index + 2] = 255 - img_02.pixels[index + 2];
         }
     }
+
     img_02.updatePixels();
 }
 
-const convolutions = ()=>{ // Mascara de convoluciones
+const convolutions = ()=>{    
     img_02.loadPixels();
 
 	for (let x = 0; x < img_02.width; x++) {
@@ -232,7 +253,8 @@ const convolutions = ()=>{ // Mascara de convoluciones
 			img_02.pixels[loc+2] = blue(c);
 			img_02.pixels[loc+3] = alpha(c);
 		}
-    }    
+    }
+    
     img_02.updatePixels();
 }
 
@@ -249,13 +271,13 @@ const convolutionAux = (x, y, matrix, matrixsize, img)=>{
 			var loc = (xloc + img.width*yloc)*4;
 
 			loc = constrain(loc,0,img.pixels.length-1);
-			rtotal += ((img.pixels[loc+0]) * matrix[i][j]);
+			rtotal += ((img.pixels[loc]) * matrix[i][j]);
 			gtotal += ((img.pixels[loc+1]) * matrix[i][j]);
 			btotal += ((img.pixels[loc+2]) * matrix[i][j]);
 			atotal += ((img.pixels[loc+3]) * matrix[i][j]);
 		}
 	}
-	// Restringir el rango de los valores RGBA
+	// Restringe el valor
 	rtotal = constrain(rtotal, 0, 255);
 	gtotal = constrain(gtotal, 0, 255);
 	btotal = constrain(btotal, 0, 255);
