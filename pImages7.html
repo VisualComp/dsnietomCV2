@@ -258,14 +258,10 @@
 									<pre><code class="prettyprint">let value; // permite escoger que filtro se va a realizar
 let matrixsize; // tamaño de la matriz
 var matrix; // matriz     
-
 let canvas_01;
 let canvas_02;
-
 var heightI = 500;  // altura del lienzo
 var widthI = 500;   // anchura del lienzo
-
-let myTime = 0; // almacena la diferencia de tiempo de los frames en ms 
 
 function preload() {
 	img_01 = createCapture(VIDEO);
@@ -274,21 +270,20 @@ function preload() {
 	img_02.hide();
 }
 
-function setup() {
-	frameRate(50);
-	var myCanvas = createCanvas(widthI*2+20, heightI);
-	myCanvas.parent('eficiency'); 
+function setup() {    
+	createCanvas(widthI*2+20, heightI);
 	frameRate(30);
 	background(255);
+
 	canvas_01 = createGraphics(widthI, heightI);
 	canvas_02 = createGraphics(widthI, heightI);
 }
 
 function draw(){
-	myTime += deltaTime;
 	drawCanvas_01();
-	drawCanvas_02();	
+	drawCanvas_02();   
 	selectValue();
+
 	image(canvas_01, 0, 0);
 	image(canvas_02, widthI+10, 0);
 }
@@ -324,67 +319,67 @@ function keyPressed(){
 		case '0':   // Identidad
 			value = 10;
 			matrix = [ [  0,  0,  0 ],
-						[  0,  1,  0 ],
-						[  0,  0,  0 ] ]; 
+					[  0,  1,  0 ],
+					[  0,  0,  0 ] ]; 
 			break;
 		case '1':   // Enfocar. Acentúa los bordes
 			value = 11;
 			matrix = [ [ -1, -1, -1 ],
-						[ -1,  9, -1 ],
-						[ -1, -1, -1 ] ]; 
+					[ -1,  9, -1 ],
+					[ -1, -1, -1 ] ]; 
 			break;
 		case '2':   // Repujado
 			matrix = [ [ -2, -1,  0 ],
-						[ -1,  1,  1 ],
-						[  0,  1,  2 ] ]; 
+					[ -1,  1,  1 ],
+					[  0,  1,  2 ] ]; 
 			value = 12;
 			break;
 		case '3':   // Detección de bordes
 			matrix = [ [  1,  0, -1 ],
-						[  0,  0,  0 ],
-						[ -1,  0,  1 ] ]; 
+					[  0,  0,  0 ],
+					[ -1,  0,  1 ] ]; 
 			value = 13;
 			break;
 		case '4':
 			matrix = [ [  0,  1,  0 ],
-						[  1, -4,  1 ],
-						[  0,  1,  0 ] ]; 
+					[  1, -4,  1 ],
+					[  0,  1,  0 ] ]; 
 			value = 14;
 			break;
 		case '5':
 			matrix = [ [ -1, -1, -1 ],
-						[ -1,  8, -1 ],
-						[ -1, -1, -1 ] ];
+					[ -1,  8, -1 ],
+					[ -1, -1, -1 ] ];
 			value = 15;
 			break;
 		case '6':   // Enfocar
 			matrix = [ [  0, -1,  0 ],
-						[ -1,  5, -1 ],
-						[  0, -1,  0 ] ];
+					[ -1,  5, -1 ],
+					[  0, -1,  0 ] ];
 			value = 16;
 			break;
 		case '7':   // Desenfoque de cuadro (normalizado)
 			matrix = [ [ 1/9, 1/9, 1/9 ],
-						[ 1/9, 1/9, 1/9 ],
-						[ 1/9, 1/9, 1/9 ] ]; 
+					[ 1/9, 1/9, 1/9 ],
+					[ 1/9, 1/9, 1/9 ] ]; 
 			value = 17;
 			break;
 		case '8':   // Desenfoque gaussiano 5 × 5 (aproximación)
 			matrixsize = 5;
 			matrix = [ [ 1/256,  4/256,  6/256,  4/256, 1/256 ],
-						[ 4/256, 16/256, 24/256, 16/256, 4/256 ],
-						[ 6/256, 24/256, 36/256, 24/256, 6/256 ],
-						[ 4/256, 16/256, 24/256, 16/256, 4/256 ],
-						[ 1/256,  4/256,  6/256,  4/256, 1/256 ] ];
+					[ 4/256, 16/256, 24/256, 16/256, 4/256 ],
+					[ 6/256, 24/256, 36/256, 24/256, 6/256 ],
+					[ 4/256, 16/256, 24/256, 16/256, 4/256 ],
+					[ 1/256,  4/256,  6/256,  4/256, 1/256 ] ];
 			value = 18;
 			break;
 		case '9':   // Máscara de desenfoque 5 × 5 (sin máscara de imagen)
 			matrixsize = 5;
 			matrix = [ [ -1/256,  -4/256,  -6/256,  -4/256, -1/256 ],
-						[ -4/256, -16/256, -24/256, -16/256, -4/256 ],
-						[ -6/256, -24/256, 476/256, -24/256, -6/256 ],
-						[ -4/256, -16/256, -24/256, -16/256, -4/256 ],
-						[ -1/256,  -4/256,  -6/256,  -4/256, -1/256 ] ];
+					[ -4/256, -16/256, -24/256, -16/256, -4/256 ],
+					[ -6/256, -24/256, 476/256, -24/256, -6/256 ],
+					[ -4/256, -16/256, -24/256, -16/256, -4/256 ],
+					[ -1/256,  -4/256,  -6/256,  -4/256, -1/256 ] ];
 			value = 19;
 			break;
 		default:
@@ -392,25 +387,25 @@ function keyPressed(){
 	}
 }
 
-//Funciones propias del desarrollo
+// Funciones propias del desarrollo
 const drawCanvas_01 = ()=>{ // pone el primer video en el lienzo 1
 	canvas_01.image(img_01, 0, 0);
 	canvas_01.textSize(40);
 
 		//  imprime los frames por segundo 
-	canvas_01.text( (frameCount / (myTime/1000)).toFixed(2) + " F/S" , 20, 400);
+	canvas_01.text( frameRate().toFixed(2) + " F/S" , 20, 400);
 };
 
 const drawCanvas_02 = ()=>{ // pone el segundo video en el lienzo 2
 	canvas_02.image(img_02, 0, 0);
 	canvas_02.textSize(40);
 
-		// imprime los frames por segundo 
-	canvas_02.text( (frameCount / (myTime/1000)).toFixed(2) + " F/S" , 20, 400);
+		//  imprime los frames por segundo 
+	canvas_02.text( frameRate().toFixed(2) + " F/S" , 20, 400);
 };
 
 const selectValue = ()=>{
-		// selecciona el filtro a utilizar dependiendo del valor que tenga value
+		//selecciona el filtro a utilizar dependiendo del valor que tenga value
 	if( 0 &lt value && value &lt 10 ) {
 		filtrosBlancoNegro(value);
 	} else if(value === 'c') {
@@ -456,6 +451,7 @@ const filtrosBlancoNegro = (gray)=>{
 				let Y2020= 0.2627*r + 0.6780*g + 0.0593*b; // UHDTV,HDR
 				lightness = Y2020;
 			} 
+
 			img_02.pixels[index+0]=lightness;
 			img_02.pixels[index+1]=lightness;
 			img_02.pixels[index+2]=lightness;
@@ -478,13 +474,11 @@ const complementary = ()=>{
 	for(var y = 0 ; y &lt img_02.height; y++) {
 		for(var x = 0; x &lt img_02.width; x++) {
 			let index = (x + y * img_02.width) * 4;
-
 			img_02.pixels[index + 0] = 255 - img_02.pixels[index + 0];
 			img_02.pixels[index + 1] = 255 - img_02.pixels[index + 1];
 			img_02.pixels[index + 2] = 255 - img_02.pixels[index + 2];
 		}
 	}
-
 	img_02.updatePixels();
 }
 
@@ -495,14 +489,12 @@ const convolutions = ()=>{
 		for (let y = 0; y &lt img_02.height; y++ ) { 
 			let c = convolutionAux(x, y, matrix, matrixsize, img_02);
 			let loc = (x + y*img_02.width)*4;
-
 			img_02.pixels[loc] = red(c);
 			img_02.pixels[loc+1] = green(c);
 			img_02.pixels[loc+2] = blue(c);
 			img_02.pixels[loc+3] = alpha(c);
 		}
-	}
-	
+	}    
 	img_02.updatePixels();
 }
 
@@ -525,7 +517,7 @@ const convolutionAux = (x, y, matrix, matrixsize, img)=>{
 			atotal += ((img.pixels[loc+3]) * matrix[i][j]);
 		}
 	}
-	// Restringe el valor
+	// Restringe el valor de RGB
 	rtotal = constrain(rtotal, 0, 255);
 	gtotal = constrain(gtotal, 0, 255);
 	btotal = constrain(btotal, 0, 255);
