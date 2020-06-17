@@ -107,7 +107,7 @@
 							<article class="post">
 								<header>
 									<div class="title">
-										<h2><a href="https://en.wikipedia.org/wiki/HSL_and_HSV" target="_blank">Grayscale Image and Video</a></h2>
+										<h2><a href="https://processing.org/tutorials/pshader/" target="_blank">Grayscale Image and Video</a></h2>
 										<p>Shaders and WEBGL</p>
 									</div>
 									<div class="meta">
@@ -116,12 +116,10 @@
 										
 									</div>
 								</header>
-								<p>En la siguiente publicación se pondrá en practica lo aprendido durante el estudio de procesamiento de imágenes en los ejemplos expuestos y desarrollados en <a href="images1.html" target="_parent">PIXELS AND IMAGES</a>, donde se observó cómo funciona una matriz de pixeles y cómo modificar los pixeles de una imagen accediendo a los valores de este arreglo.</p>
-								
-								<p>A continuación, se observará cómo se puede obtener una imagen a escala de grises a partir del <em>Promedio</em> de los componentes RGB de una imagen y el caculo del coeficiente <em>Luma</em>. Para ello este estudio esta basado en la documentación <a href="https://en.wikipedia.org/wiki/HSL_and_HSV#Lightness" target="_blank">HSL and HSV</a> y en gran medida estará basado en el ejemplo <a href="images4.html" target="_parent">BLACK AND WHITE</a> anteriormente trabajado, por lo tanto, no se profundizará en los cálculos de las expresiones, sino en la manera de aplicar estas expresiones a nuestro programa en p5.js para modificar la luminancia de la imagen y obtener los resultados esperados.</p>
-								
-								<p>Para obtener una imagen a escala de grises por medio del siguiente programa, bastará con acceder al componente RGB de cada pixel de la imagen, hacer el cálculo del <strong>Promedio RGB</strong> o el coeficiente <strong>Luma</strong> utilizando las expresiones descritas en la tabla de Comandos por Teclado y por último se reemplazará el valor obtenido en cada uno de los componentes de color RGB del pixel. Adicionalmente también se observarán otras posibilidades para modificar la luminancia de la imagen y obtener la imagen a escala de grises a partir del calculo del <strong>Componente mas grande</strong>, el <strong>Rango medio</strong> y el <strong>Valor de Munsell</strong> visto en la documentación <a href="https://en.wikipedia.org/wiki/Lightness#Relationship_to_value_and_relative_luminance" target="_blank">Lightness</a>.</p>
-															
+								<p>En esta publicación se desea mostrar los resultados obtenidos al realizar el procesamiento de imágenes y videos con shaders utilizando un leguaje de alto nivel, como lo es GLSL, para empezar a aprovechar las características de nuestro hardware y tener resultados muy favorables a nivel de máquina. El cambio y rendimiento, comparado con la velocidad de respuesta es notable en comparación con el procesamiento de imágenes y videos por medio de hardware.</p>
+
+								<p>A continuación, se observará cómo se puede obtener una imagen y video a escala de grises a partir del Promedio de los componentes RGB de una imagen y el caculo del coeficiente Luma. Para ello este estudio está basado en la documentación <a href="https://en.wikipedia.org/wiki/HSL_and_HSV#Lightness" target="_blank">HSL and HSV</a>, el tutorial de shaders del profesor <strong><em>Andres Colubri</em></strong> en el sitio web <a href="https://processing.org/tutorials/pshader/" target="_blank">processing.org</a> y el tutorial de la página <a href="https://itp-xstory.github.io/p5js-shaders/" target="_blank">itp-xstory.github.io</a> donde se explican conceptos básicos de shaders con p5.js. En gran medida la construcción de este programa está basado en el ejemplo <a href="pImages1.html" target="_parent">GRAYSCALE IMAGE</a> del procesamiento de imágenes con software, ya que se manejan funciones y procedimientos muy similares, sin embargo, para facilitar el entendimiento de cómo funciona el procesamiento por hardware, hay que pensar que lo que hacíamos para uno solo pixel en software ahora lo vamos hacer al mismo tiempo para todos los pixeles.</p>
+																
 								<hr />
 								<h3>Comandos por teclado</h3>
 								<div class="table-wrapper text-center">
@@ -184,53 +182,197 @@
 								</div>
 								<p></p>
 								<h4>p5*js Code</h4>
-									<pre><code class="prettyprint">let rSlider, gSlider, bSlider; //Declarar variables de sliders
-let img; // Declarar variable 'img'
+									<pre><code class="prettyprint">let theShader;
+let shaderTexture;
+let img;
+let cam;
+
+let theShaderVideo;
+let shaderVideo;
+let video;
+
+let angle=0;
+let gray = 0;
+
+function preload(){
+	img = loadImage('https://upload.wikimedia.org/wikipedia/commons/thumb/b/bb/Hawaii_turtle_2.JPG/640px-Hawaii_turtle_2.JPG');
+	video = createVideo('https://d2v9y0dukr6mq2.cloudfront.net/video/preview/GTYSdDW/divers-watching-sea-turtle-swim-through-coral-reef_zksb-usls__PMNW.mp4');
+	video.hide();
+	// Cargar los shaders
+	theShader = loadShader('texture.vert','texture.frag');
+	theShaderVideo = loadShader('texture.vert','texture.frag');  
+}
 
 function setup() {
-  createCanvas(800, 600);
-  textSize(14);
-  noStroke();
+	pixelDensity(1);
+	//cam = createCapture(VIDEO); //crea una captura de video
+	//cam.size(windowWidth, windowHeight); //definde el tamaño de la captura
+	
+	// Se requiere trabajar con WEBGL
+	createCanvas(windowWidth, 400, WEBGL);
+	noStroke();
 
-  // Crear sliders
-  rSlider = createSlider(-255, 255, 0);
-  rSlider.position(20, 20);
-  gSlider = createSlider(-255, 255, 0);
-  gSlider.position(20, 50);
-  bSlider = createSlider(-255, 255, 0);
-  bSlider.position(20, 80);
-  img = loadImage('https://upload.wikimedia.org/wikipedia/commons/thumb/b/be/Red_eyed_tree_frog_edit2.jpg/800px-Red_eyed_tree_frog_edit2.jpg'); 
+	// inicializar la capa del createGraphics
+	shaderTexture = createGraphics(512, 512, WEBGL);
+	shaderVideo = createGraphics(windowWidth, windowHeight, WEBGL);
+	
+	// Quitar bordes en el createGraphics
+	shaderTexture.noStroke();
+	shaderVideo.noStroke();  
+	
+	//cam.hide();
+	video.loop();
 }
 
 function draw() {
-  const R = rSlider.value();
-  const G = gSlider.value();
-  const B = bSlider.value();
-  loadPixels();
-  img.loadPixels(); //Carga los pixeles de la imagen
-  // Recorre la matriz de pixeles
-  for (let y = 0; y &lt height; y++) {
-		for (let x = 0; x &lt width; x++){ 
-			let index = (x+y*width)*4; // Posicion del pixel
-			let r=img.pixels[index+0]; // Componente Red
-			let g=img.pixels[index+1]; // Componente Green
-			let b=img.pixels[index+2]; // Componente Blue
-			let a=img.pixels[index+3]; // Componente Alpha
-			// Pinta el lienzo con los valores de los pixeles de la imagen
-			// Suma el valor del componente junto con el valor del slider
-			pixels[index+0]=r+R; 
-			pixels[index+1]=g+G; 
-			pixels[index+2]=b+B;
-			pixels[index+3]=a;
-		}
+	// Se pasa el shader a la capa del createGraphics
+	shaderTexture.shader(theShader);
+	shaderVideo.shader(theShaderVideo);
+
+	// Valores uniform para el fragment shader
+	theShader.setUniform("u_img", img);
+	theShader.setUniform("u_key", gray);
+	theShaderVideo.setUniform('u_img', video);
+	theShaderVideo.setUniform('u_key', gray);
+	
+	// Renderizar el shader
+	shaderTexture.rect(0,0,width,height);
+	shaderVideo.rect(0,0,width,height);
+
+	background(255);
+
+	// Puntos de luz 
+	pointLight(255, 255, 255, 0, 0, 500);
+	// Efecto linterna
+	let dx= mouseX-width/2;
+	let dy= mouseY-height/2;
+	pointLight(100,250,255,dx,dy,100);
+
+	translate(0, 0, 0);
+	push();
+	//Se pasa el shader como textura
+	texture(shaderTexture);
+	translate(200, 0, 0);
+	rotateZ(angle);
+	rotateX(angle);
+	rotateY(angle*2); 
+	box(200);
+	pop();
+	
+	// Rotacion de la caja
+	angle += 0.002;
+	
+	push();
+	// Se pasa la imagen original como textura
+	texture(img);
+	// Numero de puntas de la figura
+	let ellipseFidelity = int(map(mouseX, 25, width, 8, 100));
+	ellipse(-250, 0, 350, 350, ellipseFidelity);
+	//plane(500,500);
+	pop();
+	
+	push();
+	//Se pasa el shader del video como textura
+	texture(shaderVideo);
+	translate(0, 0, -100);
+	plane(900,500);
+	pop();  
+}
+
+// Se ejecuta cuando se presiona cualquier tecla
+function keyPressed() {
+	if (key === '0') {
+	gray = 0;
+	} else if (key === '1') { 
+	gray = 1;
+	} else if (key === '2') {
+	gray = 2;
+	} else if (key === '3') {
+	gray = 3;
+	} else if (key === '4') {
+	gray = 4;
 	}
-  updatePixels();	
-  
-  stroke(255);
-  textStyle(BOLDITALIC);
-  text('RED', 175, 40);
-  text('GREEN', 175, 70);
-  text('BLUE', 175, 100);
+}
+
+function windowResized(){
+	resizeCanvas(windowWidth, windowHeight);
+}</code></pre>
+
+<h4>Vertex Code</h4>
+									<pre><code class="prettyprint">attribute vec3 aPosition;
+attribute vec2 aTexCoord;
+
+// Obtener texcoords
+varying vec2 vTexCoord;
+
+void main() {
+
+	// Copia los texcoords
+	vTexCoord = aTexCoord;
+	// Copia la poscicion de los datos en vec4, usando 1.0 como el componente w
+	vec4 positionVec4 = vec4(aPosition, 1.0);
+
+	// Escala la posicion por dos y la mueve al centro de la pantalla
+	positionVec4.xy = positionVec4.xy * 2.0 - 1.0;
+
+	// Envia la informacion del vertex al fragment shader
+	gl_Position = positionVec4;
+}</code></pre>
+
+<h4>Fragment Code</h4>
+									<pre><code class="prettyprint">// Estas son definiciones necesarias que le permiten a la tarjeta gráfica saber cómo representar el sombreador
+#ifdef GL_ES
+precision mediump float;
+#endif
+	
+	varying vec2 vTexCoord;
+	// Valores que se pasan desde p5
+	uniform sampler2D u_img;
+	uniform int u_key;
+
+// Funcion para convertir un color a escala de grises
+float grayscale(vec3 color) {
+	float lightness;
+	
+	if (u_key==1){
+		float I=(color.r + color.g + color.b) / 3.0; // Promedio de los tres componentes
+		lightness = I;
+	} else if (u_key==2){
+		float V= max(max(color.r,color.g),color.b); // Componente mas grande de un color
+		lightness = V;
+	} else if (u_key==3){
+		float L=(max(max(color.r,color.g),color.b)+min(min(color.r,color.g),color.b))/2.0; // Promedio entre el componente mas grande y el mas pequeño
+		lightness = L;
+	} else if (u_key==4){ // Promedio ponderado de RGB con corrección gamma (Luma)
+		float Y= dot(color, vec3(0.299, 0.587, 0.114)); // SDTV
+		lightness = Y;
+	}
+	return lightness;
+}
+
+void main() {
+	vec2 uv = vTexCoord;
+
+	//Invierte la posicion de la cordenada  para que la imagen no quede alrreves
+	uv.y = 1.0 - uv.y;
+
+	vec4 tex = texture2D(u_img, uv);
+	// Escala de grises
+	float gray =grayscale(tex.rgb);
+	
+	float threshR = gray ;
+	float threshG = gray ;
+	float threshB = gray ;
+	
+	if (u_key==0){
+	threshR = tex.r ;
+	threshG = tex.g ;
+	threshB = tex.b ;
+	}
+	vec3 thresh = vec3(threshR, threshG, threshB);
+
+	// Render de la salida
+	gl_FragColor = vec4(thresh, 1.0);
 }</code></pre>
 								
 								<p></p>
