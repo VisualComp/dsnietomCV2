@@ -35,12 +35,9 @@ void main(){
    
 	vec2 pix = gl_FragCoord.xy;
 	//vec3 col = texture2D(u_img, floor(pix/8.0)*8.0/uv).rgb;  
-    vec3 col = texture2D(u_img, uv).rgb;
-  	
+    vec3 col = texture2D(u_img, uv).rgb;  	
 
 	float gray = 0.3 * col.r + 0.59 * col.g + 0.11 * col.b;
-  
-  vec3 cRed= vec3(1.0,1.0,1.0) ;
 
   float n =  4096.0;             // .
 	if (gray > 0.2) n = 65600.0;    // :
